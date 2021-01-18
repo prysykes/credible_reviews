@@ -9,11 +9,28 @@ from .forms import ReviewForm
 from users.models import Like
 from pages.filters import ReviewFilter
 
+#implementing imports for send message
+from companyusers.models import Message
+from companyusers.forms import MessageForm
+
 
 def dynamic_url(request, *args, **kwargs):
     likes = Like.objects.all()
     responses = Response.objects.all()
     company = Company.objects.get(company_slug=kwargs.get('company_id'))
+
+    form_message = MessageForm()
+    if request.method == "POST":
+        form_message = MessageForm(request.POST or None)
+        if form_message.is_valid:
+            form_message = MessageForm(request.POST or None)
+            data = form_message.save(commit=False)
+            data.sender = request.user
+            print(request.user)
+            data.receiver = company.user
+            print(company.user)
+            data.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
     # used to return the name of the company instead of digits on detail page
     
     avg_rating = company.rating_array
@@ -78,10 +95,29 @@ def dynamic_url(request, *args, **kwargs):
         'form': form,
         'responses': responses,
         'likes': likes,
+        'form_message': form_message
         
     }
 
     return render(request, 'companies/detail.html', context)
+
+
+def send_message(request, company_id):
+    company = get_list_or_404(Company, id=company_id)
+    form_message = MessageForm()
+    if request.method == "POST":
+        form_message = MessageForm(request.POST or None)
+        if form.is_valid:
+            form = MessageForm(request.POST or None)
+            data = form.save(commit=False)
+            data.sender = request.user
+            data.reciever = company.user
+            data.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
+
+    context = {'form_message': form_message}
+
+    return render(request, 'detail', context)
 
 """ def review_submitted(request):
     return render(request, 'review-submitted.html')

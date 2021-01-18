@@ -9,6 +9,13 @@ from .models import UserProfile, Review, Response, Like
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
+#imports for interuser messages
+from companyusers.models import Message, ReplyMessage
+from companyusers.forms import MessageForm, ReplyMessageForm
+
+#imports to make send email faster using python threading ability
+import threading
+
 #begin imports for reset email
 from django.core.mail import EmailMessage
 from django.views import View
@@ -26,6 +33,10 @@ from pages import filters
 from companies.models import Company
 from users.forms import ReviewForm, ResponseForm
 from .decorators import unauthenticated_user_regular, allowed_users_regular
+
+
+class QuickerEmail(threading.Thread):
+    pass
 
 @unauthenticated_user_regular
 @allowed_users_regular(allowed_roles=['regular'])
@@ -187,9 +198,11 @@ def response_user(request, review_id):
 @login_required(login_url='user_login')
 @allowed_users_regular(allowed_roles=['regular'])
 def profile_regular(request):
-    # would contain all companies reviewed by the user
+    messages = Message.objects.filter(sender=request.user)
+    replies = ReplyMessage.objects.filter().order_by('date_sent')
     responses = Response.objects.all()
     reviews = Review.objects.filter(user=request.user)
+    
     companies = []
     paginated_reviews = Paginator(reviews, 3)
     page_num = int(request.GET.get('page', 1))
@@ -215,15 +228,72 @@ def profile_regular(request):
     
     context = {
         'reviews': page,
+        'replies': replies,
         'total_reviews': total_reviews,
         'responses': responses,
         'total_companies': total_companies,
         'companies': companies,
         'page': page,
+        'messages': messages,
+        'total_messages': len(messages),
         
 
     }
     return render(request, 'users/profile_regular.html', context)
+
+@login_required(login_url='user_login')
+@allowed_users_regular(allowed_roles=['regular'])
+def reply_message_user(request, message_id):
+    message = get_object_or_404(Message, pk=message_id)
+    reviews = Review.objects.filter(user=request.user)
+    total_reviews = len(reviews)
+    companies = []
+    for review in reviews:
+        company = review.company
+        if company not in companies:
+            companies.append(company)
+    total_companies = len(companies)
+
+    reply_message_form = ReplyMessageForm()
+    if request.method == "POST":
+         reply_message_form = ReplyMessageForm(request.POST or None)
+         if reply_message_form.is_valid:
+             data = reply_message_form.save(commit=False)
+             data.sender = request.user
+             data.message = message
+             
+             data.save()
+             return redirect('profile_regular')
+    else:
+        reply_message_form =  ReplyMessageForm(request.POST or None)
+    context = {
+       'reply_message_form': reply_message_form, 
+       'total_reviews': total_reviews,
+       'total_companies': total_companies,
+    }
+    return render(request, 'users/reply_message_user.html', context)
+
+
+def edit_message(request, message_id):
+    message = get_object_or_404(Message, pk=message_id)
+    print(message.sender)
+    if request.method == "POST":
+        form = MessageForm(request.POST or None, instance=message)
+        if form.is_valid:
+            data = form.save(commit=False)
+            data.save()
+            return redirect('profile_regular')
+    else:
+        form = MessageForm(instance=message)
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/edit_message_regular.html', context)
+
+def delete_message(request, message_id):
+    message = get_object_or_404(Message, pk=message_id)
+    message.delete()
+    return redirect('profile_regular')
 
 def review_submitted(request):
     return render(request, 'users/review-submitted.html')
@@ -346,7 +416,7 @@ def settings_regular(request):
     form = UserProfileForm(instance=user_profile)
     if request.method == "POST":
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid():            
+        if form.is_valid:            
             form.save()
     context = {
         'form': form,

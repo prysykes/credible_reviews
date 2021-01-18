@@ -119,6 +119,46 @@ a{
 	height: 200px;
 
 }
+.numberbg{
+	background-color: rgb(119, 241, 119) !important;
+	color: grey !important;
+	border-radius: 5px !important;
+	padding: 4px 4px 4px 4px !important;
+}
+.messagebarbg{
+	background-color: rgb(8, 8, 77) !important;
+	color: white  !important;
+	border-radius: 5px !important;
+	padding-top: 2px !important;
+
+}
+.sentbg{
+	background-color: honeydew;
+	color: gray;
+	font-size: x-small;
+}
+
+.sentparabg{
+	background-color: rgb(67, 119, 67) !important;
+	color: rgb(255, 255, 255) !important;
+	font-size: small !important;
+	padding: 2px 2px 2px 2px !important;
+}
+
+.receivedparabg{
+	background-color: rgb(92, 88, 129) !important;
+	color: rgb(255, 255, 255) !important;
+	font-size: small !important;
+	padding: 2px 2px 2px 2px !important;
+}
+
+
+
+.receivedbg{
+	background-color:rgb(208, 214, 208);
+	color: rgb(71, 70, 70);
+	font-size: x-small;
+}
 .cursornormal{
 	cursor: default !important;
 	background-color: grey !important;

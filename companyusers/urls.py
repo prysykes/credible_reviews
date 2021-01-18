@@ -19,6 +19,8 @@ urlpatterns = [
     path('done.html', views.done, name='done'),   
     path('settings_company', views.settings_company, name='settings_company'),
     path('response/<int:review_id>', views.response, name='response'),
+
+    path('reply_message/<int:message_id>', views.reply_message, name='reply_message'),
     
     # overwriting the default template name for reset_password for company users
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="company_users/reset_password.html"), name="reset_password"),

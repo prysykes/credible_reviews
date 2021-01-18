@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpFormCompany, UserProfileCompanyForm
@@ -10,6 +10,11 @@ from .models import UserProfileCompany
 from users.models import Review, Response
 from users.forms import ResponseForm
 from django.urls import reverse
+
+# imports for interuser messages
+from . models import Message, ReplyMessage
+from . forms import MessageForm, ReplyMessageForm
+
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from pages import filters
@@ -31,6 +36,7 @@ from django.contrib.sites.shortcuts import get_current_site
 #from companies.models import Company, Review
 
 from .decorators import unauthenticated_user_company, allowed_users_company
+
 # importing modules to support html email message
 from django.http import JsonResponse
 from django.template.loader import get_template
@@ -163,6 +169,8 @@ def response(request, review_id):
 @login_required(login_url='user_login')
 @allowed_users_company(allowed_roles=['company'])
 def profile_company(request):
+    messages = Message.objects.filter(receiver=request.user)
+    replies = ReplyMessage.objects.filter(sender=request.user).order_by('date_sent')
     
     companies = Company.objects.all().filter(approved=True)
     form = CompanyForm()
@@ -191,16 +199,20 @@ def profile_company(request):
         except EmptyPage:
             page = paginated_reviews(1)
         context = {
+            
             'company': company,
             'companies': companies,
             'reviews': page,
             'page': page,
+            'replies': replies,
             #'company_reviews': company_reviews,
             #'total_reviews': total_reviews,
             'responses': responses,
             'info': "No company claimed yet",
             'infor': 'Not Available',
             'form': form,
+            'messages': messages,
+            'total_messages': len(messages),
         }
     except:
         context = {
@@ -214,6 +226,30 @@ def profile_company(request):
         pass
 
     return render(request, 'companyusers/profile_company.html', context)
+
+
+@login_required(login_url='user_login')
+@allowed_users_company(allowed_roles=['company'])
+def reply_message(request, message_id):
+    message = get_object_or_404(Message, pk=message_id)
+
+    reply_message_form = ReplyMessageForm()
+    if request.method == "POST":
+         reply_message_form = ReplyMessageForm(request.POST or None)
+         if reply_message_form.is_valid:
+             data = reply_message_form.save(commit=False)
+             data.sender = request.user
+             data.message = message
+             
+             data.save()
+             return redirect('profile_company')
+    else:
+        reply_message_form =  ReplyMessageForm(request.POST or None)
+    context = {
+       'reply_message_form': reply_message_form, 
+    }
+    return render(request, 'companyusers/reply_message.html', context)
+
 
 def request_review_api(request):
     if request.method == 'POST':

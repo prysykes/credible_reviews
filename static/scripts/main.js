@@ -3,6 +3,10 @@ $(document).ready(function () {
     
     
     var display_company = $('#tm-display-companies');
+    var send_message_button = $('#tm_send_message');
+    var message_div = $('#tm_send_message_div');
+    var delete_message = $('.tm_delete_message');
+    var message_hide_button = $('#tm_show_mesages');
     var companies = $('#tm-companies');
     var list_company_button = $('#list_company_button');
     var list_company_display = $('#list_company_display');
@@ -26,10 +30,23 @@ $(document).ready(function () {
     var star_four = $('#star_four');
     var star_five = $('#star_five');
 
+    message_div.hide()
     review_display.show()
     list_company_display.hide()
 
    
+    // begin toggle message division
+    send_message_button.click(function() {
+        message_div.slideToggle(600);
+        add_review.hide();
+    }) 
+
+    // begin toggle message division
+    message_hide_button.click(function(){
+        $('#user_message_div').slideToggle(600);
+        review_display.hide();
+
+    })
     // begin stylin go of filter inputs on featured page
     avg_rating_input.attr({
         'min': 1,
@@ -39,7 +56,12 @@ $(document).ready(function () {
 
     $("#id_average_rating, #id_company_name, #id_company_sector, #id_company_state").addClass('form-control');
     
-    
+    // implementing delete message
+    delete_message.click(function () {
+        
+        return confirm("Are you sure you want to delete message? ")
+
+      })
     /* $('#tm-filter-form').focusout(function(){
         
         form_filter.hide();
@@ -160,6 +182,7 @@ $(document).ready(function () {
     
     review_button.click(function(){
         add_review.slideToggle(600);
+        message_div.hide();
     });
 
     delete_review.click(function(){

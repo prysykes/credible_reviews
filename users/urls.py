@@ -22,7 +22,12 @@ urlpatterns = [
     path('done.html', views.done, name='done'),
     path('done_contact', views.done_contact, name='done_contact'),
     path('settings_regular', views.settings_regular, name='settings_regular'),
+
+    path('edit_message/<int:message_id>', views.edit_message, name='edit_message'),
+    path('delete_message/<int:message_id>', views.delete_message, name='delete_message'),
+    path('reply_message_user/<int:message_id>', views.reply_message_user, name='reply_message_user'),
     
+
     path('submit_review/', views.submit_review, name='submit_review'),
     path('submit_review/review-submitted', views.review_submitted, name='review-submitted'),
     path('edit_review/<int:review_id>/', views.edit_review, name='edit_review'),

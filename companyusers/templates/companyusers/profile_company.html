@@ -100,10 +100,64 @@
 
                     </div>
                     
+                    
                     {% for company in companies %}
                         {% if company.user == request.user %}
                     
-                    <div class="col-md mb-2">
+                    <div class="col-md-7 mb-2">
+                        <div class="row messagebarbg">
+                            <div class="col-md-6 ">
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages">Show/Hide Your Messages</button> </h5>
+                            </div>
+                            
+                            <div class="col-md-6 ">
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Your Reviews</button> </h5>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            
+                                <div class="col-md mb-2">
+                                    
+                                        <div id="user_message_div" class="card  box-shadow  mb-3"> 
+                                            <div  class="card-header text-white text-center bg-info">
+                                                <h5 class="card-title">Messages - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                {% for message in messages %}
+                                                    <div class="row-md">
+                                                        
+                                                        <p class="card-text receivedparabg"><span class="text-left">{{message.subject}} <span class="sentbg"> received <span class=" text-danger"> {{message.date_sent}} </span> </span></span>  <br> 
+                                                        {{message.message}} <br>
+                                                        <span id="tm_send_reply" class="sentbg"> received </span>
+                                                        </p>
+                                                        
+                                                        
+                                                        {% for reply in replies %}
+                                                            {% if reply.message == message %}
+                                                                <p class="card-text sentparabg"><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                                    
+                                                                </p>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <p class="card-text">
+                                                            <a href="{%url 'reply_message' message.id %}"><button class="btn btn-sm btn-success">Reply</button> </a> 
+                                                        </p>
+                                                        
+                                                        
+                                                    </div>
+                                                    <hr> 
+                                                {% endfor %}
+                                                
+                                            </div>
+                                            <hr>
+                                            
+                                        </div>
+                                    
+                                </div>
+                                
+                            
+                        </div>
                         
                         <div class="row">
                             <div class="col-md mb-2">
@@ -126,7 +180,7 @@
                                         <h3 class="card-title"></h3>
                                     </div>
                                     
-                                    <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Reviews and Responses</button>
+                                    
                                 </div>
     
                                 

@@ -26,8 +26,8 @@ from .filters import CompanyFilter, ReviewFilter
 def search_business(request):
     if request.method == "GET" and request.GET.get('search_text') != "":
         term = request.GET.get('search_text')
-        company = Company.objects.all().filter(company_name__icontains=term)
-        sector = Company.objects.all().filter(company_sector__icontains=term)
+        company = Company.objects.all().filter(company_name__icontains=term, approved=True)
+        sector = Company.objects.all().filter(company_sector__icontains=term, approved=True)
         context = {
             'company': company,
             'sector': sector,

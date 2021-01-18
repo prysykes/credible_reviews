@@ -61,10 +61,12 @@
                             <img src="{{request.user.userprofile.profile_picture.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
                             <div class="card-body">
                                 <h5 class="card-title">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</h5>
-                                <p class="card-text">Username: &nbsp;{{request.user.username}}</br><span style="font-size: 1vw;">this is publicly visible</span></p>
+                                <p class="card-text">Username: &nbsp;{{request.user.username}}</p>
                                 <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
                                 <p class="card-text">Phone: {{request.user.userprofile.phone}}</p>
                                 <p class="card-text">Location: {{request.user.userprofile.location}}</p>
+                                <p class="card-title">Total Companies Reviewed: <span class="numberbg">{{total_companies}}</span></p>
+                                <p class="card-title">Total Reviews: <span class="numberbg">{{total_reviews}}</span></p>
                                 <a href="{% url 'submit_review' %}" class="btn btn-outline-info btn-sm font-weight-bold">Submit Review</a></br>
                                 <p class="card-text"></p>
                                 <a href="{% url 'settings_regular' %}" class="btn btn-outline-info btn-sm btn-sm font-weight-bold">Go to Settings</a>
@@ -76,41 +78,56 @@
 
                     </div>
                     <div class="col-md mb-2">
+                        <div class="row messagebarbg">
+                            <div class="col-md-4 ">
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages">Show/Hide Your Messages</button> </h5>
+                            </div>
+                            
+                            <div class="col-md-4 ">
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Your Reviews</button> </h5>
+                            </div>
+                            <div class="col-md-4 ">
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">Show/Hide Companies</button> </h5>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md mb-2">
                                 
-                                    <div  class="card text-center box-shadow  mb-3"> 
-                                        <div class="card-header text-white bg-info">
-                                            <h5 class="card-title">Total Reviews</h5>
+                                    <div id="user_message_div" class="card  box-shadow  mb-3"> 
+                                        <div  class="card-header text-white text-center bg-info">
+                                            <h5 class="card-title">Messages - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
                                         </div>
                                         <div class="card-body">
-                                            <h3 class="card-title">{{total_reviews}}</h3>
+                                            {% for message in messages %}
+                                                <div class="row-md">
+                                                    
+                                                    <p class="card-text"><span class="text-left">{{message.subject}} <span class="sentbg"> sent </span></span> <span class="font-weight-small text-danger"> {{message.date_sent}} </span> <br> 
+                                                    {{message.message}}
+                                                    </p>
+                                                    {% for reply in replies %}
+                                                            {% if reply.message == message %}
+                                                                <p class="card-text sentparabg"><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                                    
+                                                                </p>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <p class="card-text">
+                                                            <a href="{%url 'reply_message_user' message.id %}"><button class="btn btn-sm btn-success">Reply</button> </a> 
+                                                        </p>
+                                                    
+                                                </div> 
+                                            {% endfor %}
+                                            
                                         </div>
                                         <hr>
-                                        <div class="card-body">
-                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Your Reviews</button> </h5>
-                                        </div>
+                                        
                                     </div>
                                 
                             </div>
-                            <div class="col-md mb-2">
-                                
-                                    <div  class="card text-center box-shadow mb-3" > 
-                                        <div class="card-header text-white bg-info">
-                                            <h5 class="card-title ">Total Companies Reviewed</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <h3 class="card-title">{{total_companies}}</h3>
-                                        </div>
-                                        <hr>
-                                        <div class="card-body">
-                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">Show/Hide Companies</button> </h5>
-                                        </div>
-                                    </div>                      
-
-                            </div>
+                            
                             
                         </div>
+                        
                         
                         <div class="row" id="tm-display-reviews">
                                 <div class="col-md mb-2">
@@ -185,6 +202,7 @@
                                             <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.id %}">{{company.company_name}}</a>&nbsp; | &nbsp; {% for item in "12345"|make_list %}
                                                             <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= company.average_rating %}checked{% endif %}"></span>
                                                             {% endfor %} </p>
+                                            
                                          {% endfor %}   
                                         </div>
                                         
