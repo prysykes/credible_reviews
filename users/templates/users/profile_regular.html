@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                </div>
+                <div class="row mx-2">
+                    <div class="col-md-5 mb-2">
+                        <div class="card" style="width: 23rem;">
+                            <img src="{{request.user.userprofile.profile_picture.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
+                            <div class="card-body">
+                                <h5 class="card-title">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</h5>
+                                <p class="card-text">Username: &nbsp;{{request.user.username}}</br><span style="font-size: 1vw;">this is publicly visible</span></p>
+                                <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
+                                <p class="card-text">Phone: {{request.user.userprofile.phone}}</p>
+                                <p class="card-text">Location: {{request.user.userprofile.location}}</p>
+                                <a href="{% url 'submit_review' %}" class="btn btn-outline-info">Submit Review</a></br>
+                                <p class="card-text"></p>
+                                <a href="{% url 'settings_regular' %}" class="btn btn-outline-info">Go to Settings</a>
+                                <p class="card-text"></p>
+                                <a href="{% url 'logoutpage_regular' %}" class="btn btn-outline-info">Logout</a></br>
+                            
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md mb-2">
+                        <div class="row">
+                            <div class="col-md mb-2">
+                                
+                                    <div class="card text-center  mb-3"> 
+                                        <div class="card-header text-white bg-info">
+                                            <h5 class="card-title">Total Reviews</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{total_reviews}}</h3>
+                                        </div>
+                                        <hr>
+                                        <div class="card-body">
+                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">View Reviews</button> </h5>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            <div class="col-md mb-2">
+                                
+                                    <div class="card text-center  mb-3" > 
+                                        <div class="card-header text-white bg-info">
+                                            <h5 class="card-title ">Total Companies Reviewed</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{total_companies}}</h3>
+                                        </div>
+                                        <hr>
+                                        <div class="card-body">
+                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">View Companies</button> </h5>
+                                        </div>
+                                    </div>                      
+
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row" id="tm-display-reviews">
+                                <div class="col-md mb-2">
+                                
+                                    <div class="card text-center  mb-3"> 
+                                        <div class="card-header text-white bg-info">
+                                            <h5 class="card-title">Details</h5>
+                                        </div>
+                                        {% for review in reviews %}
+                                        <div style="font-size: small;" class="card-body">
+                                            <p class="card-text">Company Name: <a class="text-decoration-none" href="{% url 'detail' review.company.id %}">{{review.company}}</a>&nbsp; | &nbsp; Rating: {{review.rating}}/5 &nbsp; | &nbsp; <span class="text-danger">Date added: {{ review.date_added }}</span></p>
+                                            <p class="card-text">{{review.review_text}}</p>
+                                            <p class="card-text"><a href="{%url 'delete_review' review.id %}"><button id="tm-delete" class="btn btn-outline-danger font-weight-bold btn-sm">Delete review</button></a>&nbsp; | &nbsp; <a href="{%url 'edit_review' review.id %}"><button class="btn btn-outline-primary font-weight-bold btn-sm">Edit Review</button></a></p>
+                                        {% for response in responses %}
+                                            {% if response.review == review %}
+                                            <p class="card-text bg-light"><span class="font-weight-bold">{{response.user | capfirst }}&nbsp; wrote: &nbsp;</span>{{response.response}} &nbsp; <span class="font-weight-bold"> on: </span> &nbsp; <span class="text-danger"> {{response.date_added}} </span></p>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </div>
+                                        {% endfor %}
+                                        
+                                    </div>
+                                
+                                </div>
+                        
+                        </div>
+                        
+                        <div class="row" id="tm-display-companies">
+                                <div class="col-md mb-2">
+                                
+                                    <div class="card text-center  mb-3"> 
+                                        <div class="card-header text-white bg-info">
+                                            <h5 class="card-title">Reviewed Companies</h5>
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                        {% for company in companies %}
+                                            <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.id %}">{{company.company_name}}</a>&nbsp; | &nbsp; Rating: {{company.average_rating}}/5 </p>
+                                         {% endfor %}   
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                
+                                </div>
+                        
+                        </div>
+                        
+                    
+                </div>
+                
+
+            </div>
+            
+        </section>
+        {% endblock section %}
+               
+{% block article %}
+        <article class="mt-2 bg-white mx-2">
+            
+             
+                  
+    
+            
+        </article>
+        {% endblock article %}
+        
+
+
+        

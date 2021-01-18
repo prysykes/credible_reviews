@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+        {% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                  
+                    <div class="col-md-7 py-2  mx-auto ">
+                        <h1 class="h4 font-weight-bold px-2 py-2 text-center"> Complete the Form Below to Enjoy the Full Features of Credible Reviews</h1>
+						<p> 
+                            <!-- enctype="multipart/form-data"  comes in the form tag cos I wish the image to be uplaoded through the rendered template-->
+                            <form action="" method="POST" enctype="multipart/form-data" >{% csrf_token %}
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h5 class="text-danger"> Personal Information </h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        {{ form.first_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form.last_name|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md">
+                                        {{ form.email|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ profile_form.phone|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+      
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        {{ profile_form.location|as_crispy_field }}
+                                    </div>
+                                    <div class="col">
+                                        {{ profile_form.profile_picture|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                <div class="row">
+                                    
+      
+                                </div>
+								<hr>
+								<div class="row">
+                                    <div class="col-md-7">
+                                        <h5 class="text-danger"> Login Information </h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        {{ form.username|as_crispy_field }}
+                                    </div>
+                                </div>
+								<div class="row">
+                                    <div class="col-md">
+                                        {{ form.password1|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form.password2|as_crispy_field }}
+                                    </div>
+                                </div>
+								
+								<div class="form-row mb-4">
+									<div class="col-md-7">
+										<div class="form-group form-check">
+											<input type="checkbox" class="form-check-input" id="agreeTerms" required>
+											<label class="form-check-label" for="agreeTerms"><a href="{% url 'privacy-terms' %}" target="_blank">Accept Our Privacy Statement</a></label>
+										</div>
+									</div>
+						
+								</div>
+                                <input class="btn btn-outline-primary" type="submit" value="Submit Registration Form">
+                                <hr>
+                            </form>
+                        </p>
+                    </div>
+                    <div class="col-md-5 py-2">
+                        <h2 class="h4 px-2 py-2 text-center">Welcome to Credible Reviews Adverts</h2>
+						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safety</p>                  </div>
+                    </div>
+                </div
+            </div>
+            
+        </section>
+        {% endblock section %}
+
+
+ {% block script%}
+      <script type="text/javascript" src="/static/scripts/main.js"></script>  
+ 	  <script type="text/javascript" src="/static/scripts/formauth.js"></script> 
+     {% endblock script %}

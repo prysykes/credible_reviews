@@ -1,0 +1,21 @@
+<ul id="response">
+    <div class="row mb-1">
+        {% for comp in company%}
+            <div class="col-md-6"><li><a href="{% url 'detail' comp.company_slug %}" > {{comp.company_name}} </a> &nbsp; &nbsp; &nbsp; </li></div>
+            <div class="col-md-6">
+                {% for item in "12345"|make_list %}
+                <span class="fa fa-star {% if forloop.counter <= comp.average_rating %}checked{% endif %}"></span>
+                {% endfor %}
+            </div>
+        {% empty %}
+            <div class="col-md">
+                <li>Business or Category doesn't exist</li>
+            </div>
+        
+        {% endfor %}
+    </div>
+
+    
+</ul>
+
+    

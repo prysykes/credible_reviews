@@ -1,0 +1,13 @@
+﻿.vscode
+companies/__pycache__
+companies/migrations
+companyusers/__pycache__
+companyusers/migrations
+credible_reviews/__pycache__
+env
+pages/__pycache__
+pages/migrations
+companyusers/templatetags/__pycache__
+users/__pycache__
+users/migrations
+users/templatetags/__pycache__

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load crispy_forms_tags %}
+
+
+
+ {% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row mx-3 ">
+                    
+                    <div class="col-md-7 py-2">
+                      <!-- card section-->
+                        <div class="card  mb-3  bg-light"> 
+                            <h1 class="h4 font-weight-bold px-2 py-2 text-center">{{company.company_name}} </h1>
+                                
+                            <div class="card-header border-top text-center text-white">
+                                <h5 class="card-title"><img src="{{company.company_logo.url}}" alt="Company Logo" width="250" height="300" class="img-thumbnail"></h5>
+                                <p class="row h3 justify-content-center mb-2">
+                                    <span id="star_one" class="fa fa-star "></span>
+                                    <span id="star_two" class="fa fa-star "></span>
+                                    <span id="star_three" class="fa fa-star "></span>
+                                    <span id="star_four" class="fa fa-star "></span>
+                                    <span id="star_five" class="fa fa-star "></span>
+                                </p>
+                                <p class="card-text text-info font-weight-bold ">Total Views:&nbsp;(<span class="text-primary">{{company.company_views}}</span>)</p>
+                            </div>
+                            <div class="card-body">
+                                <p><span class="font-weight-bold">Name of Company:</span> {{company.company_name}} </p>                             
+                                <p><span class="font-weight-bold">Phone Number: </span> {{ company.company_phone }}</p>
+                                <p><span class="font-weight-bold"> Email Address: </span> {{ company.company_email }}</p>
+                                <p><span class="font-weight-bold"> Website: </span> <a href="{{ company.company_website }} target="_blank">{{ company.company_website }} </a></p>                     
+                                <p><span class="font-weight-bold"> Description: </span> {{ company.company_description}}</p>
+                                <p><span class="font-weight-bold"> Address: </span> {{ company.company_address}}</p>
+                                <p><span class="font-weight-bold"> Average Rating: <i id="tm_average">{{company.average_rating}} </i> </span> </p>
+                                <p><span class="font-weight-bold"> Total Reviews: {{ total_reviews }} </p>
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user|has_group:"regular"%}
+                                <p><button type="button" id="tm-review-button" class="btn btn-primary font-weight-bold btn-sm">Add Review</button> </p>
+                                
+                                    <p >
+                                        <form id="tm-add-review-div" action="" method="POST">{% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    {{ form.rating|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md">
+                                                    {{ form.review_text|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <input class="btn btn-primary btn-sm" type="submit" value="Send Review">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </p>
+                                    {% endif %}
+                                {% else %}
+                                <p class="text-danger mx-auto">
+                                    <a href="{% url 'loginpage_regular' %}" target="_blank"> Login to review this company</a>
+                                </p>
+                                {% endif %}
+                                {% if company.premium %}
+                                <p> <span class="font-weight-bold text-danger"> {{company.company_name}}: Has claimed this page. </span> </p>
+                                {% endif %}
+                                <h5 class="text-center font-weight-bold">Latest Reviews</h5>
+                                {% for review in companyone_reviews %}
+                                <div style="font-size: small;" class="row text-white bg-primary py-1">
+                                        
+                                            <div class="col-md-2 border-dark align-self-center">
+                                                <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
+                                            </div>
+                                            <div  class="col-md align-self-center font-weight-bold">
+                                                By: {{review.user.last_name}}&nbsp;{{review.user.first_name}} &nbsp; | &nbsp;  Rating: {{review.rating}}/5 &nbsp; | &nbsp; <span class="text-warning">Date added: {{ review.date_added }}</span>
+                                            </div>
+                                </div>
+                                                                     
+                                        <div class="row">
+                                            <div class="col  justify-content-start">
+                                                <p>{{ review.review_text }} <br>
+                                                {% for response in responses%}
+                                                    {% if response.review == review %}
+                                                    <span style="font-size: small;" class="mx-2 font-italic"> <img src="{{response.review.company.company_logo.url}}" alt="Company Logo" width="35" height="35" class="rounded-circle"> {{response.review.company | capfirst }} responded: {{response}} on: <span class="text-danger">{{response.date_added}} </span></span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </p>
+                                                                                    
+                                            </div>
+                                        </div>
+                                        
+                                                                            
+                                
+                                    
+                                    
+                                    
+                                    {% empty %} <!-- checks to see if there are no reviews for the particular company-->
+                                    <div class="d-flex mx-5 border-bottom text-danger h6 "> This Company hasn't been reviewed yet... 
+                                        <hr>
+                                    </div>
+                                    {% endfor %}
+                                
+                            </div>
+                            
+                            
+                        
+                                                                    
+                            
+                        </div>
+                      <!-- end card section-->
+                  
+                        
+                    
+                </div>
+                    <div class="col-md-5 py-2">
+                        <h2 class="h4 px-2 py-2 text-center">Welcome to Credible Reviews Adverts</h2>
+						    <p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safety</p>                  </div>
+                    </div>
+            </div>
+            
+        </section>
+        {% endblock section %}
+        {% block article %}
+        <article class="mt-2 bg-white mx-2">
+        
+        </article>
+        {% endblock article %}

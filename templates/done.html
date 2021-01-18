@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                </div>
+                <div class="row">
+                    
+                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light bg-light py-2">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                              </button>
+                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class=" nav  flex-column">
+                                
+                                <li class="nav-item">
+                                    <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        </div>
+                    
+                    
+                  
+                    <div class="col-md-7 py-2 ">
+                        <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Registration Form Submitted</h1>
+                        <p class="text-wrap"> Your registration form have been successfully submitted kindly visit your email to activate your account and enjoy the full features of Credible Reviews!. 
+                            <br/> <span style="font: bold;" >Your experience and satisfaction mean the world to our team!!</span>
+                        </p>
+                    </div>
+                <div class="col-md-3 py-2">
+                    <h2 class="h5 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
+						<!-- Slideshow advert container -->
+                        <div class="galleryContaineradvert">
+                            <div class="slideShowContaineradvert">
+                                <div id="playPauseadvert" onclick="playPauseSlidesadvert()"></div>
+                                <div onclick="plusSlidesadvert(-1)" class="nextPrevBtnadvert leftArrowadvert"><span class="arrowadvert arrowLeftadvert"></span></div>
+                                <div onclick="plusSlidesadvert(1)" class="nextPrevBtnadvert rightArrowadvert"><span class="arrowadvert arrowRightadvert"></span></div>
+                                <div class="captionTextHolderadvert"><p class="captionTextadvert slideTextFromTopadvert"></p></div>
+                                <div class="imageHolderadvert">
+                                    <img src="/static/slide_images_advert/img_1.jpg"><!-- image resolution should be - 1366X768-->
+                                    <p class="captionTextadvert">lo Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                </div>
+                                <div class="imageHolderadvert">
+                                    <img src="/static/slide_images_advert/img_2.jpg">
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                </div>
+                                <div class="imageHolderadvert">
+                                    <img src="/static/slide_images_advert/img_3.jpg">
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                </div>
+                                <div class="imageHolderadvert">
+                                    <img src="/static/slide_images_advert/img_4.jpg">
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                    <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                </div>
+                            
+                        </div>
+                        <div id="dotsContaineradvert"></div>
+                    </div>
+                <!-- Slide show advert ends-->                  
+                </div>
+            </div>
+            
+        </section>
+        {% endblock section %}

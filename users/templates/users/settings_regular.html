@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                </div>
+                <div class="row mx-2">
+                    <div class="col-md-5 mb-2">
+                        <div class="card" style="width: 23rem;">
+                                <p class="card-text"></p>
+                                    <a href="{% url 'profile_regular' %}" class="btn btn-outline-info font-weight-bold">Back to Profile</a>
+                                <p class="card-text"></p>
+                            <img src="{{request.user.userprofile.profile_picture.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
+                            <div class="card-body">
+                                <h5 class="card-title">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</h5>
+                                <p class="card-text">Username: &nbsp;{{request.user.username}}</br><span style="font-size: 1vw;">this is publicly visible</span></p>
+                                <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
+                                <p class="card-text">Phone: {{request.user.userprofile.phone}}</p>
+                                <p class="card-text">Location: {{request.user.userprofile.location}}</p>
+                                <p class="card-text"><a href="{% url 'submit_review' %}" class="btn btn-outline-info">Review a Company</a></p>
+                                <a href="{% url 'logoutpage_regular' %}" class="btn btn-outline-info">Logout</a></br>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="col-md-7 mb-2">
+                        
+                            <div class="card text-center  mb-3"> 
+                                <div class="card-header text-white bg-info">
+                                    <h5 class="card-title">Use the Form Below to Update Your Settings</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                        {{form.as_p}}
+                                        
+                                        <input type="submit" class="btn btn-info btn-sm" value="Update Profile">
+                                    </form>
+                                </div>
+                                <hr>
+                                
+                            </div>
+
+                        
+
+                    </div>
+                    
+
+                </div>
+
+            </div>
+             <div class="row  container-fluid border-0 ">
+                            
+                           <!--Use context of company objects to make division dynamic-->
+                            <div class="col-3 py-2">
+                                <div class="card" style="width: 18rem; height: 20rem">
+                                    <img src="" width="100" height="120" class="card-img-top" alt="Company Logo">
+                                    <div class="card-body">
+                                         <h5 class="card-title"></h5>
+                                         <p></p>
+                                         <p><a class="text-decoration-none" href="#">Click to View Full Details</a></p>
+                                         <a href=" target="_blank""" class="btn btn-primary"> </a>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+            
+        </section>
+        {% endblock section %}
+        {% block article %}
+        
+        {% endblock article %}
+
+
+        

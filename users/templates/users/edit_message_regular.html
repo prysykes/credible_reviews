@@ -1,0 +1,142 @@
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row navbarbg justify-content-center ">
+                    <nav class="navbar navbar-expand-lg navbar-light ">
+                        <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
+                            <ul class="nav nav-pills bg-light ">
+                                <li class="nav-item ">
+                                <a class="nav-link font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item" >
+                                <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <div class="dropdown ">
+                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Reviews
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item font-weight-bold text-primary" href="{% url 'submit_review' %}">Submit Review</a>
+                                        <a class="dropdown-item font-weight-bold text-primary" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                        </div>
+                                    </div>
+                                
+                                </li>
+                                                        
+                                
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
+                                </li>
+
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                </li>
+                                                        
+                                <li class="nav-item" id="tm-search-pane" >                            
+                                    <form class="form-inline  my-2 my-lg-0" >
+                                        <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
+                                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                                </li>
+                                
+                                            
+                            </ul>
+                        
+                        </div>
+                </nav>
+                </div>
+                <hr>
+                <div class="row mx-2">
+                    <div class="col-md-5 mb-2">
+                        <div class="card box-shadow" style="width: 23rem;">
+                            <img src="{{request.user.userprofile.profile_picture.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
+                            <div class="card-body">
+                                <h5 class="card-title">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</h5>
+                                <p class="card-text">Username: &nbsp;{{request.user.username}}</br><span style="font-size: 1vw;">this is publicly visible</span></p>
+                                <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
+                                <p class="card-text">Phone: {{request.user.userprofile.phone}}</p>
+                                <p class="card-text">Location: {{request.user.userprofile.location}}</p>
+                                <a href="{% url 'submit_review' %}" class="btn btn-outline-info btn-sm font-weight-bold">Submit Review</a></br>
+                                <p class="card-text"></p>
+                                <a href="{% url 'settings_regular' %}" class="btn btn-outline-info btn-sm btn-sm font-weight-bold">Go to Settings</a>
+                                <p class="card-text"></p>
+                                <a href="{% url 'logoutpage_regular' %}" class="btn btn-outline-info btn-sm font-weight-bold">Logout</a></br>
+                            
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md mb-2">
+                        <div class="row">
+                            <div class="col-md mb-2">
+                                
+                                    <div  class="card  box-shadow  mb-3"> 
+                                        <div class="card-header text-white text-center bg-info">
+                                            <h5 class="card-title">Edit Your Messages  </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            
+                                                <div class="row-md">
+                                                    
+                                                    <p class="card-text">
+                                                        <form action="" method="POST"> {% csrf_token %}
+                                                            {{ form|crispy }}
+                                                            <input class="btn btn-sm btn-primary" type="submit" value="Save Editted Message">
+                                                            
+                                                        </form>
+                                                    </p> 
+                                                    
+                                                    
+                                                </div> 
+                                            
+                                            
+                                        </div>
+                                        <hr>
+                                        
+                                    </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                </div>
+                
+
+            </div>
+            
+        </section>
+        {% endblock section %}
+               
+{% block article %}
+        <article class="mt-2 bg-white mx-2">
+            
+             
+                  
+    
+            
+        </article>
+        {% endblock article %}
+
+
+        
+
+
+        

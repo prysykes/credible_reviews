@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    {% if messages %}
+                        {% for message in messages%}
+                            <span class="font-weight-bold px-2 py-1 mx-auto text-danger">{{ message }}</span>
+                        {% endfor %} 
+                    {% else %}
+                        <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                    {% endif %} 
+                </div>
+                <div class="row">
+                    <div class="tm-nav navbar-expand-lg col-md-2  navbar-light navbarbg py-2">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class=" nav  flex-column">
+                                    
+                                    <li class="nav-item">
+                                        <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                    </div>
+                    
+                  
+                    <div class="col-md-7 py-2 ">
+                
+                        <div class="row justify-content-center">
+                            
+                                <h3 class="">Please login to your account</h3>
+                                <form action="" method="POST" class="font-weight-bold navbarbg py-5 px-5 tm-login" id="loginForm">
+                                    {% csrf_token %}
+                                        <div class="form-group row">
+                                            <div class="col-md-5">
+                                                <label for="tm-username" class="col-sm-2 col-form-label">Username: </label>
+                                            </div>
+                                            
+                                            <div class="col-md-7">
+                                                <input type="text" class="form-control" id="tm-username" name="username" placeholder="username">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-5">
+                                                <label for="tm-password" class="col-sm-2 col-form-label">Password: </label>
+                                            </div>
+                                            
+                                            <div class="col-md-7">
+                                                <input type="password" class="form-control" id="tm-password" name="password" placeholder="password">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-md-5">
+                                                <label for="tm-password" class="col-sm-2 col-form-label">Forgot Password? </label>
+                                            </div>
+                                            
+                                            <div class="col-md-7">
+                                                <a class="nav-link  text-white" href="{% url 'reset_password' %}">Click Here to Reset</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md text-center">
+                                                <button type="submit" class="btn font-weight-bold btn-outline-light">Login to Your Account</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row justify-content-center text-center">
+                                            <div class="col-md">
+                                                <h5> Login using your social network accounts</h5>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        <div class="form-group row justify-content-center text-center">
+                                            <div class="col-md-3">
+                                                
+                                            </div>
+                                            <div class="col-md-2">
+                                                <img src="{% static '/icons/fbk.png'%}"  alt="facebook logo" height="30" width="30">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <img src="{% static '/icons/google.png'%}"  alt="google logo" height="30" width="30">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <img src="{% static '/icons/twitter.png'%}"  alt="twitter logo" height="30" width="30">
+                                            </div>
+                                            <div class="col-md-3">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </form>
+                                   
+                        </div>
+                        
+                    </div>
+                <!-- Slide show ends-->
+                
+                    <div class="col-md-3 py-2">
+                        <h2 class="h5 px-2 py-2 text-center navbarbg">Advertise here... Get noticed!</h2>
+                            <p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. </p>                  
+                    </div>
+                </div>    
+            </div>
+            
+        </section>
+        {% endblock section %}

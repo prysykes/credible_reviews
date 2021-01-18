@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+ {% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                </div>
+                <div class="row">
+                  
+                  <div class="col-md-7 justify-content-center py-2 ">
+                        <h1 class="h4 font-weight-bold px-2 py-2 text-center"> Login to Your Account...</h1>
+                            {% for message in messages%}
+                                <p> {{ message }}</p>
+                            {% endfor %}
+                            <form action="" method="POST" class="font-weight-bold tm-login" id="loginForm">
+                            {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="tm-username" class="col-sm-2 col-form-label">Username: </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control col-5" id="tm-username" name="username" placeholder="username">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tm-password" class="col-sm-2 col-form-label">Password: </label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control col-5" id="tm-password" name="password" placeholder="password">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="tm-password" class="col-sm-2 col-form-label">Forgot Your Password? </label>
+                                    <div class="col-sm-10">
+                                        <a class="nav-link" href="{% url 'reset_password' %}">Click Here to Reset</a>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10 justify-content-end">
+                                        <button type="submit" class="btn font-weight-bold btn-outline-info">Login to Your Account</button>
+                                    </div>
+                                </div>
+                            </form>
+                       
+                  </div>
+                  <div class="col-md-5 py-2">
+                    <h2 class="h4 px-2 py-2 text-center">Welcome to Credible Reviews Adverts</h2>
+						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safety</p>                  </div>
+                </div>
+            </div>
+            
+        </section>
+        {% endblock section %}

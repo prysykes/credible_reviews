@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% include "nav_bar.html" %}
+
+{% block greeting %}                        
+    <li class="nav-item" >
+        <a class="nav-link font-weight-bold" href="{% url 'contact' %}"><i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Contact Us</a>
+    </li>
+{% endblock greeting %}
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                </div>
+                <div class="row mx-2">
+                    <div class="col-md-5 mb-2">
+                        <div class="card" style="width: 23rem;">
+                            <img src="{{request.user.userprofilecompany.profile_photo.url}}" class="card-img-top" alt="profile picture">
+                            <div class="card-body">
+                                
+                                <p class="card-text">Username: {{request.user.username}} </br><span class="font-weight-sm">this is publicly visible</span></p>
+                                <p class="card-text">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</p>
+                                <p class="card-text">Designation: &nbsp; {{request.user.userprofilecompany.designation}}</p>
+                                <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
+                                <p class="card-text">Phone:&nbsp;{{request.user.userprofilecompany.phone}}</p>
+                                <p class="card-text">Location: &nbsp;{{request.user.userprofilecompany.location}}</p>
+                                <p class="card-text">Claimed: &nbsp;<span id="tm-claimed">{{request.user.userprofilecompany.claimed}}</span>&nbsp;&nbsp;&nbsp;</p>
+                                <p class="card-text">Package: &nbsp;{{request.user.userprofilecompany.package}}&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-primary btn-sm">Upgrade</a></p>
+                                
+                                
+                                <p class="card-text"></p>
+                                <a href="{% url 'settings_company' %}" class="btn btn-outline-info">Go to Settings</a></br>
+                                <p class="card-text"></p>
+                                <a href="{% url 'logoutpage_company' %}" class="btn btn-outline-info">Logout</a></br>
+                            </div>
+                         </div>
+
+                    </div>
+                    
+                    {% for company in companies %}
+                        {% if company.user == request.user %}
+                    
+                    <div class="col-md mb-2">
+                        
+                        <div class="row">
+                            <div class="col-md mb-2">
+                                
+                                <div class="card text-center  mb-3"> 
+                                    <div class="card-header text-white bg-info">
+                                        <h5 class="card-title">Total Reviews</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-title"></h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-title"></h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{ company.review_set.all.count }}</h3>
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <h3 class="card-title"></h3>
+                                    </div>
+                                    
+                                    <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">View Reviews and Responses</button>
+                                </div>
+    
+                                
+                            </div>
+                            
+                            <div class="col-md mb-2">
+                                
+                                    <div class="card  mb-3" > 
+                                        <div class="card-header text-center text-white bg-info">
+                                            <h5 class="card-title ">Statistics</h5>
+                                        </div>
+                                        
+                                        <div class="py-2 font-weight-bold px-2">
+                                            <p class="card-text">Average Rating:&nbsp;&nbsp; <i id="tm-average_rating">{{company.average_rating}}</i><i>/5</i> </p>
+                                            <p class="card-text">Remarks: &nbsp;&nbsp;<i id="tm-remarks" class=""></i></p>
+                                            <p class="card-text">Total Likes: &nbsp;&nbsp; like count number</p>
+                                            <p class="card-text">Total Dislikes: &nbsp;&nbsp; dislike count number</p>
+                                            <p class="card-text">Average Rating:&nbsp;&nbsp; 4/5 </p>
+                                            <p class="card-text">Total Views: &nbsp;&nbsp; {{company.company_views}}</p>
+                                            <p class="card-text">Popularity: &nbsp;&nbsp;<i id="tm-popularity">Satisfactory</i></p>
+                                            
+                                            <p class="card-text"><h6 class=" font-weight-bold">Claimed Company:&nbsp; <span class= "text-primary"><a class="text-decoration-none" href="{% url 'detail' company.id %}" target="_blank"> {{company.company_name}}</a> </span> </h5></p>
+                                            
+                                        </div>
+                                        
+                                        <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Click to Get Noticed</button>
+                                        
+                                    </div>                      
+
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row" id="tm-display-reviews">
+                                <div class="col-md mb-2">
+                                
+                                    <div style="font-size: small;" class="card text-center  mb-3"> 
+                                        <div class="card-header text-white bg-info">
+                                            <h5 class="card-title">Details</h5>
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                            {% for review in company.review_set.all %}
+                                            <div  class=" py-2">
+                                                <p class="card-text ">Name: &nbsp; {{review.user | capfirst }} Rating: {{review.rating}}/5 &nbsp; | &nbsp; Date added: <span class="text-danger"> {{ review.date_added }}</span></p>
+                                                <p class="card-text">  Review: &nbsp; {{review.review_text}} </p>
+                                            
+                                            
+                                            <!-- check to see if there is a reponse under this review to know whether
+                                             to show the button -->
+                                            {% for response in review.response_set.all %} 
+                                                {% empty %}                                            
+                                            <p class="card-text"><a href="{% url 'response' review.id %}"><button id="tm-respond" class="btn btn-outline-primary font-weight-bold btn-sm">respond to this review</button></a></p>
+                                                
+                                            {% endfor %}
+                                           
+                                            {% for response in responses%}
+                                            {% if response.review == review %}
+                                            <p class="card-text bg-light font-italic">{{response.review.company | capfirst }} responded: {{response}} on: {{response.date_added}}</p>
+                                            <hr>
+                                            {% endif %}
+                                            {% endfor %}
+                                            
+                                            {% endfor %}
+                                            
+                                            </div>
+                                                                                                                       
+                                        
+                                        
+                                        
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                        
+                        </div>
+                        
+                    </div>
+                        
+                        {% endif %}
+                        
+                    {% endfor %}
+                    
+                    
+                    
+                    <div id="tm-claimed-detail" class="col-md mb-2">
+                        <!-- The problem is here. It seems to rund the code over and over again-->
+                          
+                        
+                        <div class="row">
+                            <div class="col-md mb-2">
+                                
+                                <div class="card text-center  mb-3"> 
+                                    <div class="card-header text-white bg-info">
+                                        <h5 class="card-title">Total Reviews</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"> You have not claimed a company yet.</p>
+                                        <p class="card-text"> You need to claim a company to view its statistis here.</p>
+                                        <p class="card-text"> You need to have your company listed to claim it.</p>
+                                        <p class="card-text"> If your company is already listed on our site, kindly email us on:</p>
+                                        <p class="card-text"> <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a></p>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                   
+                                </div>
+    
+                                
+                            </div>
+                            
+                            <div class="col-md mb-2">
+                                
+                                    <div class="card  mb-3" > 
+                                        <div class="card-header text-center text-white bg-info">
+                                            <h5 class="card-title ">Statistics</h5>
+                                        </div>
+                                        
+                                        <div class="py-2 font-weight-bold px-2">
+                                            <p class="card-text">Average Rating:&nbsp; | &nbsp; <i id="tm-average_rating">{{infor}}</i> </p>
+                                            <p class="card-text">Remarks: &nbsp; | &nbsp;<i id="tm-remarks" class="">{{infor}}</i></p>
+                                            <p class="card-text">Total Likes: &nbsp; | &nbsp; {{infor}}</p>
+                                            <p class="card-text">Total Dislikes: &nbsp; | &nbsp; {{infor}}</p>
+                                            <p class="card-text">Average Rating:&nbsp; | &nbsp; {{infor}} </p>
+                                            <p class="card-text">Remarks: &nbsp; | &nbsp;{{infor}}</p>
+                                            <p class="card-text">Total Views: &nbsp; | &nbsp; {{infor}}</p>
+                                            
+                                            <p class="card-text"><h6 class=" text-warning font-weight-bold">{{info}}:&nbsp; <span style="font-size: small;" class= "text-info"> Email us to claim a company </span> </h5></p>
+                                            
+                                        </div>
+                                        
+                                        <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Click to Get Noticed</button>
+                                        
+                                    </div>                      
+
+                            </div>
+                            
+                        </div>
+                        
+                        <!---->
+                        
+                    </div>
+                    
+                   
+                    
+                </div>
+            </div>
+            
+        </section>
+        {% endblock section %}
+        {% block article %}
+        
+        {% endblock article %}
+        

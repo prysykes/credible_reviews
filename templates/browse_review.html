@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseURL %}
+
+
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">                
+                    
+                    <div class="container-fluid  py-2">
+                            <h2 class="h4 px-1 py-2 text-center font-weight-bold"> Browse all Reviews </h2>
+
+                            
+                                <h6 class="h4 px-1 py-2 text-center">Over 100,000 visitors per day with millions of reviews already submitted...</h6>
+                                
+                              
+                                
+                                
+                           
+				                                 
+                        <div class="container ">
+                            <div class="card border-0 text-center">
+                                <div class="row ">
+                                    {% for review in reviews%}
+                        <div class="col-md-3 px-2 py-2">
+                            <div  class="col-md  text-wrap">
+                                <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">  Rating: <span class="text-warning">{{review.rating}}/5</span> | Date added: <span class="text-warning"> {{ review.date_added }}.</span> <br>
+                                {{review.user.first_name }} Reviewed: {{review.company}}</h6>
+                                <p> {{review.review_text}}  </p>
+                            </div>
+                            
+                        </div>
+                    {% endfor %} 
+                                    
+                                                          
+                                </div>
+                                <div class="row">
+                                    {% if reviews.has_previous%}
+                                    <div class="col-md">
+                                       <a href="{% url 'browse_review' %}?page={{reviews.previous_page_number}}"> <button class="btn btn-primary btn-sm">previous page </button> </a>
+                                    </div>
+                                    {% endif %}
+                                    {% if reviews.has_next %}
+                                    <div class="col-md">
+                                        <a href="{% url 'browse_review' %}?page={{reviews.next_page_number}}"> <button class="btn btn-primary btn-sm">next page </button> </a>
+                                    </div>
+                                    {% endif %}
+                                </div>   
+                            </div>   
+                        </div>
+                        
+                        
+                        
+
+                        
+                            
+                    </div>
+                
+            
+            
+        </section>
+        {% endblock section %}
+
+        {% block article %}
+        <article class="mt-2 bg-white mx-2">
+            
+             
+                  
+    
+            
+        </article>
+        {% endblock article %}
