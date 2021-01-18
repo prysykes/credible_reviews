@@ -1,201 +1,201 @@
 
 .galleryContaineradvert{
-    width: 100%;
-    height: 500px;
-    max-width: 1000px;
-    margin: auto;
-    user-select: none;
-    box-shadow: 0px 0px 3px 1px #00000078;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  .galleryContaineradvert .slideShowContaineradvert{
-    width: 100%;
-    height: 90%;
-    overflow: hidden;
-    background-color: gainsboro;
-    position: relative;
-  }
-  
-  
-  .galleryContaineradvert .slideShowContaineradvert #playPauseadvert{
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    background-image: url(/static/slide_images_advert/playPause.png);
-    background-repeat: no-repeat;
-    z-index: 5;
-    background-size: cover;
-    margin: 5px;
-    cursor: pointer;
-  }
-  .galleryContaineradvert .slideShowContaineradvert #playPauseadvert:hover{
-    opacity: .7;
-  }
-  .galleryContaineradvert .slideShowContaineradvert .imageHolderadvert{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    opacity: 0;
-  }
-  .galleryContaineradvert .slideShowContaineradvert .imageHolderadvert img{
-    width: 100%;
-    height: 100%;
-  }
-  .galleryContaineradvert .slideShowContaineradvert .imageHolderadvert .captionTextadvert{
-    display: none;
-  }
-  
-  .galleryContaineradvert .slideShowContaineradvert .leftArrowadvert,.galleryContaineradvert .slideShowContaineradvert .rightArrowadvert{
-    width: 50px;
-    background: #00000036;
-    position: absolute;
-    left: 0;
-    z-index: 1;
-    transition: background 0.5s;
-    height: 72px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  .galleryContaineradvert .slideShowContaineradvert .rightArrowadvert{
-    left: auto;
-    right: 0;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-  }
-  .galleryContaineradvert .slideShowContaineradvert .leftArrowadvert:hover,.galleryContaineradvert .slideShowContaineradvert .rightArrowadvert:hover{
-    background: #000000a8;
-    cursor: pointer;
-  }
-  .galleryContaineradvert .arrowadvert{
-    display: inline-block;
-    border: 3px solid white;
-    width: 10px;
-    height: 10px;
-    border-left: none;
-    border-bottom: none;
-    margin: auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
-  .galleryContaineradvert .arrowadvert.arrowLeftadvert{
-    transform: rotateZ(-135deg);
-  }
-  .galleryContaineradvert .arrowadvert.arrowRightadvert{
-    transform: rotateZ(45deg);
-  }
-  
-  
-  .galleryContaineradvert .slideShowContaineradvert>.captionTextHolderadvert{
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-    color: white;
-    font-family: sans-serif;
-    font-size: 20px;
-    text-align: center;
-    width: 100%;
-    background: #00000047;
-    height: 50px;
-    line-height: 50px;
-    overflow: hidden;
-  }
-  .galleryContaineradvert .slideShowContaineradvert>.captionTextHolderadvert>.captionTextadvert{
-    margin: 0;
-  }
-  
-  .galleryContaineradvert #dotsContaineradvert{
-    width: 100%;
-    height: 10%;
-    text-align: center;
-    padding-top: 20px;
-    box-sizing: border-box;
-  }
-  .galleryContaineradvert #dotsContaineradvert .dotsadvert{
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-left: 5px;
-    background-color: #bbb;
-    cursor: pointer;
-    transition:background-color 0.5s;
-  }
-  .galleryContaineradvert #dotsContaineradvert .dotsadvert:first-child{
-    margin-left: 0;
-  }
-  .galleryContaineradvert #dotsContaineradvert .dotsadvert:hover,.galleryContaineradvert #dotsContaineradvert .dotsadvert.active{
-    background-color: #717171;;
-  }
-  
-  
-  
-  
-  .galleryContaineradvert .moveLeftCurrentSlideadvert{
-    animation-name: moveLeftCurrentadvert;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-fill-mode:forwards;
-  
-  }
-  .galleryContaineradvert .moveLeftNextSlideadvert{
-    animation-name: moveLeftNextadvert;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-fill-mode:forwards;
-  }
-  @keyframes moveLeftCurrentadvert {
-    from {margin-left: 0;opacity: 1;}
-    to {margin-left: -100%;opacity: 1;}
-  }
-  @keyframes moveLeftNextadvert {
-    from {margin-left: 100%;opacity: 1;}
-    to {margin-left: 0%;opacity: 1;}
-  }
-  
-  
-  .galleryContaineradvert .moveRightCurrentSlideadvert{
-    animation-name: moveRightCurrentadvert;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-fill-mode:forwards;
-  }
-  .galleryContaineradvert .moveRightPrevSlideadvert{
-    animation-name: moveRightPrevadvert;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-fill-mode:forwards;
-  }
-  @keyframes moveRightCurrentadvert {
-    from {margin-left: 0;opacity: 1;}
-    to {margin-left: 100%;opacity: 1;}
-  }
-  @keyframes moveRightPrevadvert {
-    from {margin-left: -100%;opacity: 1;}
-    to {margin-left: 0%;opacity: 1;}
-  }
-  .slideTextFromBottomadvert {
-    animation-name: slideTextFromBottomadvert;
-    animation-duration: 0.7s;
-    animation-timing-function: ease-out;
-  }
-  @keyframes slideTextFromBottomadvert {
-    from {opacity: 0;margin-top: 100px}
-    to {opacity: 1;margin-top: 0px;}
-  }
-  .slideTextFromTopadvert {
-    animation-name: slideTextFromTopadvert;
-    animation-duration: 0.7s;
-    animation-timing-function: ease-out;
-  }
-  @keyframes slideTextFromTopadvert {
-    from {opacity: 0;margin-top: -100px}
-    to {opacity: 1;margin-top: 0px;}
-  }
+  width: 100%;
+  height: 500px;
+  max-width: 1000px;
+  margin: auto;
+  user-select: none;
+  box-shadow: 0px 0px 3px 1px #00000078;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.galleryContaineradvert .slideShowContaineradvert{
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  background-color: gainsboro;
+  position: relative;
+}
+
+
+.galleryContaineradvert .slideShowContaineradvert #playPauseadvert{
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  background-image: url(/static/slide_images_advert/playPause.png);
+  background-repeat: no-repeat;
+  z-index: 5;
+  background-size: cover;
+  margin: 5px;
+  cursor: pointer;
+}
+.galleryContaineradvert .slideShowContaineradvert #playPauseadvert:hover{
+  opacity: .7;
+}
+.galleryContaineradvert .slideShowContaineradvert .imageHolderadvert{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+}
+.galleryContaineradvert .slideShowContaineradvert .imageHolderadvert img{
+  width: 100%;
+  height: 100%;
+}
+.galleryContaineradvert .slideShowContaineradvert .imageHolderadvert .captionTextadvert{
+  display: none;
+}
+
+.galleryContaineradvert .slideShowContaineradvert .leftArrowadvert,.galleryContaineradvert .slideShowContaineradvert .rightArrowadvert{
+  width: 50px;
+  background: #00000036;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  transition: background 0.5s;
+  height: 72px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.galleryContaineradvert .slideShowContaineradvert .rightArrowadvert{
+  left: auto;
+  right: 0;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.galleryContaineradvert .slideShowContaineradvert .leftArrowadvert:hover,.galleryContaineradvert .slideShowContaineradvert .rightArrowadvert:hover{
+  background: #000000a8;
+  cursor: pointer;
+}
+.galleryContaineradvert .arrowadvert{
+  display: inline-block;
+  border: 3px solid white;
+  width: 10px;
+  height: 10px;
+  border-left: none;
+  border-bottom: none;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.galleryContaineradvert .arrowadvert.arrowLeftadvert{
+  transform: rotateZ(-135deg);
+}
+.galleryContaineradvert .arrowadvert.arrowRightadvert{
+  transform: rotateZ(45deg);
+}
+
+
+.galleryContaineradvert .slideShowContaineradvert>.captionTextHolderadvert{
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  color: white;
+  font-family: sans-serif;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  background: #00000047;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
+}
+.galleryContaineradvert .slideShowContaineradvert>.captionTextHolderadvert>.captionTextadvert{
+  margin: 0;
+}
+
+.galleryContaineradvert #dotsContaineradvert{
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+.galleryContaineradvert #dotsContaineradvert .dotsadvert{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-left: 5px;
+  background-color: #bbb;
+  cursor: pointer;
+  transition:background-color 0.5s;
+}
+.galleryContaineradvert #dotsContaineradvert .dotsadvert:first-child{
+  margin-left: 0;
+}
+.galleryContaineradvert #dotsContaineradvert .dotsadvert:hover,.galleryContaineradvert #dotsContaineradvert .dotsadvert.active{
+  background-color: #717171;;
+}
+
+
+
+
+.galleryContaineradvert .moveLeftCurrentSlideadvert{
+  animation-name: moveLeftCurrentadvert;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode:forwards;
+
+}
+.galleryContaineradvert .moveLeftNextSlideadvert{
+  animation-name: moveLeftNextadvert;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode:forwards;
+}
+@keyframes moveLeftCurrentadvert {
+  from {margin-left: 0;opacity: 1;}
+  to {margin-left: -100%;opacity: 1;}
+}
+@keyframes moveLeftNextadvert {
+  from {margin-left: 100%;opacity: 1;}
+  to {margin-left: 0%;opacity: 1;}
+}
+
+
+.galleryContaineradvert .moveRightCurrentSlideadvert{
+  animation-name: moveRightCurrentadvert;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode:forwards;
+}
+.galleryContaineradvert .moveRightPrevSlideadvert{
+  animation-name: moveRightPrevadvert;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode:forwards;
+}
+@keyframes moveRightCurrentadvert {
+  from {margin-left: 0;opacity: 1;}
+  to {margin-left: 100%;opacity: 1;}
+}
+@keyframes moveRightPrevadvert {
+  from {margin-left: -100%;opacity: 1;}
+  to {margin-left: 0%;opacity: 1;}
+}
+.slideTextFromBottomadvert {
+  animation-name: slideTextFromBottomadvert;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+}
+@keyframes slideTextFromBottomadvert {
+  from {opacity: 0;margin-top: 100px}
+  to {opacity: 1;margin-top: 0px;}
+}
+.slideTextFromTopadvert {
+  animation-name: slideTextFromTopadvert;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+}
+@keyframes slideTextFromTopadvert {
+  from {opacity: 0;margin-top: -100px}
+  to {opacity: 1;margin-top: 0px;}
+}

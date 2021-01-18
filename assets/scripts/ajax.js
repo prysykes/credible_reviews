@@ -2,8 +2,7 @@ $(document).ready(function () {
     var review_div = $('#tm-review-rating-star');
     var next = $('#next-page');
     var prev = $('#previous-page');
-
-
+    
     var auto_review = null;
     review_div.mouseover(function () { 
         clearInterval(auto_review);
@@ -27,7 +26,12 @@ $(document).ready(function () {
         review_div.load(`${currentHref} #tm-review-rating-star > *`);
     };
 
-    auto_review = setInterval(ajax_review, 5000);
+    // auto_review was set to null initially then used as
+    // a variable to contain the setInterval function
+    auto_review = setInterval(ajax_review, 5000); 
+
+    // implementing site-wide search for company names
+    
 
     // next.on('click', function(e){
     //     e.preventDefault();
