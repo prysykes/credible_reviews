@@ -8,6 +8,11 @@ body{
 	background: #fcfcfc;
 		
 }
+.divbgimg{
+	background: url('/media/bg_image/latest_review_bg.jpg') !important;
+	color: white !important;
+	
+}
 
 a{
 	text-decoration-style: none;
@@ -69,7 +74,60 @@ a{
 	padding: 10px 0 0 25px;
 	cursor: pointer;
 }
-  
+
+#tm-search-display ul li {
+	width: 100%
+	
+}
+
+#tm-search-display ul li a {
+	
+	text-decoration: none;
+}
+
+#tm-search-display ul li:hover {
+	background-color: rgb(236, 241, 243);
+	cursor: pointer;
+}
+
+#tm-search-display ul {
+	display: block;
+	padding: 0;
+	list-style: none;
+	
+	
+}
+
+#tm-search-display{
+	background-color: #ffffff;
+    position: absolute;
+	color: black;
+	top: 40px;
+	left: 30px;
+	font-weight: 900;
+	padding: 5px 5px 5px 5px;
+	font-size: 14px;
+	width: calc(100% - 30px);
+	height: auto;
+	border-radius: 10px;
+}
+#tm-search-result{
+	position: relative;
+	color: black;
+	font-size: 10px;
+	width: 200px;
+	height: 200px;
+
+}
+.navbarbgtop{
+	background-color: rgb(8, 8, 77) !important;
+	color: white  !important;
+}
+
+.navbarbg{
+	background-color: rgb(102, 122, 129) !important;
+	color: white  !important;
+}
 
 #topBtn {
 	position: fixed;
@@ -114,6 +172,18 @@ text-decoration: none;
 	text-align: center;
 	position: absolute;
 }
+
+.box-shadow{
+	border: 1px solid !important;
+	padding: 10px !important;
+	box-shadow: 5px 10px #7e7c7c !important;
+	
+}
+
+#active{
+	a:active { color:#7476b4; text-decoration: underline; }
+}
+
 
 .privacySpan{
 	color: royalblue;

@@ -13,15 +13,15 @@
         <section class="mt-2 bg-white mx-2">
             
             <div class="container-fluid border-0 text-justify">
-                <div class="row justify-content-center">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="row navbarbg justify-content-center" >
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white" >
                         <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
-                            <ul class="nav nav-pills ">
+                            <ul class="nav bg-light nav-pills ">
                                 <li class="nav-item ">
-                                <a class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item" >
                                 <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
@@ -56,13 +56,13 @@
                         </div>
                 </nav>
                 </div>
-                <div class="row mx-2">
-                    <div class="col-md-5 mb-2">
-                        <div class="card" style="width: 23rem;">
+                <div class="row mx-2 mt-2">
+                    <div class="col-md-5  mb-2">
+                        <div class="card bg-light box-shadow font-weight-bold" style="width: 23rem;">
                             <img src="{{request.user.userprofilecompany.profile_photo.url}}" class="card-img-top" alt="profile picture" height="300px" width="50px">
                             <div class="card-body">
                                 
-                                <p class="card-text">Username: {{request.user.username}} </br><span class="font-weight-sm">this is publicly visible</span></p>
+                                <p class="card-text">Username: {{request.user.username}} </br></p>
                                 <p class="card-text">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</p>
                                 <p class="card-text">Designation: &nbsp; {{request.user.userprofilecompany.designation}}</p>
                                 <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
@@ -108,7 +108,7 @@
                         <div class="row">
                             <div class="col-md mb-2">
                                 
-                                <div class="card text-center  mb-3"> 
+                                <div class="card text-center box-shadow mb-3" > 
                                     <div class="card-header text-white bg-info">
                                         <h5 class="card-title">Total Reviews</h5>
                                     </div>
@@ -126,7 +126,7 @@
                                         <h3 class="card-title"></h3>
                                     </div>
                                     
-                                    <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">View Reviews and Responses</button>
+                                    <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Reviews and Responses</button>
                                 </div>
     
                                 
@@ -134,21 +134,22 @@
                             
                             <div class="col-md mb-2">
                                 
-                                    <div class="card  mb-3" > 
+                                    <div class="card box-shadow mb-3" > 
                                         <div class="card-header text-center text-white bg-info">
                                             <h5 class="card-title ">Statistics</h5>
                                         </div>
                                         
                                         <div class="py-2 font-weight-bold px-2">
-                                            <p class="card-text">Average Rating:&nbsp;&nbsp; <i id="tm-average_rating">{{company.average_rating}}</i><i>/5</i> </p>
+                                            <p class="card-text"><h6 class=" font-weight-bold">Claimed Company:&nbsp; <span class= "text-primary"><a class="text-decoration-none" href="{% url 'detail' company.company_slug %}" target="_blank"> {{company.company_name}}</a> </span> </h5></p>
+                                            <p class="card-text">Average Rating:&nbsp;&nbsp; <i style="visibility: hidden;" id="tm-average_rating">{{company.average_rating}}</i><i>{% for item in "12345"|make_list %}
+                                                            <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= company.average_rating %}checked{% endif %}"></span>
+                                                            {% endfor %}</i> </p>
                                             <p class="card-text">Remarks: &nbsp;&nbsp;<i id="tm-remarks" class=""></i></p>
-                                            <p class="card-text">Total Reviews: &nbsp;&nbsp; {{ company.review_set.all.count }}</p>
-                                            <p class="card-text">Total Dislikes: &nbsp;&nbsp; dislike count number</p>
-                                            <p class="card-text">Average Rating:&nbsp;&nbsp; 4/5 </p>
+                                            
                                             <p class="card-text">Total Views: &nbsp;&nbsp; {{company.company_views}}</p>
                                             <p class="card-text">Popularity: &nbsp;&nbsp;<i id="tm-popularity">Satisfactory</i></p>
                                             
-                                            <p class="card-text"><h6 class=" font-weight-bold">Claimed Company:&nbsp; <span class= "text-primary"><a class="text-decoration-none" href="{% url 'detail' company.id %}" target="_blank"> {{company.company_name}}</a> </span> </h5></p>
+                                            
                                             
                                         </div>
                                         
@@ -163,15 +164,17 @@
                         <div class="row" id="tm-display-reviews">
                                 <div class="col-md mb-2">
                                 
-                                    <div style="font-size: small;" class="card text-center  mb-3"> 
+                                    <div style="font-size: small; " class="card text-center .box-shadow mb-3"> 
                                         <div class="card-header text-white bg-info">
-                                            <h5 class="card-title">Details</h5>
+                                            <h5 class="card-title">Reviews and Responses</h5>
                                         </div>
                                         
                                         <div class="card-body">
-                                            {% for review in company.review_set.all %}
+                                            {% for review in reviews %}
                                             <div  class=" py-2">
-                                                <p class="card-text ">Name: &nbsp; {{review.user | capfirst }} Rating: {{review.rating}}/5 &nbsp; | &nbsp; Date added: <span class="text-danger"> {{ review.date_added }}</span></p>
+                                                <p class="card-text ">&nbsp; <span class="font-weight-bold">{{review.user | capfirst }}</span> {% for item in "12345"|make_list %}
+                                                    <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
+                                                    {% endfor %}  &nbsp; | &nbsp;likes: {{review.likes}} &nbsp; | &nbsp; Date added: <span class="text-danger"> {{ review.date_added }}</span></p>
                                                 <p class="card-text">  Review: &nbsp; {{review.review_text}} </p>
                                             
                                             
@@ -185,7 +188,7 @@
                                            
                                             {% for response in responses%}
                                             {% if response.review == review %}
-                                            <p class="card-text bg-light font-italic">{{response.review.company | capfirst }} responded: {{response}} on: {{response.date_added}}</p>
+                                            <p class="card-text bg-light font-italic"> <span class="font-weight-bold"> {{response.review.company | capfirst }}</span> responded: {{response}} on: <span class="text-danger"> {{response.date_added}}</span></p>
                                             <hr>
                                             {% endif %}
                                             {% endfor %}
@@ -199,7 +202,35 @@
                                         
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="row text-center">
+                                        {% if page.has_previous%}
+                                        <div class="col-md-2">
+                                        <a  href="{% url 'profile_company' %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        <div  class="col-md-8 font-weight-bold">
+                                        <ul style="list-style-type: none;">
+                                            
+                                        {% for l in  page.paginator.page_range %}
+                                        {% if forloop.counter <= 10 %}
+                                        
+                                        <li  style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </ul>
+                                        </div>
+                                        {% if page.has_next %}
                                     
+                                        
+                                        <div class="col-md-2">
+                                            <a href="{% url 'profile_company' %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                   
                                 </div>
                                 
                         

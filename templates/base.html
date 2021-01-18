@@ -10,14 +10,16 @@
           }
 
           .tm-nav li a{
-            color: darkblue !important;
+            color: white !important;
             font-weight: 800; 
             
           }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="apple-touch-icon" sizes="57x57" href="{% static '/iconfavs/apple-icon-57x57.png'%}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="icon" type="image/icon" href="{% static '/iconfavs/favicon.ico'%}">
     <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static '/css/slideshow.css'%}">
@@ -34,9 +36,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static '/iconfavs/favicon-32x32.png'%}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static '/iconfavs/favicon-96x96.png'%}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static '/iconfavs/favicon-16x16.png'%}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/47f849ecd1.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
     <link rel="stylesheet" type="text/css" href="jquery.fancybox.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -45,9 +45,7 @@
     <meta name="msapplication-TileImage" content="/static/iconfavs/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
     <title>Credible Reviews | Home</title>
     
 </head>
@@ -74,7 +72,7 @@
             
             <div class="row">
                 
-                    <div class="tm-nav navbar-expand-lg col-md-2  navbar-light bg-light py-2">
+                    <div  class=" navbarbg tm-nav navbar-expand-lg col-md-2  navbar-light py-2">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                           </button>
@@ -98,10 +96,7 @@
                             <li class="nav-item">
                                 <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
                             </li>
-                            
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
-                            </li>
+                        
                             <li class="nav-item">
                                 <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
                             </li>
@@ -117,7 +112,7 @@
                 
               
                 <div class="col-md-7 py-2 ">
-                    <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
+                    <h1 class="h4 font-weight-bold navbarbg  px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
                     <!-- Slideshow container -->
                     <div class="galleryContainer">
                         <div class="slideShowContainer">
@@ -151,40 +146,9 @@
                 </div>
             <!-- Slide show ends-->
             </div>
-            <div class="col-md-3 py-2">
-                <h2 class="h5 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
-                    <!-- Slideshow advert container -->
-                    <div class="galleryContaineradvert">
-                        <div class="slideShowContaineradvert">
-                            <div id="playPauseadvert" onclick="playPauseSlidesadvert()"></div>
-                            <div onclick="plusSlidesadvert(-1)" class="nextPrevBtnadvert leftArrowadvert"><span class="arrowadvert arrowLeftadvert"></span></div>
-                            <div onclick="plusSlidesadvert(1)" class="nextPrevBtnadvert rightArrowadvert"><span class="arrowadvert arrowRightadvert"></span></div>
-                            <div class="captionTextHolderadvert"><p class="captionTextadvert slideTextFromTopadvert"></p></div>
-                            <div class="imageHolderadvert">
-                                <img src="/static/slide_images_advert/img_1.jpg"><!-- image resolution should be - 1366X768-->
-                                <p class="captionTextadvert">lo Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                            </div>
-                            <div class="imageHolderadvert">
-                                <img src="/static/slide_images_advert/img_2.jpg">
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                            </div>
-                            <div class="imageHolderadvert">
-                                <img src="/static/slide_images_advert/img_3.jpg">
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                            </div>
-                            <div class="imageHolderadvert">
-                                <img src="/static/slide_images_advert/img_4.jpg">
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                            </div>
-                        
-                    </div>
-                    <div id="dotsContaineradvert"></div>
-                </div>
-            <!-- Slide show advert ends-->                  
+            <div  class="col-md-3 py-2">
+                <h2 class="h5 px-2 py-2 text-center navbarbg">Advertise here... Get noticed!</h2>
+                   <p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do</p>                
             </div>
         </div>
         
@@ -192,21 +156,30 @@
     {% endblock section %}
     
 {% block article %}
-    <article class="mt-2 bg-white mx-2">
-    <div class= "row  justify-content-center ">
-            <h2 class="text-center justify-content-center">Latest Reviews</h2>
+    <article  class="mt-2 bg-white mx-2">
+        <div class= "row-md  justify-content-center ">
+            <h2 class="text-center navbarbgtop justify-content-center">Latest Reviews - <span class="h4"> <a class="text-decoration-none" href=" {% url 'browse_review' %}"> Browse Reviews </a> to like and view number of likes... </span> </h2>
          </div>
         
          <div class="container-fluid border-0 d-flex text-justify">
          
          
-            <div class="row d-flex">
+            <div  id="tm-review-rating-star" class="row divbgimg d-flex">
                 {% for review in reviews%}
-                    <div class="col-md-3 px-2 py-2">
-                        <div  class="col-md  text-wrap">
-                            <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">  Rating: <span class="text-warning">{{review.rating}}/5</span> | Date added: <span class="text-warning"> {{ review.date_added }}.</span> <br>
+                    <div  class="review col-md-3 px-2 py-2 text-center">
+                        <div   class="col-md  text-wrap">
+                            <h6 style="font-size:x-small;" class="font-weight-bold bg-info text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle mb-1">  &nbsp; <i style="font-size: large;" class="">
+                                {% comment %} The code gets a review. and runs the span tag 
+                                as many as there are numbers in the list. Then compares each umber to be less
+                                 than or equall to the review value to know how many 
+                                 reviews to add the checked class {% endcomment %}
+                                {% for item in '12345'|make_list  %} 
+                                
+                                    <span class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
+                                {% endfor %}
+                            </i><br>
                             {{review.user.first_name }} Reviewed: {{review.company}}</h6>
-                            <p> {{review.review_text}}  </p>
+                            <p><span class="font-weight-bold">{{review.subject}}&nbsp;...</span> <br> {{review.review_text}}  </p>
                         </div>
                         
                     </div>
@@ -214,7 +187,13 @@
             </div>
         </div>
               
-
+        <div class="row text-center">
+            {% if page.has_next %}
+            <div class="col-md">
+                <a id="next-page" href="{{ request.path }}?page={{page.next_page_number}}">  </a>
+            </div>
+            {% endif %}
+        </div>
         
     </article>
     {% endblock article %}
@@ -272,14 +251,82 @@
 <button id="topBtn"><i class="fas fa-arrow-up"></i></button>
 {% endblock topbtn %}
  {% block script %}
- <script type="text/javascript" src="/static/scripts/main.js"></script> 
- <script type="text/javascript" src="/static/scripts/slideshow.js"></script>
- <script type="text/javascript" src="/static/scripts/slideshowadvert.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/formauth.js"></script> 
+    <script type="text/javascript" src="/static/scripts/faq.js"></script> 
+    <script src="https://kit.fontawesome.com/47f849ecd1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/scripts/ajax.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/main.js"></script> 
+    <script type="text/javascript" src="/static/scripts/slideshow.js"></script>
+    <script type="text/javascript" src="/static/scripts/slideshowadvert.js"></script>  
  {% endblock script %}
 
- {% block ajaxscript %}
+ {% block select_2_script_tag %}
+    
+    <script>
+    $(document).ready(function () {
+        $('#id_company').select2({
+            ajax: {
+                url: '{% url 'submit_review' %}',
+                dataType: 'json',
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {id: item.id, text: item.company_name};
+                        })
+                    };
+                }
+            },
+            minimumInputLength: 2
+        });
+    });
+    </script>
        
-       
- {% endblock ajaxscript %}
+ {% endblock select_2_script_tag %}
+
+ {% block search_script %}
+    <script>
+        $(document).ready(function () {
+            var search_display = $('#tm-search-display');
+            var search_form = $('#tm-search-form');
+            var business = $('#business');
+
+            $(window).click(function () { 
+                search_display.hide()
+                
+            });
+
+            business.keyup(function () { 
+                search_display.show()
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'search_business'%}",
+                    data: {
+                        'search_text': business.val(),
+                    },
+                    success: searchSuccess,
+                    dataType: 'html',
+
+                    })
+                });
+                
+                
+            });
+
+
+            function searchSuccess(data, textStatus, jqXHR) {
+                
+                $('#response').html(data);
+            }
+    </script>
+
+ {% endblock search_script %}
+
 </body>
 </html>

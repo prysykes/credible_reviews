@@ -1,237 +1,203 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
 {% load static %}
 {% static 'images' as baseURL %}
 {% load crispy_forms_tags %}
 
 
-{% block sectionsars %}  
-        <section class="mt-2 bg-white mx-2">
-            
-            <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
-                </div>
-                <div class="row">
-                    <div class="tm-nav col-md-2 py-2">
-                        
-                        <ul class=" nav flex-column">
-                            <li class="nav-item">
-                                <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
-                            </li>
-                            <li class="nav-item">
-                                <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
-                            </li>
-                            <li class="nav-item">
-                                <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                            </li>
-                            
-                          </ul>
-                    </div>
-                    
-                  
-                    <div class="col-md-7 py-2 ">
-                        <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
-                        <!-- Slideshow container -->
-                        <div class="galleryContainer">
-                            <div class="slideShowContainer">
-                                <div id="playPause" onclick="playPauseSlides()"></div>
-                                <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow"><span class="arrow arrowLeft"></span></div>
-                                <div onclick="plusSlides(1)" class="nextPrevBtn rightArrow"><span class="arrow arrowRight"></span></div>
-                                <div class="captionTextHolder"><p class="captionText slideTextFromTop"></p></div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_1.jpg"><!-- image resolution should be - 1366X768-->
-                                    <p class="captionText">lo Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_2.jpg">
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_3.jpg">
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_4.jpg">
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                            
-                        </div>
-                        <div id="dotsContainer"></div>
-                    </div>
-                <!-- Slide show ends-->
-                </div>
-                <div class="col-md-3 py-2">
-                    <h2 class="h5 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
-						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. </p>                  </div>
-                </div>
-            </div>
-            
-        </section>
-        {% endblock sectionsars %}
-        {% block section %}  
-        <section class="mt-2 bg-white mx-2">
-            
-            <div class="container-fluid border-0 text-justify">
-                <div class="row" id="tm-filter-button-div">
-                    <span class="font-weight-bold py-1 mx-auto text-info">
-                        <button id="tm-form-filter-button" class="btn btn-sm btn-outline-primary font-weight-bold">Click to Filter Reviews</button>
-                    </span>
-                </div>
-                <div class="row" id="tm-form-filter">
-                    <span class="font-weight-bold py-1 mx-auto text-info">
-                        <form action="" method="GET" id="tm-filter-form">
-                        
-                            <div class="row ">
-                                                            
-                                <div class="col-md-4">
-                                    {{ filtered_reviews.form.company|as_crispy_field }}
-                                </div>
-                                <div class="col-md-3">
-                                    {{ filtered_reviews.form.rating|as_crispy_field }}
-                                </div>
-                                <div class="col-md-3">
-                                    {{ filtered_reviews.form.date_added|as_crispy_field }}
-                                </div>
-                                
-                                <div class="col-md-1">
-                                    <div></div>
-                                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="submit" value="Filter">
-                                </div>
-                                <br>
-                                <div class="col-md-1">
-                                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="reset" value="Clear">
-                                </div>
-
-  
-                            </div>
-                            
-                        
-                        
-                    </form>
-                    </span>
-                </div>
-                <div class="row">
-                    
-                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light bg-light py-2">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class=" nav  flex-column">
-                                
-                                <li class="nav-item">
-                                    <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        </div>
-                    
-                    
-                  
-                    <div class="col-md-10 ">
-                        <div class="row  container-fluid border-0 ">
-                                <div class="col-md py-2 text-center">
-                                    <p class="font-weight-bold">
-                                    <a class="text-decoration-none" href="{% url 'contact' %}">Contact Us </a> if the information here is erronous or you want your company featured on this page.
-                                    </P> 
-                                </div>
-                                
-                        </div>    
-                                
-                                                 
-                        <div class=" container bg-light ">
-                            <div class="card border-0 bg-light py-2 text-center">
-
-                                <div class="row">
-                                    <!-- without .qs extension, the returned value won't be an iterable hence a for loop can't be used on it-->
-                                    {% for review in filtered_reviews.qs|slice:":12" %}
-                                    <div class="col-md-3 px-2 py-2">
-                                                    <div  class="col-md  ">
-                                                        <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> likes {{review.helpful}} </span> <br> Rating: <span class="text-warning">{{review.rating}}/5</span> | Date added: <span class="text-warning"> {{ review.date_added }}.</span> <br>
-                                                        {{review.user.first_name }} Reviewed: {{review.company}} </h6>
-                                                        <p> {{review.review_text}} <br> <i style="font-size: large;" id="tooltip" class="fas fa-thumbs-up text-primary"></i><br> 
-                                                            <span id="tooltiptext">Click to Like Review</span> </p>
-                                                    </div>
-                                        
-                                                </div>
-                                    {% empty %}
-                                    <div class="card border mr-2 text-danger font-weight-bold" style="width: 100%; height: 100%">
-                                        
-                                            <p> ooops! No Review with such details, please Modidy your search...</p>
-                                     
-                                    </div>
-                                    {% endfor %} 
-                                    
-                                                            
-                                </div>
-                                <div class="row">
-                                    {% if page.has_previous%}
-                                    <div class="col-md">
-                                       <a href="{% url 'browse_review' %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
-                                    </div>
-                                    {% endif %}
-                                    {% if page.has_next %}
-                                    <div class="col-md">
-                                        <a href="{% url 'browse_review' %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                
-                                
-                     
-                         </div>
-                    </div>
-                
-                </div>
-                
-            </div>
-            
-        </section>
-        {% endblock section %}
-
-        {% block article %}
-        <article class="mt-2 bg-white mx-2">
-            
-             
-                  
+{% block section %}  
+<section class="mt-2 bg-white mx-2">
     
+    <div class="container-fluid border-0 text-justify">
+        <div class="row" id="tm-filter-button-div">
+            <span class="font-weight-bold py-1 mx-auto text-info">
+                <button id="tm-form-filter-button" class="btn btn-sm btn-outline-primary font-weight-bold">Click to Filter Reviews</button>
+            </span>
+        </div>
+        <div class="row" id="tm-form-filter">
+            <span class="font-weight-bold py-1 mx-auto text-info">
+                <form action="" method="GET" id="tm-filter-form">
+                
+                    <div class="row ">
+                                                    
+                        <div class="col-md-4">
+                            {{ filtered_reviews.form.company|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ filtered_reviews.form.rating|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ filtered_reviews.form.date_added|as_crispy_field }}
+                        </div>
+                        
+                        <div class="col-md-1">
+                            <div></div>
+                            <input class="btn btn-sm font-weight-bold btn-info mt-4" type="submit" value="Filter">
+                        </div>
+                        <br>
+                        <div class="col-md-1">
+                            <input class="btn btn-sm font-weight-bold btn-info mt-4" type="reset" value="Clear">
+                        </div>
+
+
+                    </div>
+                    
+                
+                
+            </form>
+            </span>
+        </div>
+        <div class="row">
             
-        </article>
-        {% endblock article %}
+                <div class="tm-nav navbar-expand-lg col-md-2  navbar-light navbarbg py-2">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                    <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class=" nav  flex-column">
+                        
+                        <li class="nav-item">
+                            <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
+                        </li>
+                        <li class="nav-item">
+                            <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                </div>
+            
+            
+            
+            <div class="col-md-10 ">
+                <div class="row  container-fluid border-0 ">
+                        <div class="col-md py-2 text-center">
+                            <p class="font-weight-bold">
+                            <a class="text-decoration-none" href="{% url 'contact' %}">Contact Us </a> if the information here is erronous or you want your company featured on this page. <br>
+                            {% for error in messages %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </P> 
+                        </div>
+                        
+                </div> 
+                    
+                        
+                                            
+                <div class=" container bg-light ">
+                    <div class="card border-0 bg-light py-2 text-center">
+
+                        <div class="row ">
+                            <!-- without .qs extension, the returned value won't be an iterable hence a for loop can't be used on it-->
+                            
+                            {% for review in page %}
+                            <div class="col-md-3 px-2 py-2">
+                                            <div  class="col-md text-wrap ">
+                                                <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; 
+                                                    {% for item in "12345"|make_list %}
+                                                    <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
+                                                    {% endfor %}
+                                                <br>
+                                                
+                                                    <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas fa-heart"></i> {{review.like_set.all.count}} </span>  <br>
+                                                
+                                                {{review.user.first_name }} Reviewed: {{review.company}} </h6>
+                                                <p class="text-justify"><span class="font-weight-bold">{{review.subject}}</span> <br>
+                                                
+                                                {{review.review_text|slice:":200"}} <br>
+                                                    {% if request.user.is_authenticated and request.user|has_group:"regular" %} 
+                                                        
+                                                        
+                                                            
+                                                            
+                                                        <a href="{% url 'likes' review.id %}"><i style="font-size: large;" id="tooltip" class="btn btn-sm fas fa-thumbs-up text-primary"></i></a> 
+                                                            
+                                                            
+                                                        
+                                                    {% elif request.user.is_authenticated and request.user|has_group:"company"%} 
+                                                        
+                                                        <span style="font-size: x-small; color:darkred; font-weight:800;">Company users can't like Reviews.</span> 
+                                                            
+                                                    {% else %} 
+                                                        <span style="font-size: x-small; color:darkred; font-weight:800;">Please Login as Regular User to Like Reviews.</span> 
+                                                    {% endif %} <br> 
+                                                    <span id="tooltiptext">Click to Like Review</span> 
+                                                    
+                                                </p>
+                                            </div>
+                                
+                                        </div>
+                            {% empty %}
+                            <div class="card border mr-2 text-danger font-weight-bold" style="width: 100%; height: 100%">
+                                
+                                    <p> ooops! No Review with such details, please modify your search...</p>
+                                
+                            </div>
+                            {% endfor %} 
+                            
+                                                    
+                        </div>
+                        <hr>
+                        <div class="row text-center">
+                            {% if page.has_previous%}
+                            <div class="col-md-2">
+                                <a  href="{% url 'browse_review' %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
+                            </div>
+                            {% endif %}
+                            
+                            <div  class="col-md-8 font-weight-bold">
+                            <ul style="list-style-type: none;">
+                                
+                            {% for l in  page.paginator.page_range %}
+                            {% if forloop.counter <= 10 %}
+                            <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            </ul>
+                            </div>
+                            {% if page.has_next %}
+                            
+                            
+                            <div class="col-md-2">
+                                <a href="{% url 'browse_review' %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        
+                
+                    </div>
+            </div>
+        
+        </div>
+        
+    </div>
+    
+</section>
+{% endblock section %}
+
+{% block article %}
+<article class="mt-2 bg-white mx-2">
+    
+        
+            
+
+    
+</article>
+{% endblock article %}

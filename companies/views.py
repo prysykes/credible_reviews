@@ -1,15 +1,22 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from companies.models import Company
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from users.models import Review, Response
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from companies.forms import *
 from .forms import ReviewForm
+from users.models import Like
+from pages.filters import ReviewFilter
 
 
-def dynamic_url(request, company_id):
+def dynamic_url(request, *args, **kwargs):
+    likes = Like.objects.all()
     responses = Response.objects.all()
-    company = get_object_or_404(Company, pk=company_id)
+    company = Company.objects.get(company_slug=kwargs.get('company_id'))
+    # used to return the name of the company instead of digits on detail page
+    
+    avg_rating = company.rating_array
 
     """ implementing views count for companies
      once details page is refreshed or clicked
@@ -20,6 +27,17 @@ def dynamic_url(request, company_id):
 
     # get all reviews under a particular company fetched with company_id
     companyone_reviews = company.review_set.all()
+    filtered_companyone_reviews = ReviewFilter(
+        request.GET,
+        queryset=companyone_reviews.order_by('-date_added'),
+    )
+    companyone_reviews = filtered_companyone_reviews.qs
+    paginated_companyone_reviews = Paginator(companyone_reviews, 6)
+    page_num = int(request.GET.get('page', 1))
+    try:
+        page = paginated_companyone_reviews.page(page_num)
+    except EmptyPage:
+        page = paginated_companyone_reviews.page(1)
     total_reviews = len(companyone_reviews)
     form = ReviewForm()
     
@@ -28,26 +46,38 @@ def dynamic_url(request, company_id):
         if form.is_valid:
             data = form.save(commit=False)
             data.company = company
-            print(data.company)
             data.user = request.user
-            print(data.user)
             data.save()
-            print('saved')
              # to implement average rating
             rating = request.POST.get('rating')
-            print(f"This is the rating {rating}")
-            companyone = Company.objects.get(pk=company_id)
-            print(f"This is the CompanyONe {companyone}")
-            companyone.average_rating = round((int(rating) + int(companyone.average_rating))/2)
+            companyone = company
+            companyone.rating_array.append(int(rating))
+            new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
+            
+            if 4.5 <= new_rating <= 5:
+                companyone.average_rating = 5
+            elif 4.0 <= new_rating < 4.5:
+                companyone.average_rating = 4
+            elif 3.0 <= new_rating < 4.0:
+                companyone.average_rating = 3
+            elif 2.0 <= new_rating < 3:
+                companyone.average_rating = 2
+            elif 1.0 <= new_rating < 2:
+                companyone.average_rating = 1
+            
             companyone.save()
-            print(f"This is the Average_rating {companyone.average_rating}")
-            return redirect('detail', company_id)
+            
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            # comes back to the current page
     context = {
         'company': company,
-        'companyone_reviews': companyone_reviews,
+        'companyone_reviews': page[::-1],
+        'page': page,
+        'filtered_companyone_reviews': filtered_companyone_reviews,
         'total_reviews': total_reviews,
         'form': form,
         'responses': responses,
+        'likes': likes,
         
     }
 

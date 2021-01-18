@@ -98,9 +98,9 @@ class Review(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # SET_NULL ensures that when a user is deleted, their reviews get deleted too
-    review_text = models.TextField(max_length=500, verbose_name='Your Review: (Maximum of 200 Words)')
+    subject = models.CharField(max_length=50)
+    review_text = models.TextField(max_length=500, verbose_name='Your Review: (Maximum of 500 Words)')
     rating = Int_max.IntegerRangeField(min_value=1, max_value=5)
-    helpful = models.IntegerField(default=0)
     date_added = models.DateField('Review Date', auto_now_add=True)
 
     def __str__(self):
@@ -124,3 +124,10 @@ class ResponseReply(models.Model):
     def __str__(self):
         return self.reply
 
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    like_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.user)

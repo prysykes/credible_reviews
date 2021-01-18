@@ -13,10 +13,10 @@ urlpatterns = [
     path('faq/', views.faq, name='faq'),
     path('how-to-use/', views.how_to_use, name='how-to-use'),
     path('privacy-terms/', views.privacy_terms, name='privacy-terms'),
-    
-
+    path('search_business', views.search_business, name='search_business'),
     path('online-safety/', views.online_safety, name='online-safety'),
     #path('submit-review/', views.submit_review, name='submit-review'),
+    
     path('validate-business/', views.validate_business, name='validate-business'),
     path('featured-companies/', views.featured_companies, name='featured-companies'),
     path('company_list/', views.company_list, name='company-list'),

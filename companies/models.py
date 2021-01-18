@@ -4,32 +4,40 @@ from . import Int_max
 
 from django.urls import reverse
 
+from django.contrib.postgres.fields import ArrayField
+
 class Company(models.Model):
-    Online_Merchant = 'merch'
-    Education = 'edu'
-    Transportation = 'trans'
-    Hospitalism = 'hosp'
-    Healthcare = 'health'
-    Construction = 'const'
-    Blog = 'blog'
-    Finance = 'fin'
-    Media = 'media'
-    Government_Agency = 'agency'
-    Other = 'other'
-    Manufacturing = 'manufacturing'
+    merchant = 'online merchant'
+    forex = 'Forex Company'
+    betting = 'sports betting'
+    fooddrug = 'food and drug'
+    education = 'education'
+    transportation = 'transportation'
+    hospitality = 'hospitality'
+    healthcare = 'health'
+    construction = 'construction'
+    blog = 'blog'
+    finance = 'finance'
+    media = 'media'
+    agency = 'governement agency'
+    other = 'other'
+    manufacturing = 'manufacturing'
     sector = [
-        (Online_Merchant, 'Online Merchant'),
-        (Education, 'Education'),
-        (Transportation, 'Transportation'),
-        (Hospitalism, 'Hospitalism'),
-        (Healthcare, 'Healthcare'),
-        (Construction, 'Construction'),
-        (Blog, 'Blog'),
-        (Finance, 'Finance'),
-        (Media, 'Media'),
-        (Manufacturing, 'Manufacturing'),
-        (Government_Agency, 'Government Agency'),
-        (Other, 'Other')
+        (merchant, 'Online Merchant'),
+        (forex, 'Forex Company'),
+        (betting, 'Sports Betting'),
+        (fooddrug, 'Food and Drug'),
+        (education, 'Education'),
+        (transportation, 'Transportation'),
+        (hospitality, 'Hospitality'),
+        (healthcare, 'Healthcare'),
+        (construction, 'Construction'),
+        (blog, 'Blog'),
+        (finance, 'Finance'),
+        (media, 'Media'),
+        (manufacturing, 'Manufacturing'),
+        (agency, 'Governement Agency'),
+        (other, 'Other')
     ]
     Free = 'Free'
     Premium = 'Premium'
@@ -116,12 +124,13 @@ class Company(models.Model):
     ]
     
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Company User')
-    company_sector = models.CharField(max_length=30, choices=sector, default=Online_Merchant, verbose_name='Sector')
+    company_sector = models.CharField(max_length=30, choices=sector, default=merchant, verbose_name='Sector')
     company_name = models.CharField(max_length=100)
     company_description = models.TextField()
     company_logo = models.ImageField(upload_to='company_logos', blank=True, null=True)
     company_state = models.CharField(max_length=30, choices=state, default=Lagos, verbose_name='State')
     company_address = models.TextField(max_length=2000)
+    rating_array = ArrayField(models.IntegerField(), size=50, default=list)
     average_rating = Int_max.IntegerRangeField(default=0, verbose_name='Avg', min_value=1, max_value=5)
     total_views = models.IntegerField(default=0)
     company_website = models.CharField(max_length=500, blank=True, null=True)
@@ -133,9 +142,11 @@ class Company(models.Model):
     advert = models.BooleanField(default=False)
     premium = models.BooleanField(default=False)
 
-    def get_absolute_url(self):
+    company_slug = models.SlugField(max_length=255, allow_unicode=True, null=True, default=company_name)# used to get company name in url instead of ID
+
+    def get_absolute_url(self):# used to get company name in url instead of ID
         """Returns the url to access a particular instance of the model."""
-        return reverse("detail", kwargs={ "id": self.id })
+        return reverse("detail", kwargs={ "slug": self.slug })
     
     def __str__(self):
         return self.company_name

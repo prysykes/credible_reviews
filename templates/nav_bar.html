@@ -1,7 +1,7 @@
 {% load auth_extras %}
     {% block navtop %}
         
-            <nav  class="row navbar sticky-top navbar-expand-lg navbar-light bg-white">
+            <nav class=" navbarbgtop row navbar sticky-top navbar-expand-lg ">
                     <div class="col-md">
                         <div class="container-fluid">
                             <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/logo.png" alt="Credible Reviews Logo" width="90" height="80"></a>
@@ -27,7 +27,7 @@
                                         <a class="nav-link font-weight-bold" href="{% url 'profile_regular' %}"></i>Back to Profile Page</a>
                                     </li>
                                     <li class="nav-item" >
-                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_regular' %}"></i>Logout</a>
+                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_regular' %}"><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">&nbsp;Logout</a>
                                     </li>
                                 {% endblock greetingregular %}
                                 {% elif request.user|has_group:"company"%}
@@ -36,7 +36,7 @@
                                         <a class="nav-link font-weight-bold" href="{% url 'profile_company' %}"></i>Back to Profile Page</a>
                                     </li>
                                     <li class="nav-item" >
-                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_company' %}"></i>Logout</a>
+                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_company' %}"><img src="{{request.user.userprofilecompany.profile_photo.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">&nbsp;Logout</a>
                                     </li>
                                 {% endblock greetingcompany %}
                                 {% endif %}
@@ -55,17 +55,10 @@
                                     </div>
                                                                                         
                                 </li>
+                              
                                 <li class="nav-item" >
-                                    <div class="dropdown ">
-                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-user-plus" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Login to Your Account
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'loginpage_regular' %}">Login as a Regular User</a>
-                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'loginpage_company' %}">Login as a Company Representive</a>
-                                        </div>
-                                    </div>
-                                    
+                                    <a class="nav-link font-weight-bold" href="{% url 'user_login' %}"><i class="fa fa-sign-in" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Login</a>
+                                  
                                 </li>
                             {% endif %}
                                 
@@ -76,22 +69,27 @@
                     </div>  
                     <div class="col-md-3">  
                         <div class="justify-content-end">
-                            <form class="form-inline  my-2 my-lg-0">
-                                    <input class="form-control-sm " type="search" placeholder="search business..." aria-label="Search">&nbsp;
-                                    <button class="btn btn-outline-primary btn-sm" type="submit">Search</button>
-                            </form>
+                            
+                            <input autocomplete="off" id="business" name="company_name" class="form-control " type="search" size="28" placeholder="search for a company or business" aria-label="Search">&nbsp;
+                                    
+                            
+                        </div>
+                        <div style="display: none;" id="tm-search-display"  class="row">
+                        <ul id="response">
+
+                            
+                
+                        </ul>
+                        
+                            
                         </div>
                     </div>
                             
                     
             </nav>
-        
-        
+            
         {% endblock navtop %}
         {% block navsticky %}
-            <div class="col-md-auto mt-1 sticky-top">
-         
-                    
-              </div>
+        
         {% endblock navsticky %}
         

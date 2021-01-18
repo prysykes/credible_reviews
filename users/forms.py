@@ -4,14 +4,14 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import *
 
+from companies.models import Company
+
 
 
 class SignUpFormRegular(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2']
-        
-
 
 class UserProfileForm(ModelForm):
     class Meta:
@@ -22,7 +22,20 @@ class UserProfileForm(ModelForm):
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = ['company', 'review_text', 'rating']
+        fields = ['company','subject', 'review_text', 'rating']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['company'].queryset = Company.objects.none()
+
+        if 'company' in self.data:
+            self.fields['company'].queryset = Company.objects.all()
+    
+    
+        
+    
+
+        
+        
 
 class ResponseForm(ModelForm):
     class Meta:

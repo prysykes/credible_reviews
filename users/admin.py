@@ -11,7 +11,7 @@ admin.site.register(UserProfile, UserProfileAdmin)
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('company','review_text', 'date_added', 'helpful')
+    list_display = ('company', 'subject', 'review_text', 'date_added')
     autocomplete_fields = ['company']
     form = ReviewForm
 
@@ -26,5 +26,10 @@ class ResponseReplyAdmin(admin.ModelAdmin):
     list_display = ['user', 'reply']
 
 admin.site.register(ResponseReply, ResponseReplyAdmin)
+
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ['user', 'review', 'like_count']
+
+admin.site.register(Like, LikeAdmin)
 
 

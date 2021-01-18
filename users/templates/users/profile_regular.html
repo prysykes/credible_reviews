@@ -6,15 +6,15 @@
         <section class="mt-2 bg-white mx-2">
             
             <div class="container-fluid border-0 text-justify">
-                <div class="row justify-content-center">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="row navbarbg justify-content-center ">
+                    <nav class="navbar navbar-expand-lg navbar-light ">
                         <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
-                            <ul class="nav nav-pills ">
+                            <ul class="nav nav-pills bg-light ">
                                 <li class="nav-item ">
-                                <a class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item" >
                                 <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
@@ -32,16 +32,13 @@
                                 
                                 </li>
                                                         
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                                </li>
-                                <li class="nav-item" >
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
-                                </li>
                                 
                                 <li class="nav-item" >
                                     <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
+                                </li>
+
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
                                 </li>
                                                         
                                 <li class="nav-item" id="tm-search-pane" >                            
@@ -57,9 +54,10 @@
                         </div>
                 </nav>
                 </div>
+                <hr>
                 <div class="row mx-2">
                     <div class="col-md-5 mb-2">
-                        <div class="card" style="width: 23rem;">
+                        <div class="card box-shadow" style="width: 23rem;">
                             <img src="{{request.user.userprofile.profile_picture.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
                             <div class="card-body">
                                 <h5 class="card-title">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</h5>
@@ -81,7 +79,7 @@
                         <div class="row">
                             <div class="col-md mb-2">
                                 
-                                    <div class="card text-center  mb-3"> 
+                                    <div  class="card text-center box-shadow  mb-3"> 
                                         <div class="card-header text-white bg-info">
                                             <h5 class="card-title">Total Reviews</h5>
                                         </div>
@@ -90,14 +88,14 @@
                                         </div>
                                         <hr>
                                         <div class="card-body">
-                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">View Reviews</button> </h5>
+                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Your Reviews</button> </h5>
                                         </div>
                                     </div>
                                 
                             </div>
                             <div class="col-md mb-2">
                                 
-                                    <div class="card text-center  mb-3" > 
+                                    <div  class="card text-center box-shadow mb-3" > 
                                         <div class="card-header text-white bg-info">
                                             <h5 class="card-title ">Total Companies Reviewed</h5>
                                         </div>
@@ -106,7 +104,7 @@
                                         </div>
                                         <hr>
                                         <div class="card-body">
-                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">View Companies</button> </h5>
+                                            <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">Show/Hide Companies</button> </h5>
                                         </div>
                                     </div>                      
 
@@ -117,26 +115,57 @@
                         <div class="row" id="tm-display-reviews">
                                 <div class="col-md mb-2">
                                 
-                                    <div class="card text-center  mb-3"> 
+                                    <div  class="card text-center box-shadow mb-3"> 
                                         <div class="card-header text-white bg-info">
                                             <h5 class="card-title">Details</h5>
                                         </div>
-                                        {% for review in reviews %}
-                                        <div style="font-size: small;" class="card-body">
-                                            <p class="card-text">Company Name: <a class="text-decoration-none" href="{% url 'detail' review.company.id %}">{{review.company}}</a>&nbsp; | &nbsp; Rating: {{review.rating}}/5 &nbsp; | &nbsp; <span class="text-danger">Date added: {{ review.date_added }}</span></p>
-                                            <p class="card-text">{{review.review_text}}</p>
-                                            <p class="card-text"><a class="tm-delete-review btn btn-outline-danger font-weight-bold btn-sm"  href="{%url 'delete_review' review.id %}">Delete review</a>&nbsp; | &nbsp; <a href="{%url 'edit_review' review.id %}"><button class="btn btn-outline-primary font-weight-bold btn-sm">Edit Review</button></a></p>
-                                        {% for response in responses %}
-                                            {% if response.review == review %}
-                                            <p class="card-text bg-light"><span class="font-weight-bold">{{response.user.first_name | capfirst }}&nbsp; replied: &nbsp;</span>{{response.response}} &nbsp; <span class="font-weight-bold"> on: </span> &nbsp; <span class="text-danger"> {{response.date_added}} </span></p>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <p class="card-text"><a href="{% url 'response_user' review.id %}"><span id="tm-respond" class="text-primary font-weight-bold ">reply </span></a></p>
-                                                
-                                            <hr>
+                                        <div class="row ">
+                                            {% for review in reviews %}
+                                            <div style="font-size: small;" class="card-body">
+                                                <p class="card-text">Company Name: <a class="text-decoration-none" href="{% url 'detail' review.company.id %}">{{review.company}}</a>&nbsp; | &nbsp; {% for item in "12345"|make_list %}
+                                                            <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
+                                                            {% endfor %}&nbsp; | &nbsp; likes: {{review.likes}} &nbsp; | &nbsp; <span class="text-danger">Date added: {{ review.date_added }}</span></p>
+                                                <p class="card-text">{{review.review_text}}</p>
+                                                <p class="card-text"><a class="tm-delete-review btn btn-outline-danger font-weight-bold btn-sm"  href="{%url 'delete_review' review.id %}">Delete review</a>&nbsp; | &nbsp; <a href="{%url 'edit_review' review.id %}"><button class="btn btn-outline-primary font-weight-bold btn-sm">Edit Review</button></a></p>
+                                            {% for response in responses %}
+                                                {% if response.review == review %}
+                                                <p class="card-text bg-light"><span class="font-weight-bold">{{response.user.first_name | capfirst }}&nbsp; replied: &nbsp;</span>{{response.response}} &nbsp; <span class="font-weight-bold"> on: </span> &nbsp; <span class="text-danger"> {{response.date_added}} </span></p>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <p class="card-text"><a href="{% url 'response_user' review.id %}"><span id="tm-respond" class="text-primary font-weight-bold ">reply </span></a></p>
+                                                    
+                                                <hr>
+                                            </div>
+                                            {% endfor %}
                                         </div>
-                                        {% endfor %}
                                         
+                                    
+
+                                        <div class="row text-center">
+                                            {% if page.has_previous%}
+                                            <div class="col-md-2">
+                                            <a  href="{% url 'profile_regular' %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div  class="col-md-8 font-weight-bold">
+                                            <ul style="list-style-type: none;">
+                                                
+                                            {% for l in  page.paginator.page_range %}
+                                            {% if forloop.counter <= 10 %}
+                                            <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            </ul>
+                                            </div>
+                                            {% if page.has_next %}
+                                        
+                                            
+                                            <div class="col-md-2">
+                                                <a href="{% url 'profile_regular' %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
+                                            </div>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 
                                 </div>
@@ -146,14 +175,16 @@
                         <div class="row" id="tm-display-companies">
                                 <div class="col-md mb-2">
                                 
-                                    <div class="card   mb-3"> 
+                                    <div class="box-shadow card   mb-3"> 
                                         <div class="card-header text-center text-white bg-info">
                                             <h5 class="card-title">Reviewed Companies</h5>
                                         </div>
                                         
                                         <div class="card-body mx-5">
                                         {% for company in companies %}
-                                            <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.id %}">{{company.company_name}}</a>&nbsp; | &nbsp; Rating: {{company.average_rating}}/5 </p>
+                                            <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.id %}">{{company.company_name}}</a>&nbsp; | &nbsp; {% for item in "12345"|make_list %}
+                                                            <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= company.average_rating %}checked{% endif %}"></span>
+                                                            {% endfor %} </p>
                                          {% endfor %}   
                                         </div>
                                         
@@ -183,10 +214,7 @@
         </article>
         {% endblock article %}
 
-{% block script %}
- <script type="text/javascript" src="/static/scripts/main.js"></script> 
 
- {% endblock script %}
         
 
 

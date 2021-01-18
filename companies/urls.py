@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('<int:company_id>/', views.dynamic_url, name='detail'),
+    path('<slug:company_id>/', views.dynamic_url, name='detail'),
     
     ]

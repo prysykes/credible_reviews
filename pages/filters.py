@@ -13,6 +13,7 @@ class CompanyFilter(django_filters.FilterSet):
         ]
 
 
+
 class ReviewFilter(django_filters.FilterSet):
     class Meta:
         model = Review

@@ -10,6 +10,9 @@ from companies.models import Company
 from users.models import Review, Response
 from users.forms import ResponseForm
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from pages import filters
+
 #from companies.models import Company, Review
 
 from .decorators import unauthenticated_user_company, allowed_users_company
@@ -60,7 +63,7 @@ def loginpage_company(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('profile_company')
+                return redirect('/')
         else:
             messages.info(request, 'Username or Password Incorrect, Try Again...')
             
@@ -72,7 +75,7 @@ def loginpage_company(request):
 
 def logoutpage_company(request):
     logout(request)
-    return redirect('/')
+    return redirect('/') #sends the user to homepage after logout
 
 @login_required(login_url='loginpage_company')
 @allowed_users_company(allowed_roles=['company'])
@@ -99,22 +102,40 @@ def response(request, review_id):
 @login_required(login_url='loginpage_company')
 @allowed_users_company(allowed_roles=['company'])
 def profile_company(request):
-    print(request.user)
-    companies = Company.objects.all()
     
-    responses = Response.objects.all()
+    companies = Company.objects.all()
+    try:
+        company = get_object_or_404(Company, user=request.user)
+        reviews = company.review_set.all()
+        responses = Response.objects.all()
+        paginated_reviews = Paginator(reviews, 3)
+        page_num = request.GET.get('page', 1)
 
-    context = {
-        'companies': companies,
-        #'company_reviews': company_reviews,
-        #'total_reviews': total_reviews,
-        'responses': responses,
-        'info': "No company claimed yet",
-        'infor': 'Not Available',
-       
-        
-        
-    }
+        try:
+            page = paginated_reviews.page(page_num)
+        except EmptyPage:
+            page = paginated_reviews(1)
+        context = {
+
+            'companies': companies,
+            'reviews': page,
+            'page': page,
+            #'company_reviews': company_reviews,
+            #'total_reviews': total_reviews,
+            'responses': responses,
+            'info': "No company claimed yet",
+            'infor': 'Not Available',
+        }
+    except:
+        context = {
+
+            'companies': companies,
+            
+            'info': "No company claimed yet",
+            'infor': 'Not Available',
+        }
+        pass
+
     return render(request, 'companyusers/profile_company.html', context)
 
 def request_review_api(request):
@@ -130,7 +151,7 @@ def request_review_api(request):
 @allowed_users_company(allowed_roles=['company'])
 def request_review(request, receiver_email):
     company = get_object_or_404(Company, user=request.user)
-    company_id = company.pk
+    company_id = company.company_slug
     
     html_tpl_path = 'companyusers/request_review.html'
     context_data = {'company': company, 'company_id': company_id,}

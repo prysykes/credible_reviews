@@ -1,5 +1,7 @@
 $(document).ready(function () {
     
+    
+    
     var display_company = $('#tm-display-companies');
     var companies = $('#tm-companies');
     var claimed_detail = $('#tm-claimed-detail');
@@ -15,8 +17,16 @@ $(document).ready(function () {
     var form_filter = $('#tm-form-filter');
     var avg_rating_input = $('#id_average_rating');
     var filter_button_div = $('#tm-filter-button-div');
+    var review_rating = $('#tm-review-rating-star .review');
+    var star_one = $('#star_one');
+    var star_two = $('#star_two');
+    var star_three = $('#star_three');
+    var star_four = $('#star_four');
+    var star_five = $('#star_five');
 
+    review_display.show()
 
+   
     // begin stylin go of filter inputs on featured page
     avg_rating_input.attr({
         'min': 1,
@@ -26,15 +36,7 @@ $(document).ready(function () {
 
     $("#id_average_rating, #id_company_name, #id_company_sector, #id_company_state").addClass('form-control');
     
-    $('#tm-filter-form').mouseover(function(){
-        filter_button_div.hide();
-
-    });
-
-    $('#tm-filter-form').mouseout(function(){
-        filter_button_div.show();
-        
-    })
+    
     /* $('#tm-filter-form').focusout(function(){
         
         form_filter.hide();
@@ -109,16 +111,13 @@ $(document).ready(function () {
         remarks.text('Excellent');
         remarks.addClass('text-success');
     } 
-    var star_one = $('#star_one');
-    var star_two = $('#star_two');
-    var star_three = $('#star_three');
-    var star_four = $('#star_four');
-    var star_five = $('#star_five');
-    // implementing average rating
+    
     var average = $('#tm_average');
     
     /* var login = $('#tm-login');
     var login_company = $('#tm-login-company'); */
+
+    // implementing star rating for company page
     
     if (average.text() == 1) {
         star_one.addClass('checked');
@@ -147,7 +146,7 @@ $(document).ready(function () {
     /* login.hide(); */
     /* login_company.hide(); */
     topBtn.hide();
-    review_display.hide();
+    
     
     review_button.click(function(){
         add_review.slideToggle(600);

@@ -9,7 +9,7 @@
                 </div>
                 <div class="row">
                     
-                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light bg-light py-2">
+                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light navbarbg py-2">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                               </button>
@@ -45,60 +45,68 @@
                     
                     
                   
-                    <div class="col-md-7 py-2 ">
-                        <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
-                        <form action="" method="post">{% csrf_token %}
+                    <div class="col-md-7  py-2 ">
+                        <h1 class="h4 font-weight-bold navbarbg px-2 py-2 text-center"> Contact Us </h1>
+                        <div class="row justify-content-center ">
+                            <form  class="navbarbg py-5 px-5 " action="" method="post">{% csrf_token %}
 
-                                <div class="row">                                
-                                    <div class="col-md-2">
-                                        <label for="receiver">Full Name:</label>
+                                    <div class="row">                                
+                                        <div class="col-md-5">
+                                            <label for="receiver">Full Name:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="text" name="full_name" id="full_name">
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <input type="text" name="full_name" id="full_name">
+                                    <div class="row">                                
+                                        <div class="col-md-5">
+                                            <label for="receiver">Your Email:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="email" name="receiver" id="receiver">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">                                
-                                    <div class="col-md-2">
-                                        <label for="receiver">Your Email:</label>
+                                    <div class="row">                                
+                                        <div class="col-md-5">
+                                            <label for="receiver">Subject:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="text" name="subject" id="subject">
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <input type="email" name="receiver" id="receiver">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label for="message">Your Message:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">                                
-                                    <div class="col-md-2">
-                                        <label for="receiver">Subject:</label>
+                                    <div class="row">
+                                        
+                                        <div class="col-md-12">
+                                            <textarea name="message" cols="50" rows="10"  placeholder="Message..." id="message"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <input type="text" name="subject" id="subject">
+                                    <div class="row">
+                                        <div class="col-md text-center">
+                                            <button class="btn font-weight-bold btn-outline-light" type="submit">Send</button>
+                                        </div>
+                                        
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <label for="message">Your Message:</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <textarea name="message" placeholder="Message..." id="message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md">
-                                        <button type="submit">Send</button>
-                                    </div>
+
                                     
-                                </div>
-
                                 
-                            
-                            
-                            
-                            
-                            
-                            
-                        </form>
+                                
+                                
+                                
+                                
+                                
+                            </form>
+                        </div>    
                 </div>
                 <div class="col-md-3 py-2">
-                    <h2 class="h5 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
+                    <h2 class="h5 px-2 py-2 text-center navbarbg">Advertise here... Get noticed!</h2>
 						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. </p>                  </div>
                 </div>
             </div>
