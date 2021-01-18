@@ -10,10 +10,17 @@ from companies.models import Company
 from users.models import Review, Response
 from users.forms import ResponseForm
 
-
 #from companies.models import Company, Review
 
 from .decorators import unauthenticated_user_company, allowed_users_company
+# importing modules to support html email message
+from django.http import JsonResponse
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
+from django.conf import settings
+
+# end importing modules to support html email message
+
 
 
 @unauthenticated_user_company
@@ -62,12 +69,6 @@ def loginpage_company(request):
     }
     return render(request, 'companyusers/loginpage_company.html', context)
 
-def reset_password(request):
-    context = {
-        
-    }
-    return render(request, 'companyusers/reset_password.html', context)
-
 
 def logoutpage_company(request):
     logout(request)
@@ -115,6 +116,39 @@ def profile_company(request):
         
     }
     return render(request, 'companyusers/profile_company.html', context)
+
+def request_review_api(request):
+    if request.method == 'POST':
+        receiver_email = request.POST.get('receiver')
+        
+        request_review(request, receiver_email)
+    
+    return redirect('profile_company')
+
+
+@login_required(login_url='loginpage_company')
+@allowed_users_company(allowed_roles=['company'])
+def request_review(request, receiver_email):
+    company = get_object_or_404(Company, user=request.user)
+    company_id = company.pk
+    
+    html_tpl_path = 'companyusers/request_review.html'
+    context_data = {'company': company, 'company_id': company_id,}
+    email_html_template = get_template(html_tpl_path).render(context_data)
+    receiver_email = receiver_email
+        
+    email_msg = EmailMessage('Credible Review Request',
+                                email_html_template,
+                                settings.EMAIL_HOST_USER,
+                                [receiver_email],
+                                reply_to=['no-reply@crediblereviews.ng'],
+
+                                )  
+     
+    # this part allows the message to be send as html instead of plain text
+    email_msg.content_subtype = 'html'
+    email_msg.send(fail_silently=False)
+    
 
 def done(request):
     return render(request, 'done.html')

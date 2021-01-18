@@ -1,1 +1,107 @@
 {% extends 'base.html' %}
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row">
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                </div>
+                <div class="row">
+                    
+                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light bg-light py-2">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                              </button>
+                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class=" nav  flex-column">
+                                
+                                <li class="nav-item">
+                                    <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        </div>
+                    
+                    
+                  
+                    <div class="col-md-7 py-2 ">
+                        <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
+                        <form action="" method="post">{% csrf_token %}
+
+                                <div class="row">                                
+                                    <div class="col-md-2">
+                                        <label for="receiver">Full Name:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" name="full_name" id="full_name">
+                                    </div>
+                                </div>
+                                <div class="row">                                
+                                    <div class="col-md-2">
+                                        <label for="receiver">Your Email:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="email" name="receiver" id="receiver">
+                                    </div>
+                                </div>
+                                <div class="row">                                
+                                    <div class="col-md-2">
+                                        <label for="receiver">Subject:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" name="subject" id="subject">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="message">Your Message:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <textarea name="message" placeholder="Message..." id="message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <button type="submit">Send</button>
+                                    </div>
+                                    
+                                </div>
+
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                        </form>
+                </div>
+                <div class="col-md-3 py-2">
+                    <h2 class="h5 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
+						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. </p>                  </div>
+                </div>
+            </div>
+            
+        </section>
+        {% endblock section %}

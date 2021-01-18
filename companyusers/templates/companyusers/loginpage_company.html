@@ -6,15 +6,19 @@
             
             <div class="container-fluid border-0 text-justify">
                 <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                    {% if messages %}
+                    {% for message in messages%}
+                        <span class="font-weight-bold px-2 py-1 mx-auto text-danger">{{ message }}</span>
+                    {% endfor %} 
+                    {% else %}
+                        <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                    {% endif %}
                 </div>
                 <div class="row">
                   
                   <div class="col-md-7 justify-content-center py-2 ">
                         <h1 class="h4 font-weight-bold px-2 py-2 text-center"> Login to Your Account...</h1>
-                            {% for message in messages%}
-                                <p> {{ message }}</p>
-                            {% endfor %}
+                            
                             <form action="" method="POST" class="font-weight-bold tm-login" id="loginForm">
                             {% csrf_token %}
                                 <div class="form-group row">

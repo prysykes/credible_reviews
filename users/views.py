@@ -9,8 +9,10 @@ from django.contrib.auth.models import Group
 from .models import UserProfile, Review, Response
 
 
+
+
 from companies.models import Company
-from users.forms import ReviewForm
+from users.forms import ReviewForm, ResponseForm
 from .decorators import unauthenticated_user_regular, allowed_users_regular
 
 @unauthenticated_user_regular
@@ -70,19 +72,47 @@ def logoutpage_regular(request):
     return redirect('/')
     
 
+@login_required(login_url='loginpage_company')
+@allowed_users_regular(allowed_roles=['regular'])
+def response_user(request, review_id):
+    review = get_object_or_404(Review, pk=review_id)
+    form = ResponseForm()
+    if request.method == "POST":
+        form = ResponseForm(request.POST or None)
+        if form.is_valid:
+            data = form.save(commit=False)
+            data.user = request.user
+            data.review = review
+            data.save()
+            return redirect('profile_regular')
+    context = {
+        'form': form,
+        
+        
+
+    }
+    
+    return render(request, 'users/response_user.html', context)
 
 @login_required(login_url='loginpage_regular')
 @allowed_users_regular(allowed_roles=['regular'])
 def profile_regular(request):
+    # would contain all companies reviewed by the user
     companies = []
     responses = Response.objects.all()
     reviews = Review.objects.filter(user=request.user)
+    """
+    Loops through the reviews where user is the logged in user
+    then accesses the companies associated with the reviews
+    and automatically add it to the companies list above.
+    """
     for review in reviews:
         company = review.company
         if company not in companies:
             companies.append(company)
     total_companies = len(companies)
     total_reviews = len(reviews)
+    
     
     context = {
         'reviews': reviews,
@@ -159,6 +189,9 @@ def delete_review(request, review_id):
 
 def done(request):
     return render(request, 'done.html')
+
+def done_contact(request):
+    return render(request, 'done_contact.html')
     
 @login_required(login_url='loginpage_regular')
 @allowed_users_regular(allowed_roles=['regular'])

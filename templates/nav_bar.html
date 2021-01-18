@@ -1,136 +1,97 @@
 {% load auth_extras %}
     {% block navtop %}
         
-        <nav style="z-index: 10000;"  class="navbar navbar-expand-lg navbar-light bg-white">
-                <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/logo.png" alt="Credible Reviews Logo" width="90" height="80"></a>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="nav nav-pills ">
-                        <li class="nav-item">
-                        <a class="nav-link font-weight-bold" href="{% url 'how-to-use' %}"><i class="fas fa-cog" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>How to Use <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item" >
-                            <a class="nav-link font-weight-bold" href="{% url 'contact' %}"><i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Contact Us</a>
-                        </li>
-                        {% if request.user.is_authenticated %}
-                        {% if request.user|has_group:"regular"%}
-                        {% block greetingregular %}                        
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href="{% url 'profile_regular' %}"></i>Back to Profile Page</a>
-                            </li>
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href="{% url 'logoutpage_regular' %}"></i>Logout</a>
-                            </li>
-                        {% endblock greetingregular %}
-                        {% elif request.user|has_group:"company"%}
-                        {% block greetingcompany %}                        
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href="{% url 'profile_company' %}"></i>Back to Profile Page</a>
-                            </li>
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href="{% url 'logoutpage_company' %}"></i>Logout</a>
-                            </li>
-                        {% endblock greetingcompany %}
-                        {% endif %}
-                        {% endif %}
-                        
-                        {% if not request.user.is_authenticated %}
-                        <li class="nav-item" >
-                            <div class="dropdown ">
-                                <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user-plus" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Sign-Up For Free
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item font-weight-bold text-primary" href="{% url 'sign-up' %}">Regular User</a>
-                                    <a class="dropdown-item font-weight-bold text-primary" href="{% url 'sign-up-company' %}">Company Representive</a>
-                                </div>
-                            </div>
-                                                                                   
-                        </li>
-                        <li class="nav-item" >
-                            <div class="dropdown ">
-                                <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user-plus" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Login to Your Account
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item font-weight-bold text-primary" href="{% url 'loginpage_regular' %}">Login as a Regular User</a>
-                                    <a class="dropdown-item font-weight-bold text-primary" href="{% url 'loginpage_company' %}">Login as a Company Representive</a>
-                                </div>
-                            </div>
+            <nav  class="row navbar sticky-top navbar-expand-lg navbar-light bg-white">
+                    <div class="col-md">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/logo.png" alt="Credible Reviews Logo" width="90" height="80"></a>
                             
-                        </li>
-                    {% endif %}
-                        
-                        
-                                    
-                    </ul>
-                </div>
-                    <div class="justify-content-end">
-                    <form class="form-inline  my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                          </form>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
                     </div>
-                
-                </div>
-        </nav>
+                        <div class="col-md-8">      
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                            <ul class="nav nav-pills ">
+                                <li class="nav-item">
+                                <a class="nav-link font-weight-bold" href="{% url 'how-to-use' %}"><i class="fas fa-cog" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>How to Use <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href="{% url 'contact' %}"><i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Contact Us</a>
+                                </li>
+                                {% if request.user.is_authenticated %}
+                                {% if request.user|has_group:"regular"%}
+                                {% block greetingregular %}                        
+                                    <li class="nav-item" >
+                                        <a class="nav-link font-weight-bold" href="{% url 'profile_regular' %}"></i>Back to Profile Page</a>
+                                    </li>
+                                    <li class="nav-item" >
+                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_regular' %}"></i>Logout</a>
+                                    </li>
+                                {% endblock greetingregular %}
+                                {% elif request.user|has_group:"company"%}
+                                {% block greetingcompany %}                        
+                                    <li class="nav-item" >
+                                        <a class="nav-link font-weight-bold" href="{% url 'profile_company' %}"></i>Back to Profile Page</a>
+                                    </li>
+                                    <li class="nav-item" >
+                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_company' %}"></i>Logout</a>
+                                    </li>
+                                {% endblock greetingcompany %}
+                                {% endif %}
+                                {% endif %}
+                                
+                                {% if not request.user.is_authenticated %}
+                                <li class="nav-item" >
+                                    <div class="dropdown ">
+                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-user-plus" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Sign-Up For Free
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'sign-up' %}">Regular User</a>
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'sign-up-company' %}">Company Representive</a>
+                                        </div>
+                                    </div>
+                                                                                        
+                                </li>
+                                <li class="nav-item" >
+                                    <div class="dropdown ">
+                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-user-plus" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Login to Your Account
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'loginpage_regular' %}">Login as a Regular User</a>
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'loginpage_company' %}">Login as a Company Representive</a>
+                                        </div>
+                                    </div>
+                                    
+                                </li>
+                            {% endif %}
+                                
+                                
+                                            
+                            </ul>
+                        </div>
+                    </div>  
+                    <div class="col-md-3">  
+                        <div class="justify-content-end">
+                            <form class="form-inline  my-2 my-lg-0">
+                                    <input class="form-control-sm " type="search" placeholder="search business..." aria-label="Search">&nbsp;
+                                    <button class="btn btn-outline-primary btn-sm" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                            
+                    
+            </nav>
+        
         
         {% endblock navtop %}
         {% block navsticky %}
-            <div class="col-md-auto mt-1 bg-primary sticky-top">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
-                        <ul class="nav nav-pills ">
-                            <li class="nav-item ">
-                            <a class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item" >
-                            <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                            </li>
-                            <li class="nav-item" >
-                                <div class="dropdown ">
-                                    <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Reviews
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item font-weight-bold text-primary" href="{% url 'submit_review' %}">Submit Review</a>
-                                      <a class="dropdown-item font-weight-bold text-primary" href=" {% url 'browse_review' %} ">Browse Review</a>
-                                    </div>
-                                  </div>
-                            
-                            </li>
-                                                    
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                            </li>
-                            <li class="nav-item" >
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
-                            </li>
-                            
-                            <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
-                            </li>
-                                                       
-                            <li class="nav-item" id="tm-search-pane" >                            
-                                <form class="form-inline  my-2 my-lg-0" >
-                                    <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
-                                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                            </li>
-                            
-                                        
-                        </ul>
-                       
-                    </div>
-                </nav>    
+            <div class="col-md-auto mt-1 sticky-top">
+         
+                    
               </div>
         {% endblock navsticky %}
         

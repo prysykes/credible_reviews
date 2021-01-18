@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 
@@ -5,8 +6,56 @@
         <section class="mt-2 bg-white mx-2">
             
             <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                <div class="row justify-content-center">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
+                            <ul class="nav nav-pills ">
+                                <li class="nav-item ">
+                                <a class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item" >
+                                <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <div class="dropdown ">
+                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Reviews
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item font-weight-bold text-primary" href="{% url 'submit_review' %}">Submit Review</a>
+                                        <a class="dropdown-item font-weight-bold text-primary" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                        </div>
+                                    </div>
+                                
+                                </li>
+                                                        
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                </li>
+                                <li class="nav-item" >
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                                </li>
+                                
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
+                                </li>
+                                                        
+                                <li class="nav-item" id="tm-search-pane" >                            
+                                    <form class="form-inline  my-2 my-lg-0" >
+                                        <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
+                                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                                </li>
+                                
+                                            
+                            </ul>
+                        
+                        </div>
+                </nav>
                 </div>
                 <div class="row mx-2">
                     <div class="col-md-5 mb-2">
@@ -18,11 +67,11 @@
                                 <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
                                 <p class="card-text">Phone: {{request.user.userprofile.phone}}</p>
                                 <p class="card-text">Location: {{request.user.userprofile.location}}</p>
-                                <a href="{% url 'submit_review' %}" class="btn btn-outline-info">Submit Review</a></br>
+                                <a href="{% url 'submit_review' %}" class="btn btn-outline-info btn-sm font-weight-bold">Submit Review</a></br>
                                 <p class="card-text"></p>
-                                <a href="{% url 'settings_regular' %}" class="btn btn-outline-info">Go to Settings</a>
+                                <a href="{% url 'settings_regular' %}" class="btn btn-outline-info btn-sm btn-sm font-weight-bold">Go to Settings</a>
                                 <p class="card-text"></p>
-                                <a href="{% url 'logoutpage_regular' %}" class="btn btn-outline-info">Logout</a></br>
+                                <a href="{% url 'logoutpage_regular' %}" class="btn btn-outline-info btn-sm font-weight-bold">Logout</a></br>
                             
                             </div>
                         </div>
@@ -76,12 +125,15 @@
                                         <div style="font-size: small;" class="card-body">
                                             <p class="card-text">Company Name: <a class="text-decoration-none" href="{% url 'detail' review.company.id %}">{{review.company}}</a>&nbsp; | &nbsp; Rating: {{review.rating}}/5 &nbsp; | &nbsp; <span class="text-danger">Date added: {{ review.date_added }}</span></p>
                                             <p class="card-text">{{review.review_text}}</p>
-                                            <p class="card-text"><a href="{%url 'delete_review' review.id %}"><button id="tm-delete" class="btn btn-outline-danger font-weight-bold btn-sm">Delete review</button></a>&nbsp; | &nbsp; <a href="{%url 'edit_review' review.id %}"><button class="btn btn-outline-primary font-weight-bold btn-sm">Edit Review</button></a></p>
+                                            <p class="card-text"><a class="tm-delete-review btn btn-outline-danger font-weight-bold btn-sm"  href="{%url 'delete_review' review.id %}">Delete review</a>&nbsp; | &nbsp; <a href="{%url 'edit_review' review.id %}"><button class="btn btn-outline-primary font-weight-bold btn-sm">Edit Review</button></a></p>
                                         {% for response in responses %}
                                             {% if response.review == review %}
-                                            <p class="card-text bg-light"><span class="font-weight-bold">{{response.user | capfirst }}&nbsp; wrote: &nbsp;</span>{{response.response}} &nbsp; <span class="font-weight-bold"> on: </span> &nbsp; <span class="text-danger"> {{response.date_added}} </span></p>
+                                            <p class="card-text bg-light"><span class="font-weight-bold">{{response.user.first_name | capfirst }}&nbsp; replied: &nbsp;</span>{{response.response}} &nbsp; <span class="font-weight-bold"> on: </span> &nbsp; <span class="text-danger"> {{response.date_added}} </span></p>
                                             {% endif %}
                                         {% endfor %}
+                                        <p class="card-text"><a href="{% url 'response_user' review.id %}"><span id="tm-respond" class="text-primary font-weight-bold ">reply </span></a></p>
+                                                
+                                            <hr>
                                         </div>
                                         {% endfor %}
                                         
@@ -94,12 +146,12 @@
                         <div class="row" id="tm-display-companies">
                                 <div class="col-md mb-2">
                                 
-                                    <div class="card text-center  mb-3"> 
-                                        <div class="card-header text-white bg-info">
+                                    <div class="card   mb-3"> 
+                                        <div class="card-header text-center text-white bg-info">
                                             <h5 class="card-title">Reviewed Companies</h5>
                                         </div>
                                         
-                                        <div class="card-body">
+                                        <div class="card-body mx-5">
                                         {% for company in companies %}
                                             <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.id %}">{{company.company_name}}</a>&nbsp; | &nbsp; Rating: {{company.average_rating}}/5 </p>
                                          {% endfor %}   
@@ -130,6 +182,11 @@
             
         </article>
         {% endblock article %}
+
+{% block script %}
+ <script type="text/javascript" src="/static/scripts/main.js"></script> 
+
+ {% endblock script %}
         
 
 

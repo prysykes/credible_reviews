@@ -10,10 +10,15 @@ from .forms import ReviewForm
 def dynamic_url(request, company_id):
     responses = Response.objects.all()
     company = get_object_or_404(Company, pk=company_id)
-    # implementing views count for companies once details page is refreshed or clicked
+
+    """ implementing views count for companies
+     once details page is refreshed or clicked
+    """
     company.company_views = company.company_views + 1
     company.save()
-    
+    # end of views count
+
+    # get all reviews under a particular company fetched with company_id
     companyone_reviews = company.review_set.all()
     total_reviews = len(companyone_reviews)
     form = ReviewForm()

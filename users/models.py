@@ -94,12 +94,13 @@ class UserProfile(models.Model):
 
 
 class Review(models.Model):
-    # SET_NULL ensures that when a company is deleted, their reviews remains
+    # CASCADE ensures that when a company is deleted, their reviews remains
     company = models.ForeignKey(Company, on_delete=models.CASCADE) 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # SET_NULL ensures that when a user is deleted, their reviews get deleted too
     review_text = models.TextField(max_length=500, verbose_name='Your Review: (Maximum of 200 Words)')
     rating = Int_max.IntegerRangeField(min_value=1, max_value=5)
+    helpful = models.IntegerField(default=0)
     date_added = models.DateField('Review Date', auto_now_add=True)
 
     def __str__(self):

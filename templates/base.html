@@ -1,170 +1,285 @@
- {% load static %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-        <link rel="icon" type="image/icon" href="favicon.ico">
-        <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css'%}">
-        <link rel="stylesheet" type="text/css" href="{% static '/css/slideshow.css'%}">
-		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-		<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-		<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://kit.fontawesome.com/47f849ecd1.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
-        <link rel="stylesheet" type="text/css" href="jquery.fancybox.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="manifest" href="/manifest.json">
-		<meta name="msapplication-TileColor" content="#ffffff">
-		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-		<meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-        <title>Credible Reviews | Home</title>
-        
-    </head>
-    <body class="bg-light">
-     {% include "nav_bar.html" %}
-        {% block section %}  
-        <section class="mt-2 bg-white mx-2">
-            
-            <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
-                </div>
-                <div class="row">
-                  
-                    <div class="col-md-7 py-2 ">
-                        <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
-                        <!-- Slideshow container -->
-                        <div class="galleryContainer">
-                            <div class="slideShowContainer">
-                                <div id="playPause" onclick="playPauseSlides()"></div>
-                                <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow"><span class="arrow arrowLeft"></span></div>
-                                <div onclick="plusSlides(1)" class="nextPrevBtn rightArrow"><span class="arrow arrowRight"></span></div>
-                                <div class="captionTextHolder"><p class="captionText slideTextFromTop"></p></div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_1.jpg"><!-- image resolution should be - 1366X768-->
-                                    <p class="captionText">lo Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_2.jpg">
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_3.jpg">
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
-                                <div class="imageHolder">
-                                    <img src="/static/slide_images/img_4.jpg">
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                    <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
-                                </div>
+{% load static %}
+{% load auth_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .tm-nav li a:hover{
+            background-color: #b7d8f7 !important; 
                             
-                        </div>
-                        <div id="dotsContainer"></div>
-                    </div>
-                <!-- Slide show ends-->
-                </div>
-                <div class="col-md-5 py-2">
-                    <h2 class="h4 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
-						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safety</p>                  </div>
-                </div>
-            </div>
+          }
+
+          .tm-nav li a{
+            color: darkblue !important;
+            font-weight: 800; 
             
-        </section>
-        {% endblock section %}
-        
-{% block article %}
-        <article class="mt-2 bg-white mx-2">
-        <div class= "row  justify-content-center ">
-                <h2 class="text-center justify-content-center">Latest Reviews</h2>
-             </div>
-            
-             <div class="container-fluid border-0 d-flex text-justify">
-             
-             
-                <div class="row d-flex">
-                    {% for review in reviews%}
-                        <div class="col-md-3 px-2 py-2">
-                            <div  class="col-md  text-wrap">
-                                <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">  Rating: <span class="text-warning">{{review.rating}}/5</span> | Date added: <span class="text-warning"> {{ review.date_added }}.</span> <br>
-                                {{review.user.first_name }} Reviewed: {{review.company}}</h6>
-                                <p> {{review.review_text}}  </p>
-                            </div>
-                            
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-                  
+          }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static '/iconfavs/apple-icon-57x57.png'%}">
+    <link rel="icon" type="image/icon" href="{% static '/iconfavs/favicon.ico'%}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slideshow.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/slideshowadvert.css'%}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static '/iconfavs/apple-icon-60x60.png'%}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static '/iconfavs/apple-icon-72x72.png'%}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static '/iconfavs/apple-icon-76x76.png'%}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static '/iconfavs/apple-icon-114x114.png'%}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static '/iconfavs/apple-icon-120x120.png'%}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static '/iconfavs/apple-icon-144x144.png'%}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static '/iconfavs/apple-icon-152x152.png'%}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/iconfavs/apple-icon-180x180.png'%}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static '/iconfavs/android-icon-192x192.png'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/iconfavs/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static '/iconfavs/favicon-96x96.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/iconfavs/favicon-16x16.png'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/47f849ecd1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <link rel="stylesheet" type="text/css" href="jquery.fancybox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="manifest" href="{% static '/iconfavs/manifest.json'%}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/static/iconfavs/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <title>Credible Reviews | Home</title>
     
+</head>
+<body class="bg-light">
+ {% include "nav_bar.html" %}
+    {% block section %}  
+    <section class="mt-2 bg-white mx-2">
+        
+        <div class="container-fluid border-0 text-justify">
             
-        </article>
-        {% endblock article %}
-        {% block bottomdiv %} 
-        <div class="container-fluid mt-2 text-white py-2 bg-secondary">
             <div class="row">
-                <div class="col-md">
-                    <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
-                        <li> 
-                            <a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} >Privacy Statement</a>
-                        </li>
-                        <li> 
-                            <a class="font-weight-bold text-white" href=" {% url 'careers' %}">Careers</a>
-                        </li>
-                        <li> <i class="fas fa-phone-square-alt" style="font-size:20px; padding-right: 4px; color:#2196F3"></i></li>
-                        <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:info@crediblereviews.ng">  info@crediblereviews.ng</a></li>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <span style="color: rgb(179, 33, 11); font-style: oblique; font-size: 20px;" class="font-weight-bold px-2 py-1 mx-auto">{{ message }}</span>
+                        
+                        {% endfor %}
                     </ul>
-                </div>
-                <div class="col-md justify-content-end">
-                    <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="submit-button" id="submit-newsletter" type="Submit" value="SEND">
-                    </form>
-                    <em style="font-size: small;"> Enter your email to receive regular updates, advice and tips: 
-                        <ul style="font-size: small; padding: 0 0 0 25px;">
-                            <li> On how to stay safe online.</li>
-                            <li> How to identify ilegitimate business</li>
-                            <li> Get Informations on recent security attacks</li>
-                        </ul>
-    
-                    </em>
-                </div>
-              </div>
-            
-        </div>
-        {% endblock bottomdiv %}
-        {% block topbtn %}
-        <button id="topBtn"><i class="fas fa-arrow-up"></i></button>
-        {% endblock topbtn %}
-        {% block footer %}
-        <footer class="border-top mt-1 text-white bg-secondary">
-            
-            <div class="container d-flex  justify-content-center py-2">
-                    &copy; <span id="copyyear">2020</span> &nbsp; | &nbsp; 
-                    <span style="font-weight: 700;" id="copy"><a class="text-decoration-none text-white" href="{% url 'index' %}" > Credible Reviews </a> &nbsp; | &nbsp; Powered by the Intergrity Project</span> 
+                {% else %}
+                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                {% endif %}
+                
             </div>
-        </footer> 
-        {% endblock footer %}
-     {% block script%}
-     <script type="text/javascript" src="/static/scripts/main.js"></script> 
-     <script type="text/javascript" src="/static/scripts/slideshow.js"></script> 
-     {% endblock script %}
-    </body>
-    </html>
+            
+            <div class="row">
+                
+                    <div class="tm-nav navbar-expand-lg col-md-2  navbar-light bg-light py-2">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                        <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class=" nav  flex-column">
+                            
+                            <li class="nav-item">
+                                <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                            </li>
+                            {% if request.user.is_authenticated or not request.user.is_authenticated %}
+                            {% if request.user|has_group:"regular" or not request.user|has_group:"company"%}
+                            <li class="nav-item">
+                                <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
+                            </li>
+                            
+                            {% endif %}
+                            {% endif %}
+                            <li class="nav-item">
+                                <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                    </div>
+                
+                
+              
+                <div class="col-md-7 py-2 ">
+                    <h1 class="h4 font-weight-bold bg-primary text-white px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
+                    <!-- Slideshow container -->
+                    <div class="galleryContainer">
+                        <div class="slideShowContainer">
+                            <div id="playPause" onclick="playPauseSlides()"></div>
+                            <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow"><span class="arrow arrowLeft"></span></div>
+                            <div onclick="plusSlides(1)" class="nextPrevBtn rightArrow"><span class="arrow arrowRight"></span></div>
+                            <div class="captionTextHolder"><p class="captionText slideTextFromTop"></p></div>
+                            <div class="imageHolder">
+                                <img src="/static/slide_images/img_1.jpg"><!-- image resolution should be - 1366X768-->
+                                <p class="captionText">lo Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                            <div class="imageHolder">
+                                <img src="/static/slide_images/img_2.jpg">
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                            <div class="imageHolder">
+                                <img src="/static/slide_images/img_3.jpg">
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                            <div class="imageHolder">
+                                <img src="/static/slide_images/img_4.jpg">
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionText">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                        
+                    </div>
+                    <div id="dotsContainer"></div>
+                </div>
+            <!-- Slide show ends-->
+            </div>
+            <div class="col-md-3 py-2">
+                <h2 class="h5 px-2 py-2 text-center bg-primary text-white">Advertise here... Get noticed!</h2>
+                    <!-- Slideshow advert container -->
+                    <div class="galleryContaineradvert">
+                        <div class="slideShowContaineradvert">
+                            <div id="playPauseadvert" onclick="playPauseSlidesadvert()"></div>
+                            <div onclick="plusSlidesadvert(-1)" class="nextPrevBtnadvert leftArrowadvert"><span class="arrowadvert arrowLeftadvert"></span></div>
+                            <div onclick="plusSlidesadvert(1)" class="nextPrevBtnadvert rightArrowadvert"><span class="arrowadvert arrowRightadvert"></span></div>
+                            <div class="captionTextHolderadvert"><p class="captionTextadvert slideTextFromTopadvert"></p></div>
+                            <div class="imageHolderadvert">
+                                <img src="/static/slide_images_advert/img_1.jpg"><!-- image resolution should be - 1366X768-->
+                                <p class="captionTextadvert">lo Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                            <div class="imageHolderadvert">
+                                <img src="/static/slide_images_advert/img_2.jpg">
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                            <div class="imageHolderadvert">
+                                <img src="/static/slide_images_advert/img_3.jpg">
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                            <div class="imageHolderadvert">
+                                <img src="/static/slide_images_advert/img_4.jpg">
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                                <p class="captionTextadvert">Welcome to Credible Reviews Adverts You are here either becasue you </p>
+                            </div>
+                        
+                    </div>
+                    <div id="dotsContaineradvert"></div>
+                </div>
+            <!-- Slide show advert ends-->                  
+            </div>
+        </div>
+        
+    </section>
+    {% endblock section %}
+    
+{% block article %}
+    <article class="mt-2 bg-white mx-2">
+    <div class= "row  justify-content-center ">
+            <h2 class="text-center justify-content-center">Latest Reviews</h2>
+         </div>
+        
+         <div class="container-fluid border-0 d-flex text-justify">
+         
+         
+            <div class="row d-flex">
+                {% for review in reviews%}
+                    <div class="col-md-3 px-2 py-2">
+                        <div  class="col-md  text-wrap">
+                            <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">  Rating: <span class="text-warning">{{review.rating}}/5</span> | Date added: <span class="text-warning"> {{ review.date_added }}.</span> <br>
+                            {{review.user.first_name }} Reviewed: {{review.company}}</h6>
+                            <p> {{review.review_text}}  </p>
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+              
+
+        
+    </article>
+    {% endblock article %}
+    {% block bottomdiv %} 
+<div class="row">
+    <div class="container-fluid mt-2 text-white py-2 bg-secondary">
+        <div class="row">
+            <div class="col-md-4">
+                <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
+                    <li> 
+                        <a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} >Privacy Statement</a>
+                    </li>
+                    <li> 
+                        <a class="font-weight-bold text-white" href=" {% url 'careers' %}">Careers</a>
+                    </li>
+                    <li> <i class="fas fa-phone-square-alt" style="font-size:20px; padding-right: 4px; color:#2196F3"></i></li>
+                    <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:info@crediblereviews.ng">  info@crediblereviews.ng</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 justify-content-end">
+                
+                <em style="font-size: small;"> Enter your email to receive regular updates, advice and tips: 
+                    <ul style="font-size: small; padding: 0 0 0 25px;">
+                        <li> On how to stay safe online.</li>
+                        <li> How to identify ilegitimate business</li>
+                        <li> Get Informations on recent security attacks</li>
+                    </ul>
+
+                </em>
+            </div>
+            <div class="col-md-4 justify-content-end">
+                <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="submit-button" id="submit-newsletter" type="Submit" value="SEND">
+                </form>
+                
+            </div>
+          </div>
+        
+    </div>
+    
+    
+    {% endblock bottomdiv %}
+</div> 
+
+{% block footer %}
+    <footer class="border-top mt-1 text-white bg-secondary">
+        
+        <div class="container d-flex  justify-content-center py-2">
+                &copy; <span id="copyyear">2020</span> &nbsp; | &nbsp; 
+                <span style="font-weight: 700;" id="copy"><a class="text-decoration-none text-white" href="{% url 'index' %}" > Credible Reviews </a> &nbsp; | &nbsp; Powered by the Intergrity Project</span> 
+        </div>
+    </footer> 
+{% endblock footer %}  
+
+{% block topbtn %}
+<button id="topBtn"><i class="fas fa-arrow-up"></i></button>
+{% endblock topbtn %}
+ {% block script %}
+ <script type="text/javascript" src="/static/scripts/main.js"></script> 
+ <script type="text/javascript" src="/static/scripts/slideshow.js"></script>
+ <script type="text/javascript" src="/static/scripts/slideshowadvert.js"></script> 
+ {% endblock script %}
+
+ {% block ajaxscript %}
+       
+       
+ {% endblock ajaxscript %}
+</body>
+</html>

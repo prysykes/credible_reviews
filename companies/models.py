@@ -2,9 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from . import Int_max
 
-
-
-
+from django.urls import reverse
 
 class Company(models.Model):
     Online_Merchant = 'merch'
@@ -118,13 +116,13 @@ class Company(models.Model):
     ]
     
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, verbose_name='Company User')
-    company_sector = models.CharField(max_length=30, choices=sector, default=Online_Merchant)
+    company_sector = models.CharField(max_length=30, choices=sector, default=Online_Merchant, verbose_name='Sector')
     company_name = models.CharField(max_length=100)
     company_description = models.TextField()
     company_logo = models.ImageField(upload_to='company_logos', blank=True, null=True)
-    company_state = models.CharField(max_length=30, choices=state, default=Lagos)
+    company_state = models.CharField(max_length=30, choices=state, default=Lagos, verbose_name='State')
     company_address = models.TextField(max_length=2000)
-    average_rating = models.IntegerField(default=0)
+    average_rating = Int_max.IntegerRangeField(default=0, verbose_name='Avg', min_value=1, max_value=5)
     total_views = models.IntegerField(default=0)
     company_website = models.CharField(max_length=500, blank=True, null=True)
     company_email = models.EmailField(max_length=500, blank=True, null=True)
@@ -134,9 +132,21 @@ class Company(models.Model):
     featured = models.BooleanField(default=False)
     advert = models.BooleanField(default=False)
     premium = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of the model."""
+        return reverse("detail", kwargs={ "id": self.id })
     
     def __str__(self):
         return self.company_name
+    
+    def __repr__(self):
+        return self.company_name
+    
+    
+    
+    
+    
 
 
 """ class Review(models.Model):

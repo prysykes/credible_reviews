@@ -1,10 +1,20 @@
 from django.shortcuts import render
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from .forms import ContactForm
 
 # Create your views here.
 from django.shortcuts import render, redirect, get_list_or_404
 from companies.models import Company
 from users.models import Review
+from .forms import NewsletterForm
+
+from django.views.generic.list import ListView
+
+from .filters import CompanyFilter, ReviewFilter
 
 
 
@@ -37,15 +47,19 @@ def about(request):
     return render(request, 'submit-review.html', context) """
 
 def browse_review(request):
-    reviews = Review.objects.all()
-    p = Paginator(reviews, 16)
-    page_num = request.GET.get('page', 1)
+    filtered_reviews = ReviewFilter(
+        request.GET,
+        queryset=Review.objects.all(),
+    )
+    paginated_reviews = Paginator(filtered_reviews.qs, 12)
+    page_num = int(request.GET.get('page', 1))
     try:
-        page = p.page(page_num)
+        page = paginated_reviews.page(page_num)
     except EmptyPage:
-        page = p.page(1)
+        page = paginated_reviews.page(1)
     context = {
-        'reviews': page,
+        'filtered_reviews': filtered_reviews,
+        'page': page,
     }
     return render(request, 'browse_review.html', context)
 
@@ -58,10 +72,21 @@ def careers(request):
     return render(request, 'careers.html', context)
 
 def contact(request):
+    if request.method == "POST":
+        fullname = request.POST['full_name']
+        message = request.POST['message']
+        receiver = request.POST['receiver']
+        subject = request.POST['subject']
+        senderplusmessage = f"Fullname: {fullname} \nFrom: {receiver} \n{message}"
+        send_mail(subject, senderplusmessage, settings.EMAIL_HOST_USER, [receiver], fail_silently=False)
+        return redirect('done_contact')
+    
+    
     reviews = Review.objects.all()
     last_twenty = Review.objects.all().order_by('-id')[:20]
     context = {
         'reviews': last_twenty,
+        
     }
     return render(request, 'contact.html', context)
 
@@ -138,29 +163,39 @@ def company_list(request):
 
     return render(request, 'company_list.html', context)
 
+
 def featured_companies(request):
-    reviews = Review.objects.all()
-    comps = Company.objects.all()
+    filtered_companies = CompanyFilter(
+        request.GET,
+        queryset=Company.objects.all()
+    )  # instantiate the CompanyFilter class imported at the top of the page with these values
+    paginated_companies = Paginator(filtered_companies.qs, 9)
+    # .qs above allows a filtered_companies to return a queryset
     """
         implementing pagenation for the site
-        the 16 their means the number of items per page
+        the 15 there means the number of items per page
 
         the get('page', 1) tell django to trying gettting the
         page number specified in the querry and if that doesnt work,
         loads page 1 instead.
     """
-    p = Paginator(comps, 16)
-    page_num = request.GET.get('page', 1)
+    page_num = int(request.GET.get('page', 1))
     try:
-        page = p.page(page_num)
+        page = paginated_companies.page(page_num)
     except EmptyPage:
-        page = p.page(1)
+        page = paginated_companies.page(1)
     
-    context = {
+    """ context = {
         'comps': page,
         'reviews': reviews,
-    }
+    } """
+    context = {
+        'filtered_companies': filtered_companies,
+        'page': page,
+
+    } 
     return render(request, 'featured-companies.html', context)
+
 
 def review_submitted(request):
     reviews = Review.objects.all()
@@ -169,3 +204,8 @@ def review_submitted(request):
         'reviews': last_twenty,
     }
     return render(request, 'review-submitted.html', context)
+
+def done_newsletter(request):
+    return render(request, 'done_newsletter.html')
+
+

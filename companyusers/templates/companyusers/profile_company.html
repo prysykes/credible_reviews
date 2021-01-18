@@ -13,13 +13,53 @@
         <section class="mt-2 bg-white mx-2">
             
             <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span>... Because we understand that behind every review, there is a hearty experience...</span>
+                <div class="row justify-content-center">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
+                            <ul class="nav nav-pills ">
+                                <li class="nav-item ">
+                                <a class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item" >
+                                <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                
+                                </li>
+                                                        
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                </li>
+                                <li class="nav-item" >
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
+                                </li>
+                                
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
+                                </li>
+                                                        
+                                <li class="nav-item" id="tm-search-pane" >                            
+                                    <form class="form-inline  my-2 my-lg-0" >
+                                        <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
+                                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                                </li>
+                                
+                                            
+                            </ul>
+                        
+                        </div>
+                </nav>
                 </div>
                 <div class="row mx-2">
                     <div class="col-md-5 mb-2">
                         <div class="card" style="width: 23rem;">
-                            <img src="{{request.user.userprofilecompany.profile_photo.url}}" class="card-img-top" alt="profile picture">
+                            <img src="{{request.user.userprofilecompany.profile_photo.url}}" class="card-img-top" alt="profile picture" height="300px" width="50px">
                             <div class="card-body">
                                 
                                 <p class="card-text">Username: {{request.user.username}} </br><span class="font-weight-sm">this is publicly visible</span></p>
@@ -29,13 +69,32 @@
                                 <p class="card-text">Phone:&nbsp;{{request.user.userprofilecompany.phone}}</p>
                                 <p class="card-text">Location: &nbsp;{{request.user.userprofilecompany.location}}</p>
                                 <p class="card-text">Claimed: &nbsp;<span id="tm-claimed">{{request.user.userprofilecompany.claimed}}</span>&nbsp;&nbsp;&nbsp;</p>
-                                <p class="card-text">Package: &nbsp;{{request.user.userprofilecompany.package}}&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-primary btn-sm">Upgrade</a></p>
+                                <p class="card-text">Package: &nbsp;{{request.user.userprofilecompany.package}}&nbsp;&nbsp;&nbsp;
+                                {% if request.user.userprofilecompany.claimed and request.user.userprofilecompany.package == "Premium" %}
+                                <p class="card-text"><button class="tm-request-review btn btn-outline-primary font-weight-bold btn-sm">Send Review Request to a Customer</button></p>
+                                <p class="tm-request-review-display card-text">
+                                   
+                                    <form class="tm-request-review-display" action="{%url 'request_review' %}" method="POST"> {% csrf_token %}
+                                    
+                                    <div class="form-group">
+                                        <div class="col-md">
+                                            <input type="email" class="form-control" name="receiver" id="receiver" placeholder="Enter Reviewer's Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md">
+                                            <input class="btn btn-primary btn-sm" type="submit" value="Send Request">
+                                        </div>
+                                    </div>
+                                    </form>
+                                </p>
+                                {% else %}
+                                <p class="card-text text-danger">Please <a href="#" class="btn btn-primary btn-sm">Upgrade</a> your package above to send review request, enjoy full features of Credible Reviews, increase your companies popularity and sales. Visit <a class="text-decoration-none font-weight-bold" href="{% url 'how-to-use' %}">How to Use </a> Page to find out more!</p>
+                                {% endif %}
                                 
-                                
+                                <a href="{% url 'settings_company' %}" class="btn btn-outline-info btn-sm font-weight-bold">Go to Settings</a></br>
                                 <p class="card-text"></p>
-                                <a href="{% url 'settings_company' %}" class="btn btn-outline-info">Go to Settings</a></br>
-                                <p class="card-text"></p>
-                                <a href="{% url 'logoutpage_company' %}" class="btn btn-outline-info">Logout</a></br>
+                                <a href="{% url 'logoutpage_company' %}" class="btn btn-outline-danger btn-sm font-weight-bold">Logout</a></br>
                             </div>
                          </div>
 
@@ -83,7 +142,7 @@
                                         <div class="py-2 font-weight-bold px-2">
                                             <p class="card-text">Average Rating:&nbsp;&nbsp; <i id="tm-average_rating">{{company.average_rating}}</i><i>/5</i> </p>
                                             <p class="card-text">Remarks: &nbsp;&nbsp;<i id="tm-remarks" class=""></i></p>
-                                            <p class="card-text">Total Likes: &nbsp;&nbsp; like count number</p>
+                                            <p class="card-text">Total Reviews: &nbsp;&nbsp; {{ company.review_set.all.count }}</p>
                                             <p class="card-text">Total Dislikes: &nbsp;&nbsp; dislike count number</p>
                                             <p class="card-text">Average Rating:&nbsp;&nbsp; 4/5 </p>
                                             <p class="card-text">Total Views: &nbsp;&nbsp; {{company.company_views}}</p>

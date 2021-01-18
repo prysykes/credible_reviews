@@ -14,8 +14,10 @@ urlpatterns = [
     path('logoutpage_regular', views.logoutpage_regular, name='logoutpage_regular'),
     
     path('loginpage_regular', views.loginpage_regular, name='loginpage_regular'),
+    path('response_user/<int:review_id>', views.response_user, name='response_user'),
     
     path('done.html', views.done, name='done'),
+    path('done_contact.html', views.done_contact, name='done_contact'),
     path('settings_regular', views.settings_regular, name='settings_regular'),
     
     path('submit_review/', views.submit_review, name='submit_review'),

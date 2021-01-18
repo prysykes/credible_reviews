@@ -11,7 +11,7 @@ admin.site.register(UserProfile, UserProfileAdmin)
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('company','review_text')
+    list_display = ('company','review_text', 'date_added', 'helpful')
     autocomplete_fields = ['company']
     form = ReviewForm
 

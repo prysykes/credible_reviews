@@ -13,15 +13,15 @@
                     <div class="col-md-5 mb-2">
                         <div class="card" style="width: 23rem;">
                                 <p class="card-text"></p>
-                                    <a href="{% url 'profile_regular' %}" class="btn btn-outline-info font-weight-bold">Back to Profile</a>
+                                    <a href="{% url 'profile_company' %}" class="btn btn-outline-info font-weight-bold">Back to Profile</a>
                                 <p class="card-text"></p>
-                            <img src="{{request.user.userprofile.profile_picture.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
+                            <img src="{{request.user.userprofilecompany.profile_photo.url}}" class="card-img-top" alt="Profile Pic" height="300px" width="50px">
                             <div class="card-body">
                                 <h5 class="card-title">Fullname: &nbsp;{{request.user.last_name}},&nbsp;{{request.user.first_name}}</h5>
                                 <p class="card-text">Username: &nbsp;{{request.user.username}}</br><span style="font-size: 1vw;">this is publicly visible</span></p>
                                 <p class="card-text">Email: &nbsp;{{request.user.email}}</p>
-                                <p class="card-text">Phone: {{request.user.userprofile.phone}}</p>
-                                <p class="card-text">Location: {{request.user.userprofile.location}}</p>
+                                <p class="card-text">Phone: {{request.user.userprofilecompany.phone}}</p>
+                                <p class="card-text">Location: {{request.user.userprofilecompany.location}}</p>
                                 <p class="card-text"><a href="{% url 'submit_review' %}" class="btn btn-outline-info">Review a Company</a></p>
                                 <a href="{% url 'logoutpage_regular' %}" class="btn btn-outline-info">Logout</a></br>
                             </div>
@@ -55,21 +55,7 @@
                 </div>
 
             </div>
-             <div class="row  container-fluid border-0 ">
-                            
-                           <!--Use context of company objects to make division dynamic-->
-                            <div class="col-3 py-2">
-                                <div class="card" style="width: 18rem; height: 20rem">
-                                    <img src="" width="100" height="120" class="card-img-top" alt="Company Logo">
-                                    <div class="card-body">
-                                         <h5 class="card-title"></h5>
-                                         <p></p>
-                                         <p><a class="text-decoration-none" href="#">Click to View Full Details</a></p>
-                                         <a href=" target="_blank""" class="btn btn-primary"> </a>
-                                    </div>
-                                </div>
-                            </div>
-            </div>
+             
             
         </section>
         {% endblock section %}
