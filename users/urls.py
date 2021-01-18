@@ -7,13 +7,15 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('sign_up', views.sign_up, name='sign-up'),
+    path('activate_account/<uidb64>/<token>', views.verification_view.as_view(), name='activate_account'),
+    # the view above ask for uidb64 and token, so we pass it there.
     
    
     path('profile_regular', views.profile_regular, name='profile_regular'),
     
-    path('logoutpage_regular', views.logoutpage_regular, name='logoutpage_regular'),
-    
+    path('logoutpage_regular', views.logoutpage_regular, name='logoutpage_regular'),    
     path('user_login', views.user_login, name='user_login'),
+
     path('response_user/<int:review_id>', views.response_user, name='response_user'),
     path('likes/<int:review_id>', views.likes, name='likes'),
     

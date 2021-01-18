@@ -9,6 +9,14 @@ from .models import UserProfile, Review, Response, Like
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
+#begin imports for reset email
+from django.core.mail import EmailMessage
+from django.views import View
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.contrib.sites.shortcuts import get_current_site
+from .utils import account_activation_token
+
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from pages import filters
@@ -29,9 +37,12 @@ def sign_up(request):
         # request.FILES because we are working with an image field
         profile_form = UserProfileForm(request.POST, request.FILES)
         if form.is_valid() and profile_form.is_valid():
+            
+              # uses this to set the user as inactive to enable send actiation email
             user = form.save()
-            group = Group.objects.get(name='regular')
-            user.groups.add(group)
+            
+            
+            
             """
              commit=False prevents the profile form from being saved in the database
              this enable use to associate it with the user model prior to submission
@@ -39,8 +50,38 @@ def sign_up(request):
             profile = profile_form.save(commit=False)
             profile.user = user  # oneToOne relationship comes into play here
             profile.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account Successfully Created for: ' + user.upper() + ",\n" + "Please Log in to continue...")
+            group = Group.objects.get(name='regular')
+            user.groups.add(group)
+            
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            messages.success(request, 'Account successfully created for ' + username.upper() +' and activation email sent to: ' + email + ",\n" + " Please visit your email to activate your account...")
+            current_user = User.objects.get(username=username)
+
+            #implementing activate acc
+            uidb64 = urlsafe_base64_encode(force_bytes(current_user.pk))
+            #without forcebytes, encoded url cant be sent through the network
+            token = account_activation_token.make_token(current_user)
+            #for this, utils.py was created
+            # first we get the current site url thus
+            domain = get_current_site(request).domain
+            #second, get link the user would click for activation which takes a view name and kwargs
+            link = reverse('activate_account', kwargs={'uidb64':uidb64, 'token':token})
+            #activate_account above has already been created in the app urls.py path
+            activate_url = 'http://'+domain+link
+            current_user.is_active = False
+            current_user.save()
+            email_subject = "Activate Your Account"
+            email_body = "Hi "+current_user.username + "Please use this link to activate your acc \n" +activate_url
+            email = EmailMessage(
+                    email_subject,
+                    email_body,
+                    'noreply@crediblereviews.com',
+                    [email],
+                    
+                )
+            email.send(fail_silently=False)
+            
             return redirect('user_login')
 
     context = {
@@ -49,6 +90,31 @@ def sign_up(request):
     }
     return render(request, 'users/sign-up.html', context)
 
+
+#this class is called once the email activate link is clicked
+class verification_view(View):
+    def get(self, request, uidb64, token):
+        try:
+            id = force_text(urlsafe_base64_decode(uidb64))  #get the user Id sent with the request
+            user = User.objects.get(pk=id)
+            print("this is ", user)
+
+            # if not account_activation_token.check_token(user, token):
+            #     return redirect('user_login')
+
+
+            if user.is_active:
+                return redirect('user_login')
+            else:
+                user.is_active = True
+                user.save()
+
+            messages.success(request, "Account activated successfully")
+        except Exception as ex:
+            pass
+        
+        return redirect('user_login')
+    
 
 @unauthenticated_user_regular
 @allowed_users_regular(allowed_roles=['regular', 'company'])
@@ -74,6 +140,9 @@ def user_login(request):
                     return redirect('profile_regular')
                 elif request.user.groups.filter(name='company').exists():
                     return redirect('profile_company')
+            else:
+                messages.info(request, 'Your account is not yet activated...')
+        
         else:
             messages.info(request, 'Username or Password Incorrect, Try Again...')
             
@@ -93,7 +162,7 @@ def logoutpage_regular(request):
     return redirect('/')
     
 
-@login_required(login_url='loginpage_company')
+@login_required(login_url='user_login')
 @allowed_users_regular(allowed_roles=['regular'])
 def response_user(request, review_id):
     review = get_object_or_404(Review, pk=review_id)

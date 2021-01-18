@@ -297,7 +297,7 @@ def company_list(request):
 
 
 def featured_companies(request):
-    company_list = Company.objects.all()
+    company_list = Company.objects.all().filter(approved=True)
     filtered_companies = CompanyFilter(
         request.GET,
         queryset=company_list

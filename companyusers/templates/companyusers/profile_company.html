@@ -160,7 +160,7 @@
                             </div>
                             
                         </div>
-                        
+                                                
                         <div class="row" id="tm-display-reviews">
                                 <div class="col-md mb-2">
                                 
@@ -255,6 +255,18 @@
                                     <div class="card-header text-white bg-info">
                                         <h5 class="card-title">Total Reviews</h5>
                                     </div>
+                                    
+                                    {% if company.listed %}
+                                    <div class="card-body">
+                                        <p class="card-text"> We have received your Listing Request.</p>
+                                        <p class="card-text"> Your listing is now being reviewed.</p>
+                                        <p class="card-text"> It will be displayed on this page once approval is given.</p>
+                                        <p class="card-text"> Your listing will equally be available site wide.</p>
+                                        <p class="card-text"> If this process take unusual time, kindly email us on:</p>
+                                        <p class="card-text"> <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a></p>
+                                    </div>
+                                    <button class=" cursornormal btn btn-info font-weight-bold btn-sm">Your Company is Awaiting Approval</button>
+                                    {% else %}
                                     <div class="card-body">
                                         <p class="card-text"> You have not claimed a company yet.</p>
                                         <p class="card-text"> You need to claim a company to view its statistis here.</p>
@@ -262,6 +274,10 @@
                                         <p class="card-text"> If your company is already listed on our site, kindly email us on:</p>
                                         <p class="card-text"> <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a></p>
                                     </div>
+                                    <button class="btn btn-info font-weight-bold btn-sm" id="list_company_button">Click to List Your Company</button>
+                                    {% endif %}
+                                    
+                                    
                                     
                                     
                                     
@@ -279,18 +295,35 @@
                                             <h5 class="card-title ">Statistics</h5>
                                         </div>
                                         
-                                        <div class="py-2 font-weight-bold px-2">
-                                            <p class="card-text">Average Rating:&nbsp; | &nbsp; <i id="tm-average_rating">{{infor}}</i> </p>
-                                            <p class="card-text">Remarks: &nbsp; | &nbsp;<i id="tm-remarks" class="">{{infor}}</i></p>
-                                            <p class="card-text">Total Likes: &nbsp; | &nbsp; {{infor}}</p>
-                                            <p class="card-text">Total Dislikes: &nbsp; | &nbsp; {{infor}}</p>
-                                            <p class="card-text">Average Rating:&nbsp; | &nbsp; {{infor}} </p>
-                                            <p class="card-text">Remarks: &nbsp; | &nbsp;{{infor}}</p>
-                                            <p class="card-text">Total Views: &nbsp; | &nbsp; {{infor}}</p>
-                                            
-                                            <p class="card-text"><h6 class=" text-warning font-weight-bold">{{info}}:&nbsp; <span style="font-size: small;" class= "text-info"> Email us to claim a company </span> </h5></p>
-                                            
-                                        </div>
+                                    {% if company.listed %}
+                                    <div class="py-2 font-weight-bold px-2">
+                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; <i id="tm-average_rating">{{infor}}</i> </p>
+                                        <p class="card-text">Remarks: &nbsp; | &nbsp;<i id="tm-remarks" class="">{{infor}}</i></p>
+                                        <p class="card-text">Total Likes: &nbsp; | &nbsp; {{infor}}</p>
+                                        <p class="card-text">Total Dislikes: &nbsp; | &nbsp; {{infor}}</p>
+                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; {{infor}} </p>
+                                        <p class="card-text">Remarks: &nbsp; | &nbsp;{{infor}}</p>
+                                        <p class="card-text">Total Views: &nbsp; | &nbsp; {{infor}}</p>
+                                        
+                                        <p class="card-text"><h6 class=" text-warning font-weight-bold"> <span style="font-size: small;" class= "text-info"> Awaiting approval. Your statistic would appear here once approved </span> </h5></p>
+                                        
+                                    </div>
+                                    
+                                    {% else %}
+                                    <div class="py-2 font-weight-bold px-2">
+                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; <i id="tm-average_rating">{{infor}}</i> </p>
+                                        <p class="card-text">Remarks: &nbsp; | &nbsp;<i id="tm-remarks" class="">{{infor}}</i></p>
+                                        <p class="card-text">Total Likes: &nbsp; | &nbsp; {{infor}}</p>
+                                        <p class="card-text">Total Dislikes: &nbsp; | &nbsp; {{infor}}</p>
+                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; {{infor}} </p>
+                                        <p class="card-text">Remarks: &nbsp; | &nbsp;{{infor}}</p>
+                                        <p class="card-text">Total Views: &nbsp; | &nbsp; {{infor}}</p>
+                                        
+                                        <p class="card-text"><h6 class=" text-warning font-weight-bold">{{info}}:&nbsp; <span style="font-size: small;" class= "text-info"> Email us to claim a company </span> </h5></p>
+                                        
+                                    </div>
+                                    
+                                    {% endif %}
                                         
                                         <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Click to Get Noticed</button>
                                         
@@ -301,13 +334,96 @@
                         </div>
                         
                         <!---->
+                    <div id="list_company_display" class="row navbarbg px-2 py-2 justify-content-center"> 
+                        <h4> Complete the Form Below to List your Company for Free</h4>
+
+                        <form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                            <hr>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.company_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.company_logo|as_crispy_field }}
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.company_phone|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.company_email|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.company_website|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.company_state|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.sample_pics_one|as_crispy_field}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.sample_pics_two|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.sample_pics_three|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.sample_pics_four|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.company_address|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.company_description|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        {{ form.company_sector|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.package_chosen|as_crispy_field }}
+                                    </div>
+      
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md text-center">
+                                        <input class="btn btn-outline-light font-weight-bold" type="submit" value="Submit Company for Listing">
+                                    </div>
+                                </div>
+    
+                                
+                                <hr>
+                        </form>
+                            
+                            
+                
                         
                     </div>
-                    
-                   
+                    </div>
+                
                     
                 </div>
+                
             </div>
+            
             
         </section>
         {% endblock section %}

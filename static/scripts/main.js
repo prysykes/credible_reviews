@@ -4,6 +4,8 @@ $(document).ready(function () {
     
     var display_company = $('#tm-display-companies');
     var companies = $('#tm-companies');
+    var list_company_button = $('#list_company_button');
+    var list_company_display = $('#list_company_display');
     var claimed_detail = $('#tm-claimed-detail');
     var claimed = $('#tm-claimed');
     var add_review = $('#tm-add-review-div');
@@ -25,6 +27,7 @@ $(document).ready(function () {
     var star_five = $('#star_five');
 
     review_display.show()
+    list_company_display.hide()
 
    
     // begin stylin go of filter inputs on featured page
@@ -64,7 +67,7 @@ $(document).ready(function () {
     /* hides detail for profile company page with no claimed company.
         using booleanfield claimed. */
     
-    claimed_detail.hide();   
+      
     // implementing send review togle display
     request_review_display.hide(); 
     request_review.click(function(){
@@ -79,10 +82,17 @@ $(document).ready(function () {
         form_filter.slideToggle(600);
     })
 
-    
+    claimed_detail.hide(); 
     if (claimed.text() == "False"){
         claimed_detail.show();
+    }else{
+        list_company_display.hide();
     }
+
+    list_company_button.click(function () {
+        list_company_display.slideToggle(600);
+        
+    })
     /*
         reviewbutton below and addreviewdiv are found on
         the details page of each company
@@ -164,6 +174,8 @@ $(document).ready(function () {
         review_display.slideToggle(600);
         display_company.hide();
     });
+
+    // begind back to top animation
     $(window).scroll(function () { 
         if ($(this).scrollTop() > 40){
             topBtn.show();
@@ -176,10 +188,6 @@ $(document).ready(function () {
         
     }); 
     
-
-
-
-
 
     // End window effect
     topBtn.click(function(){

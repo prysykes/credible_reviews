@@ -8,14 +8,16 @@ from django.contrib.postgres.fields import ArrayField
 
 class Company(models.Model):
     merchant = 'online merchant'
-    forex = 'Forex Company'
+    forex = 'forex company'
     betting = 'sports betting'
     fooddrug = 'food and drug'
     education = 'education'
     transportation = 'transportation'
+    logistics = 'logistics'
     hospitality = 'hospitality'
     healthcare = 'health'
     construction = 'construction'
+    handle = 'social media handle'
     blog = 'blog'
     finance = 'finance'
     media = 'media'
@@ -29,10 +31,12 @@ class Company(models.Model):
         (fooddrug, 'Food and Drug'),
         (education, 'Education'),
         (transportation, 'Transportation'),
+        (logistics, 'Logistics'),
         (hospitality, 'Hospitality'),
         (healthcare, 'Healthcare'),
         (construction, 'Construction'),
         (blog, 'Blog'),
+        (handle, 'Social Media Handle'),
         (finance, 'Finance'),
         (media, 'Media'),
         (manufacturing, 'Manufacturing'),
@@ -127,17 +131,24 @@ class Company(models.Model):
     company_sector = models.CharField(max_length=30, choices=sector, default=merchant, verbose_name='Sector')
     company_name = models.CharField(max_length=100)
     company_description = models.TextField()
-    company_logo = models.ImageField(upload_to='company_logos', blank=True, null=True)
+    company_logo = models.ImageField(upload_to='company_logos', blank=True, null=True, verbose_name='Company Logo')
+    sample_pics_one = models.ImageField(upload_to='sample_pics', blank=True, null=True, verbose_name='Upload Company Picture')
+    sample_pics_two = models.ImageField(upload_to='sample_pics', blank=True, null=True, verbose_name='Upload Company Picture')
+    sample_pics_three = models.ImageField(upload_to='sample_pics', blank=True, null=True, verbose_name='Upload Company Picture')
+    sample_pics_four = models.ImageField(upload_to='sample_pics', blank=True, null=True, verbose_name='Upload Company Picture')
+    
     company_state = models.CharField(max_length=30, choices=state, default=Lagos, verbose_name='State')
     company_address = models.TextField(max_length=2000)
     rating_array = ArrayField(models.IntegerField(), size=50, default=list)
-    average_rating = Int_max.IntegerRangeField(default=0, verbose_name='Avg', min_value=1, max_value=5)
+    average_rating = Int_max.IntegerRangeField(default=1, verbose_name='Avg', min_value=1, max_value=5)
     total_views = models.IntegerField(default=0)
     company_website = models.CharField(max_length=500, blank=True, null=True)
     company_email = models.EmailField(max_length=500, blank=True, null=True)
     company_phone = models.CharField(max_length=500)
     package_chosen = models.CharField(max_length=8, choices=package, default=Free)
     company_views = models.IntegerField(default=0)
+    listed = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
     advert = models.BooleanField(default=False)
     premium = models.BooleanField(default=False)
@@ -153,9 +164,8 @@ class Company(models.Model):
     
     def __repr__(self):
         return self.company_name
-    
-    
-    
+
+
     
     
 

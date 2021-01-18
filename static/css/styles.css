@@ -119,6 +119,11 @@ a{
 	height: 200px;
 
 }
+.cursornormal{
+	cursor: default !important;
+	background-color: grey !important;
+	color: rgb(43, 6, 6) !important;
+}
 .navbarbgtop{
 	background-color: rgb(8, 8, 77) !important;
 	color: white  !important;

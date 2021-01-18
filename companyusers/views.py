@@ -1,17 +1,32 @@
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpFormCompany, UserProfileCompanyForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import User, Group
 from .models import UserProfileCompany
-from companies.models import Company
+
 from users.models import Review, Response
 from users.forms import ResponseForm
+from django.urls import reverse
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from pages import filters
+
+from companies.models import Company
+from companies.forms import CompanyForm
+from django.template.defaultfilters import slugify
+
+
+# email activation imports
+from .utils import company_account_activation_token
+from django.core.mail import EmailMessage
+from django.views import View
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_text, force_bytes, DjangoUnicodeDecodeError
+from django.contrib.sites.shortcuts import get_current_site
+
 
 #from companies.models import Company, Review
 
@@ -42,15 +57,61 @@ def sign_up_company(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account Successfully Created for: ' + user + ",\n" + "Please Log in to continue...")
-            return redirect('loginpage_company')
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            messages.success(request, 'Account successfully created for ' + username.upper() +' and activation email sent to: ' + email + ",\n" + " Please visit your email to activate your account...")
+            current_user = User.objects.get(username=username)
+
+            #get the useridin64bit
+            uidb64 = urlsafe_base64_encode(force_bytes(current_user.pk))
+            #not adding .pk will raise type error = get() got multiple values for argument 'uidb64'
+            #make a token of the user
+            token = company_account_activation_token.make_token(current_user)
+            #get the current url
+            domain = get_current_site(request).domain
+            #second, get link the user would click for activation which takes a view name and kwargs
+            link = reverse('company_activation_view', kwargs={'uidb64': uidb64, 'token': token})
+            #create activation url the user will see
+            activate_url = 'http://'+domain+link
+
+            current_user.is_active = False
+            current_user.save()
+            email_subject = "Activate Your Account"
+            email_body = "Hi "+current_user.username + "Please use this link to activate your acc \n" +activate_url
+            email = EmailMessage(
+                    email_subject,
+                    email_body,
+                    'noreply@crediblereviews.com',
+                    [email],
+                    
+                )
+            email.send(fail_silently=False)
+            return redirect('user_login')
             
     context = {
         'form': form,
         'profile_form': profile_form
     }
     return render(request, 'companyusers/sign-up-company.html', context)
+
+
+class CompanyVerificationView(View):
+    def get(self, request, uidb64, token):
+        print("this is user id", uidb64)
+        try:
+            id = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=id)
+            print("this is user", user)
+            if user.is_active:
+                return redirect('user_login')
+            else:
+                user.is_active = True
+                user.save()
+                
+            messages.success(request, "Account activated successfully")
+        except Exception as ex:
+            pass
+        return redirect('user_login')
 
 
 @unauthenticated_user_company
@@ -70,14 +131,14 @@ def loginpage_company(request):
     context = {
 
     }
-    return render(request, 'companyusers/loginpage_company.html', context)
+    return render(request, 'users/user_login.html', context)
 
 
 def logoutpage_company(request):
     logout(request)
     return redirect('/') #sends the user to homepage after logout
 
-@login_required(login_url='loginpage_company')
+@login_required(login_url='user_login')
 @allowed_users_company(allowed_roles=['company'])
 def response(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
@@ -99,24 +160,38 @@ def response(request, review_id):
     
     return render(request, 'companyusers/response.html', context)
 
-@login_required(login_url='loginpage_company')
+@login_required(login_url='user_login')
 @allowed_users_company(allowed_roles=['company'])
 def profile_company(request):
     
-    companies = Company.objects.all()
+    companies = Company.objects.all().filter(approved=True)
+    form = CompanyForm()
+    if request.method == "POST":
+        form = CompanyForm(request.POST, request.FILES)
+        if form.is_valid:
+            data = form.save(commit=False)
+            data.user = request.user
+            data.company_slug = slugify(request.POST.get('company_name'))
+            
+            data.save()
+            return redirect('profile_company')
+    
     try:
         company = get_object_or_404(Company, user=request.user)
         reviews = company.review_set.all()
         responses = Response.objects.all()
         paginated_reviews = Paginator(reviews, 3)
         page_num = request.GET.get('page', 1)
+        company.listed = True
+        company.save()
+
 
         try:
             page = paginated_reviews.page(page_num)
         except EmptyPage:
             page = paginated_reviews(1)
         context = {
-
+            'company': company,
             'companies': companies,
             'reviews': page,
             'page': page,
@@ -125,6 +200,7 @@ def profile_company(request):
             'responses': responses,
             'info': "No company claimed yet",
             'infor': 'Not Available',
+            'form': form,
         }
     except:
         context = {
@@ -133,6 +209,7 @@ def profile_company(request):
             
             'info': "No company claimed yet",
             'infor': 'Not Available',
+            'form': form,
         }
         pass
 
@@ -147,7 +224,7 @@ def request_review_api(request):
     return redirect('profile_company')
 
 
-@login_required(login_url='loginpage_company')
+@login_required(login_url='user_login')
 @allowed_users_company(allowed_roles=['company'])
 def request_review(request, receiver_email):
     company = get_object_or_404(Company, user=request.user)
@@ -177,7 +254,7 @@ def done(request):
 
 
 
-@login_required(login_url='loginpage_company')
+@login_required(login_url='user_login')
 @allowed_users_company(allowed_roles=['company'])
 def settings_company(request):
     user_profile = request.user.userprofilecompany

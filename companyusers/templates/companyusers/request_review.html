@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html>
   <head>
@@ -251,6 +252,11 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
+                        <tr>
+                          <td class="text-center">
+                            <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'companies/logo.png' %}" alt="Credible Reviews Logo" width="90" height="80"></a>
+                          </td>
+                        </tr>
                         <h3>{{company}}, has asked you to write a Credible Review For their Company</h1>
                         <h5>We believe strongly that you have used their services before consequently their intention for your review on our website.</h2>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
