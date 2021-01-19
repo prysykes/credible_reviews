@@ -96,387 +96,271 @@
                                 <p class="card-text"></p>
                                 <a href="{% url 'logoutpage_company' %}" class="btn btn-outline-danger btn-sm font-weight-bold">Logout</a></br>
                             </div>
-                         </div>
+                        </div>
 
                     </div>
-                    
-                    
-                    {% for company in companies %}
-                        {% if company.user == request.user %}
-                    
-                    <div class="col-md-7 mb-2">
-                        <div class="row messagebarbg">
-                            <div class="col-md-6 ">
+                    <div class="col-md-7">
+                        <div class="row messagebarbg pt-2">
+                            <div class="col-md-4 text-left ">
+                                <h5 class="card-title"> Messages - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
+                            </div>
+                            
+                            <div class="col-md-4 ">
                                 <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages">Show/Hide Your Messages</button> </h5>
                             </div>
                             
-                            <div class="col-md-6 ">
+                            <div class="col-md-4 text-right ">
                                 <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Your Reviews</button> </h5>
                             </div>
                             
                         </div>
-                        <div class="row">
-                            
-                                <div class="col-md mb-2">
-                                    
-                                        <div id="user_message_div" class="card  box-shadow  mb-3"> 
-                                            <div  class="card-header text-white text-center bg-info">
-                                                <h5 class="card-title">Messages - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
-                                            </div>
-                                            <div class="card-body">
-                                                {% for message in messages %}
-                                                    <div class="row-md">
-                                                        
-                                                        <p class="card-text receivedparabg"><span class="text-left">{{message.subject}} <span class="sentbg"> received <span class=" text-danger"> {{message.date_sent}} </span> </span></span>  <br> 
-                                                        {{message.message}} <br>
-                                                        <span id="tm_send_reply" class="sentbg"> received </span>
-                                                        </p>
-                                                        
-                                                        
-                                                        {% for reply in replies %}
-                                                            {% if reply.message == message %}
-                                                                <p class="card-text sentparabg"><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
-                                                                    
-                                                                </p>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                        <p class="card-text">
-                                                            <a href="{%url 'reply_message' message.id %}"><button class="btn btn-sm btn-success">Reply</button> </a> 
-                                                        </p>
-                                                        
-                                                        
-                                                    </div>
-                                                    <hr> 
-                                                {% endfor %}
-                                                
-                                            </div>
-                                            <hr>
-                                            
-                                        </div>
-                                    
-                                </div>
-                                
-                            
-                        </div>
                         
-                        <div class="row">
-                            <div class="col-md mb-2">
-                                
-                                <div class="card text-center box-shadow mb-3" > 
-                                    <div class="card-header text-white bg-info">
-                                        <h5 class="card-title">Total Reviews</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <h3 class="card-title"></h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <h3 class="card-title"></h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <h3 class="card-title">{{ company.review_set.all.count }}</h3>
-                                    </div>
-                                    
-                                    <div class="card-body">
-                                        <h3 class="card-title"></h3>
-                                    </div>
-                                    
-                                    
-                                </div>
-    
-                                
+                        {% if company.approved == True  %}
+                        
+                            <div class="row-md mt-2 text-center text-white bg-info">
+                                <h5 class="">Statistics</h5>
                             </div>
-                            
-                            <div class="col-md mb-2">
+                            <div class="row bg-light pt-2">
                                 
-                                    <div class="card box-shadow mb-3" > 
-                                        <div class="card-header text-center text-white bg-info">
-                                            <h5 class="card-title ">Statistics</h5>
-                                        </div>
-                                        
-                                        <div class="py-2 font-weight-bold px-2">
-                                            <p class="card-text"><h6 class=" font-weight-bold">Claimed Company:&nbsp; <span class= "text-primary"><a class="text-decoration-none" href="{% url 'detail' company.company_slug %}" target="_blank"> {{company.company_name}}</a> </span> </h5></p>
-                                            <p class="card-text">Average Rating:&nbsp;&nbsp; <i style="visibility: hidden;" id="tm-average_rating">{{company.average_rating}}</i><i>{% for item in "12345"|make_list %}
-                                                            <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= company.average_rating %}checked{% endif %}"></span>
-                                                            {% endfor %}</i> </p>
-                                            <p class="card-text">Remarks: &nbsp;&nbsp;<i id="tm-remarks" class=""></i></p>
-                                            
-                                            <p class="card-text">Total Views: &nbsp;&nbsp; {{company.company_views}}</p>
-                                            <p class="card-text">Popularity: &nbsp;&nbsp;<i id="tm-popularity">Satisfactory</i></p>
-                                            
-                                            
-                                            
-                                        </div>
-                                        
-                                        <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Click to Get Noticed</button>
-                                        
-                                    </div>                      
 
+                                
+                                    <div class="col-md-6 ">
+                                        <p class="card-text"> <i class=" font-weight-bold"> Total Reviews </i> - <span class="justify-content-right numberbg"> {{ company.review_set.all.count }} </span> </p>
+                                        <p class="card-text"><i class=" font-weight-bold"> Total Views: </i> &nbsp;&nbsp; <span class="justify-content-right numberbg">{{company.company_views}}</span></p>
+                                        <p class="card-text"><span class=" font-weight-bold">Popularity: &nbsp;&nbsp;<i id="tm-popularity">Satisfactory</i></span></p>
+                                        
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <p class="card-text"><i class=" font-weight-bold">Claimed Company:&nbsp; <span class= "text-primary"><a class="text-decoration-none" href="{% url 'detail' company.company_slug %}" target="_blank"> {{company.company_name}}</a> </span> </i></p>
+                                        <p class="card-text"><i class=" font-weight-bold">Average Rating:</i>&nbsp;&nbsp; <i style="visibility: hidden;" id="tm-average_rating">{{company.average_rating}}</i><i>{% for item in "12345"|make_list %}
+                                                        <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= company.average_rating %}checked{% endif %}"></span>
+                                                        {% endfor %}</i> </p>
+                                        <p class="card-text"><i class=" font-weight-bold">Remarks: </i>&nbsp;&nbsp;<i id="tm-remarks" class=""></i></p>
+                                        <p class="card-text"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Click to Get Noticed</button> </p>
+                                        
+                                    </div>
+                                
+                                
                             </div>
-                            
-                        </div>
+                            {% elif company.approved == False and company.listed == True %}
+                            <div class="row-md mt-2 text-center">
+                                <h5 class="text-white bg-success">We are currently reviewing the Company you listed</h5>
+                                <p class="card-text"> Email: <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a>&nbsp; or &nbsp;<button class="btn btn-info font-weight-bold btn-sm" id="list_company_button">Click to List Your Company</button></p>
+                            </div>
+                            {% else %}
+                            <div class="row-md mt-2 text-center">
+                                <h5 class="text-danger">There is no company associated with this account</h5>
+                                <p class="card-text"> Email: <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a>&nbsp; or &nbsp;<button class="btn btn-info font-weight-bold btn-sm" id="list_company_button">Click to List Your Company</button></p>
+                            </div>
+                            <div class="row bg-light pt-2">
+                                <div id="list_company_display" class="row navbarbg px-2 py-2 justify-content-center"> 
+                                    <h4> Complete the Form Below to List your Company for Free</h4>
+            
+                                    <form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                                        <hr>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.company_name|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.company_logo|as_crispy_field }}
+                                                </div>
                                                 
-                        <div class="row" id="tm-display-reviews">
-                                <div class="col-md mb-2">
-                                
-                                    <div style="font-size: small; " class="card text-center .box-shadow mb-3"> 
-                                        <div class="card-header text-white bg-info">
-                                            <h5 class="card-title">Reviews and Responses</h5>
-                                        </div>
-                                        
-                                        <div class="card-body">
-                                            {% for review in reviews %}
-                                            <div  class=" py-2">
-                                                <p class="card-text ">&nbsp; <span class="font-weight-bold">{{review.user | capfirst }}</span> {% for item in "12345"|make_list %}
-                                                    <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
-                                                    {% endfor %}  &nbsp; | &nbsp;likes: {{review.likes}} &nbsp; | &nbsp; Date added: <span class="text-danger"> {{ review.date_added }}</span></p>
-                                                <p class="card-text">  Review: &nbsp; {{review.review_text}} </p>
-                                            
-                                            
-                                            <!-- check to see if there is a reponse under this review to know whether
-                                             to show the button -->
-                                            {% for response in review.response_set.all %} 
-                                                {% empty %}                                            
-                                            <p class="card-text"><a href="{% url 'response' review.id %}"><button id="tm-respond" class="btn btn-outline-primary font-weight-bold btn-sm">respond to this review</button></a></p>
-                                                
-                                            {% endfor %}
-                                           
-                                            {% for response in responses%}
-                                            {% if response.review == review %}
-                                            <p class="card-text bg-light font-italic"> <span class="font-weight-bold"> {{response.review.company | capfirst }}</span> responded: {{response}} on: <span class="text-danger"> {{response.date_added}}</span></p>
-                                            <hr>
-                                            {% endif %}
-                                            {% endfor %}
-                                            
-                                            {% endfor %}
-                                            
                                             </div>
-                                                                                                                       
-                                        
-                                        
-                                        
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row text-center">
-                                        {% if page.has_previous%}
-                                        <div class="col-md-2">
-                                        <a  href="{% url 'profile_company' %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
-                                        </div>
-                                        {% endif %}
-                                        
-                                        <div  class="col-md-8 font-weight-bold">
-                                        <ul style="list-style-type: none;">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.company_phone|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.company_email|as_crispy_field }}
+                                                </div>
+                  
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.company_website|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.company_state|as_crispy_field }}
+                                                </div>
+                  
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.sample_pics_one|as_crispy_field}}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.sample_pics_two|as_crispy_field }}
+                                                </div>
+                  
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.sample_pics_three|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.sample_pics_four|as_crispy_field }}
+                                                </div>
+                  
+                                            </div>
                                             
-                                        {% for l in  page.paginator.page_range %}
-                                        {% if forloop.counter <= 10 %}
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.company_address|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.company_description|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{ form.company_sector|as_crispy_field }}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ form.package_chosen|as_crispy_field }}
+                                                </div>
+                  
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md text-center">
+                                                    <input class="btn btn-outline-light font-weight-bold" type="submit" value="Submit Company for Listing">
+                                                </div>
+                                            </div>
+                
+                                            
+                                            <hr>
+                                    </form>
                                         
-                                        <li  style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
-                                        {% endif %}
-                                        {% endfor %}
-                                        </ul>
-                                        </div>
-                                        {% if page.has_next %}
-                                    
-                                        
-                                        <div class="col-md-2">
-                                            <a href="{% url 'profile_company' %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    
-                                   
+                                                                     
                                 </div>
-                                
-                        
-                        </div>
-                        
-                    </div>
-                        
+            
+                            </div>
                         {% endif %}
                         
-                    {% endfor %}
-                    
-                    
-                    
-                    <div id="tm-claimed-detail" class="col-md mb-2">
-                        <!-- The problem is here. It seems to rund the code over and over again-->
-                          
-                        
-                        <div class="row">
-                            <div class="col-md mb-2">
+                        <div class="row-md mt-2 ">
                                 
-                                <div class="card text-center  mb-3"> 
-                                    <div class="card-header text-white bg-info">
-                                        <h5 class="card-title">Total Reviews</h5>
-                                    </div>
-                                    
-                                    {% if company.listed %}
-                                    <div class="card-body">
-                                        <p class="card-text"> We have received your Listing Request.</p>
-                                        <p class="card-text"> Your listing is now being reviewed.</p>
-                                        <p class="card-text"> It will be displayed on this page once approval is given.</p>
-                                        <p class="card-text"> Your listing will equally be available site wide.</p>
-                                        <p class="card-text"> If this process take unusual time, kindly email us on:</p>
-                                        <p class="card-text"> <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a></p>
-                                    </div>
-                                    <button class=" cursornormal btn btn-info font-weight-bold btn-sm">Your Company is Awaiting Approval</button>
-                                    {% else %}
-                                    <div class="card-body">
-                                        <p class="card-text"> You have not claimed a company yet.</p>
-                                        <p class="card-text"> You need to claim a company to view its statistis here.</p>
-                                        <p class="card-text"> You need to have your company listed to claim it.</p>
-                                        <p class="card-text"> If your company is already listed on our site, kindly email us on:</p>
-                                        <p class="card-text"> <a href="mailto:info@crediblereviews.ng">info@crediblereviews.ng</a></p>
-                                    </div>
-                                    <button class="btn btn-info font-weight-bold btn-sm" id="list_company_button">Click to List Your Company</button>
-                                    {% endif %}
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                   
+                            <div class=" box-shadow  mb-3"> 
+                                <div  class=" text-white text-center bg-info">
+                                    <h5 class="card-title">Your Private Messages </h5>
                                 </div>
-    
+                                <div id="user_message_div" class="card-body">
+                                    {% for message in messages %}
+                                        
+                                        <div class="row-md">
+                                            
+                                            <p class="card-text"><span class="font-weight-bold">{{message.sender}} &nbsp;-&nbsp; </span><span class="text-left">{{message.subject}} <span class="sentbg"> received <span class="font-weight-small text-danger"> {{message.date_sent}} </span></span></span>  <br> 
+                                            {{message.message}}
+                                            </p>
+                                            {% for reply in replies %}
+                                                    {% if reply.message == message %}
+                                                        <p class="card-text sentparabg"><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                            
+                                                        </p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <p class="card-text">
+                                                    <a href="{%url 'reply_message_user' message.id %}"><button class="btn btn-sm btn-success">Reply</button> </a> 
+                                                </p>
+                                            
+                                        </div>
+                                        {% empty %}
+                                        <div class="row-md">
+                                            
+                                            <p> No message yet </p>
+                                            
+                                            
+                                        </div> 
+                                    {% endfor %}
+                                    <hr>
+                                </div>
+                                
                                 
                             </div>
                             
-                            <div class="col-md mb-2">
-                                
-                                    <div class="card  mb-3" > 
-                                        <div class="card-header text-center text-white bg-info">
-                                            <h5 class="card-title ">Statistics</h5>
-                                        </div>
-                                        
-                                    {% if company.listed %}
-                                    <div class="py-2 font-weight-bold px-2">
-                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; <i id="tm-average_rating">{{infor}}</i> </p>
-                                        <p class="card-text">Remarks: &nbsp; | &nbsp;<i id="tm-remarks" class="">{{infor}}</i></p>
-                                        <p class="card-text">Total Likes: &nbsp; | &nbsp; {{infor}}</p>
-                                        <p class="card-text">Total Dislikes: &nbsp; | &nbsp; {{infor}}</p>
-                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; {{infor}} </p>
-                                        <p class="card-text">Remarks: &nbsp; | &nbsp;{{infor}}</p>
-                                        <p class="card-text">Total Views: &nbsp; | &nbsp; {{infor}}</p>
-                                        
-                                        <p class="card-text"><h6 class=" text-warning font-weight-bold"> <span style="font-size: small;" class= "text-info"> Awaiting approval. Your statistic would appear here once approved </span> </h5></p>
-                                        
-                                    </div>
-                                    
-                                    {% else %}
-                                    <div class="py-2 font-weight-bold px-2">
-                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; <i id="tm-average_rating">{{infor}}</i> </p>
-                                        <p class="card-text">Remarks: &nbsp; | &nbsp;<i id="tm-remarks" class="">{{infor}}</i></p>
-                                        <p class="card-text">Total Likes: &nbsp; | &nbsp; {{infor}}</p>
-                                        <p class="card-text">Total Dislikes: &nbsp; | &nbsp; {{infor}}</p>
-                                        <p class="card-text">Average Rating:&nbsp; | &nbsp; {{infor}} </p>
-                                        <p class="card-text">Remarks: &nbsp; | &nbsp;{{infor}}</p>
-                                        <p class="card-text">Total Views: &nbsp; | &nbsp; {{infor}}</p>
-                                        
-                                        <p class="card-text"><h6 class=" text-warning font-weight-bold">{{info}}:&nbsp; <span style="font-size: small;" class= "text-info"> Email us to claim a company </span> </h5></p>
-                                        
-                                    </div>
-                                    
-                                    {% endif %}
-                                        
-                                        <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Click to Get Noticed</button>
-                                        
-                                    </div>                      
-
-                            </div>
+                            
                             
                         </div>
-                        
-                        <!---->
-                    <div id="list_company_display" class="row navbarbg px-2 py-2 justify-content-center"> 
-                        <h4> Complete the Form Below to List your Company for Free</h4>
-
-                        <form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
-                            <hr>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.company_name|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.company_logo|as_crispy_field }}
-                                    </div>
+                    {% if reviews %}
+                    <div class="row-md mt-2" id="tm-display-reviews">
+                        <div class=" box-shadow  mb-3">
+                            <div class="text-white text-center bg-info">
+                                <h5 class="card-title">Reviews and Responses</h5>
+                            </div>
+                            
+                            <div class="card-body">
+                                {% for review in reviews %}
+                                <div  class=" py-2">
+                                    <p class="card-text ">&nbsp; <span class="font-weight-bold">{{review.user | capfirst }}</span> {% for item in "12345"|make_list %}
+                                        <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
+                                        {% endfor %}  &nbsp; | &nbsp;likes: {{review.likes}} &nbsp; | &nbsp; Date added: <span class="text-danger"> {{ review.date_added }}</span></p>
+                                    <p class="card-text">  Review: &nbsp; {{review.review_text}} </p>
+                                
+                                
+                                <!-- check to see if there is a reponse under this review to know whether
+                                 to show the button -->
+                                {% for response in review.response_set.all %} 
+                                    {% empty %}                                            
+                                <p class="card-text"><a href="{% url 'response' review.id %}"><button id="tm-respond" class="btn btn-outline-primary font-weight-bold btn-sm">respond to this review</button></a></p>
                                     
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.company_phone|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.company_email|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.company_website|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.company_state|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.sample_pics_one|as_crispy_field}}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.sample_pics_two|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.sample_pics_three|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.sample_pics_four|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.company_address|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.company_description|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        {{ form.company_sector|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.package_chosen|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md text-center">
-                                        <input class="btn btn-outline-light font-weight-bold" type="submit" value="Submit Company for Listing">
-                                    </div>
-                                </div>
-    
-                                
+                                {% endfor %}
+                               
+                                {% for response in responses%}
+                                {% if response.review == review %}
+                                <p class="card-text bg-light font-italic"> <span class="font-weight-bold"> {{response.review.company | capfirst }}</span> responded: {{response}} on: <span class="text-danger"> {{response.date_added}}</span></p>
                                 <hr>
-                        </form>
+                                {% endif %}
+                                {% endfor %}
+                                
+                                {% endfor %}
+                                
+                                </div>
+                                                                                                           
                             
                             
-                
+                            
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row text-center">
+                            {% if page.has_previous%}
+                            <div class="col-md-2">
+                            <a  href="{% url 'profile_company' %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
+                            </div>
+                            {% endif %}
+                            
+                            <div  class="col-md-8 font-weight-bold">
+                            <ul style="list-style-type: none;">
+                                
+                            {% for l in  page.paginator.page_range %}
+                            {% if forloop.counter <= 10 %}
+                            
+                            <li  style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            </ul>
+                            </div>
+                            {% if page.has_next %}
+                        
+                            
+                            <div class="col-md-2">
+                                <a href="{% url 'profile_company' %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        </div>
                         
                     </div>
+                    {% else %}
+                    <div class=" box-shadow  mb-3">
+                        <div class="text-white text-center bg-info">
+                            <h5 class="card-title">No Reviews and Responses Available </h5>
+                        </div>
                     </div>
-                
+                    {% endif %}
+                    </div>
                     
-                </div>
-                
-            </div>
             
             
         </section>

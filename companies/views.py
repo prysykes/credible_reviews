@@ -19,50 +19,65 @@ def dynamic_url(request, *args, **kwargs):
     responses = Response.objects.all()
     company = Company.objects.get(company_slug=kwargs.get('company_id'))
 
-    form = ReviewForm()
+    form_review_form = ReviewForm()
+    form_message_form = MessageForm()
     
     if request.method == "POST":
-        form = ReviewForm(request.POST or None)
-        if form.is_valid:
-            data = form.save(commit=False)
-            data.company = company
-            data.user = request.user
-            data.save()
-             # to implement average rating
-            rating = request.POST.get('rating')
-            companyone = company
-            companyone.rating_array.append(int(rating))
-            new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
-            
-            if 4.5 <= new_rating <= 5:
-                companyone.average_rating = 5
-            elif 4.0 <= new_rating < 4.5:
-                companyone.average_rating = 4
-            elif 3.0 <= new_rating < 4.0:
-                companyone.average_rating = 3
-            elif 2.0 <= new_rating < 3:
-                companyone.average_rating = 2
-            elif 1.0 <= new_rating < 2:
-                companyone.average_rating = 1
-            
-            companyone.save()
-            
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            # comes back to the current page
+        if "form_review" in request.POST:
+            form_review_form = ReviewForm(request.POST or None)
+            if form_review_form.is_valid:
+                data = form_review_form.save(commit=False)
+                data.company = company
+                data.user = request.user
+                data.save()
+                # to implement average rating
+                rating = request.POST.get('rating')
+                companyone = company
+                companyone.rating_array.append(int(rating))
+                new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
+                
+                if 4.5 <= new_rating <= 5:
+                    companyone.average_rating = 5
+                elif 4.0 <= new_rating < 4.5:
+                    companyone.average_rating = 4
+                elif 3.0 <= new_rating < 4.0:
+                    companyone.average_rating = 3
+                elif 2.0 <= new_rating < 3:
+                    companyone.average_rating = 2
+                elif 1.0 <= new_rating < 2:
+                    companyone.average_rating = 1
+                
+                companyone.save()
+                
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                #comes back to the current page
+        elif "form_message" in request.POST:
+            form_message_form = MessageForm(request.POST or None)
+            if form_message_form.is_valid:
+                data = form_message_form.save(commit=False)
+                data.sender = request.user
+                print(request.user)
+                data.receiver = company.user
+                print(company.user)
+                data.save()
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
+                # used to return the name of the company instead of digits on detail page
 
-    form_message = MessageForm()
-    if request.method == "POST":
-        form_message = MessageForm(request.POST or None)
-        if form_message.is_valid:
-            form_message = MessageForm(request.POST or None)
-            data = form_message.save(commit=False)
-            data.sender = request.user
-            print(request.user)
-            data.receiver = company.user
-            print(company.user)
-            data.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
-    # used to return the name of the company instead of digits on detail page
+
+
+    # form_message = MessageForm()
+    # if request.method == "POST":
+    #     form_message = MessageForm(request.POST or None)
+    #     if form_message.is_valid:
+    #         form_message = MessageForm(request.POST or None)
+    #         data = form_message.save(commit=False)
+    #         data.sender = request.user
+    #         print(request.user)
+    #         data.receiver = company.user
+    #         print(company.user)
+    #         data.save()
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
+    # # used to return the name of the company instead of digits on detail page
     
     avg_rating = company.rating_array
 
@@ -94,15 +109,44 @@ def dynamic_url(request, *args, **kwargs):
         'page': page,
         'filtered_companyone_reviews': filtered_companyone_reviews,
         'total_reviews': total_reviews,
-        'form': form,
+        'form_review_form': form_review_form,
         'responses': responses,
         'likes': likes,
-        'form_message': form_message
+        'form_message_form': form_message_form
         
     }
 
     return render(request, 'companies/detail.html', context)
 
+def send_review(request, company_id):
+    company = Company.objects.get(pk=company_id)
+    if request.method == "POST":
+        form_review = ReviewForm(request.POST or None)
+        if form_review.is_valid:
+            data = form_review.save(commit=False)
+            data.company = company
+            data.user = request.user
+            data.save()
+             # to implement average rating
+            rating = request.POST.get('rating')
+            companyone = company
+            companyone.rating_array.append(int(rating))
+            new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
+            
+            if 4.5 <= new_rating <= 5:
+                companyone.average_rating = 5
+            elif 4.0 <= new_rating < 4.5:
+                companyone.average_rating = 4
+            elif 3.0 <= new_rating < 4.0:
+                companyone.average_rating = 3
+            elif 2.0 <= new_rating < 3:
+                companyone.average_rating = 2
+            elif 1.0 <= new_rating < 2:
+                companyone.average_rating = 1
+            
+            companyone.save()
+            
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def send_message(request, company_id):
     company = get_list_or_404(Company, id=company_id)

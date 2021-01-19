@@ -31,12 +31,6 @@ class ReviewForm(ModelForm):
             self.fields['company'].queryset = Company.objects.all()
     
     
-        
-    
-
-        
-        
-
 class ResponseForm(ModelForm):
     class Meta:
         model = Response

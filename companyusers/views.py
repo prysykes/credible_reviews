@@ -32,6 +32,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_text, force_bytes, DjangoUnicodeDecodeError
 from django.contrib.sites.shortcuts import get_current_site
 
+# import for faster email
+import threading
+
 
 #from companies.models import Company, Review
 
@@ -45,6 +48,14 @@ from django.conf import settings
 
 # end importing modules to support html email message
 
+
+class FasterActivateEmailCompany(threading.Thread):
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+    
+    def run(self):
+        self.email.send(fail_silently=False)
 
 
 @unauthenticated_user_company
@@ -91,7 +102,9 @@ def sign_up_company(request):
                     [email],
                     
                 )
-            email.send(fail_silently=False)
+            
+            FasterActivateEmailCompany(email).start()
+            
             return redirect('user_login')
             
     context = {
@@ -281,7 +294,9 @@ def request_review(request, receiver_email):
      
     # this part allows the message to be send as html instead of plain text
     email_msg.content_subtype = 'html'
-    email_msg.send(fail_silently=False)
+    FasterActivateEmailCompany(email_msg).start()
+    
+    
     
 
 def done(request):

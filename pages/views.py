@@ -20,6 +20,10 @@ from django.views.generic.list import ListView
 
 from .filters import CompanyFilter, ReviewFilter
 
+# imports for faster contact us email
+from django.core.mail import EmailMessage
+from users.views import FasterActivateEmail
+
 
 
 
@@ -144,7 +148,16 @@ def contact(request):
         receiver = request.POST['receiver']
         subject = request.POST['subject']
         senderplusmessage = f"Fullname: {fullname} \nFrom: {receiver} \n{message}"
-        send_mail(subject, senderplusmessage, settings.EMAIL_HOST_USER, [receiver], fail_silently=False)
+        email_subject = subject
+        email_body = senderplusmessage
+        email = EmailMessage(
+                email_subject,
+                email_body,
+                'noreply@crediblereviews.com',
+                [receiver],
+                
+            )
+        FasterActivateEmail(email).start()
         return redirect('done_contact')
     
     

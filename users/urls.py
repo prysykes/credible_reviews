@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('sign_up', views.sign_up, name='sign-up'),
-    path('activate_account/<uidb64>/<token>', views.verification_view.as_view(), name='activate_account'),
+    path('activate_account/<uidb64>/<token>', views.VerificationView.as_view(), name='activate_account'),
     # the view above ask for uidb64 and token, so we pass it there.
     
    

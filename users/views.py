@@ -35,8 +35,13 @@ from users.forms import ReviewForm, ResponseForm
 from .decorators import unauthenticated_user_regular, allowed_users_regular
 
 
-class QuickerEmail(threading.Thread):
-    pass
+class FasterActivateEmail(threading.Thread):
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+    
+    def run(self):
+        self.email.send(fail_silently=False)
 
 @unauthenticated_user_regular
 @allowed_users_regular(allowed_roles=['regular'])
@@ -91,7 +96,7 @@ def sign_up(request):
                     [email],
                     
                 )
-            email.send(fail_silently=False)
+            FasterActivateEmail(email).start()
             
             return redirect('user_login')
 
@@ -103,7 +108,7 @@ def sign_up(request):
 
 
 #this class is called once the email activate link is clicked
-class verification_view(View):
+class VerificationView(View):
     def get(self, request, uidb64, token):
         try:
             id = force_text(urlsafe_base64_decode(uidb64))  #get the user Id sent with the request

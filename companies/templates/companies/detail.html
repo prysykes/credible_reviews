@@ -66,25 +66,49 @@
                             <div class="card-body">
                                 {% if request.user.is_authenticated %}
                                 {% if request.user|has_group:"regular"%}
-                            <p><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle"> &nbsp; &nbsp; <span class="font-weight-bold text-primary">{{request.user|capfirst}}</span>&nbsp; &nbsp;<button type="button" id="tm-review-button" class="btn btn-primary font-weight-bold btn-sm">Add a Review</button> </p>
-                            
-                                <p >
-                                    <form id="tm-add-review-div" action="" method="POST">{% csrf_token %}
+                                <p><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
+                                    &nbsp; &nbsp; <span class="font-weight-bold text-primary">{{request.user|capfirst}}</span>
+                                    &nbsp; &nbsp;<button id="tm-review-button" class="btn btn-primary font-weight-bold btn-sm">Add a Review</button>
+                                    {% if company.user.userprofilecompany.claimed %} 
+                                    <button id="tm_send_message_button" class="btn btn-sm btn-success btn-sm" >Send Message</button> 
+                                    {% endif %} 
+                                </p>
+                                {% if company.user.userprofilecompany.claimed %}
+                                    <div id="tm_send_message_div" class="formhidden" name="form_message_form">
+                                        <form action="" method="POST">{% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <p>{{ form_message_form.subject|as_crispy_field }}</p>
+                                                    
+                                                    <p>{{ form_message_form.message|as_crispy_field }}</p> 
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <input class="btn btn-primary btn-sm" type="submit" value="Send Message" name="form_message">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                <div id="tm-add-review-div" class="formhidden">
+                                    <form action="" method="POST" name="form_review_form">{% csrf_token %}
                                         <div class="row">
                                             <div class="col-md-3">
-                                                {{ form.rating|as_crispy_field }}
+                                                <p>{{ form_review_form.rating|as_crispy_field }}</p>
+                                                <p>{{ form_review_form.subject|as_crispy_field }}</p>
+                                                <p>{{ form_review_form.review_text|as_crispy_field }}</p>
                                             </div>
-                                            <div class="col-md">
-                                                {{ form.review_text|as_crispy_field }}
-                                            </div>
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md">
-                                                <input class="btn btn-primary btn-sm" type="submit" value="Send Review">
+                                                <input class="btn btn-primary btn-sm" type="submit" value="Send Review" name="form_review">
                                             </div>
                                         </div>
                                     </form>
-                                </p>
+                                </div>
                                 {% endif %}
                             {% else %}
                             <p class="text-danger text-center">
@@ -225,8 +249,39 @@
                     
                 </div>
                     <div class="col-md-3 py-2">
-                        <h2 class="h5 px-2 py-2 text-center navbarbg">Advertise here... Get noticed!</h2>
-						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider.</p>                  
+                        <h2 class="h5 py-2 text-center navbarbg"> Highlights </h2>
+                        <div class="row mx-2">
+                            {% if company.sample_pics_one %}
+                            <div class="col-md-4">
+                                
+                                <img src="{{company.sample_pics_one.url}}" alt="sample pic one" width="80" height="80" class="img-thumbnail">
+                            </div>
+                            {% endif %}
+                            {% if company.sample_pics_two %}
+                            <div class="col-md-4">
+                                <img src="{{company.sample_pics_two.url}}" alt="sample pic two" width="80" height="80" class="img-thumbnail">
+                            </div>
+                            {% endif %}
+                            {% if company.sample_pics_three %}
+                            <div class="col-md-4">
+                                <img src="{{company.sample_pics_three.url}}" alt="sample pic three" width="80" height="80" class="img-thumbnail">
+                            </div>
+                            {% endif %}
+                            {% if company.sample_pics_four %}
+                            <div class="col-md-4">
+                                <img src="{{company.sample_pics_four.url}}" alt="sample pic four" width="80" height="80" class="img-thumbnail">
+                            </div>
+                            {% endif %}
+                            
+                        </div>
+                        <div class="row mx-2">
+                            <div class="col-md">
+                                <p>
+                                    Map location through Location given on the site
+                                </p>
+                            </div>
+                            
+                        </div>
                     </div>
             </div>
             

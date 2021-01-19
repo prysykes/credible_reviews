@@ -145,6 +145,10 @@ a{
 	padding: 2px 2px 2px 2px !important;
 }
 
+.formhidden{
+	display: none;
+}
+
 .receivedparabg{
 	background-color: rgb(92, 88, 129) !important;
 	color: rgb(255, 255, 255) !important;

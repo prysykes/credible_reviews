@@ -3,16 +3,19 @@ $(document).ready(function () {
     
     
     var display_company = $('#tm-display-companies');
-    var send_message_button = $('#tm_send_message');
+    var send_message_button = $('#tm_send_message_button');
     var message_div = $('#tm_send_message_div');
+    var add_review = $('#tm-add-review-div');
+    var review_button = $('#tm-review-button');
     var delete_message = $('.tm_delete_message');
     var message_hide_button = $('#tm_show_mesages');
+    var average_rating = $('#tm-average_rating');
+    var remarks = $('#tm-remarks');
     var companies = $('#tm-companies');
     var list_company_button = $('#list_company_button');
     var list_company_display = $('#list_company_display');
     var claimed_detail = $('#tm-claimed-detail');
     var claimed = $('#tm-claimed');
-    var add_review = $('#tm-add-review-div');
     var review_display = $('#tm-display-reviews');
     var view_reviews = $('#tm-reviews');
     var delete_review = $('.tm-delete-review');
@@ -30,16 +33,23 @@ $(document).ready(function () {
     var star_four = $('#star_four');
     var star_five = $('#star_five');
 
-    message_div.hide()
+    
     review_display.show()
     list_company_display.hide()
 
    
     // begin toggle message division
     send_message_button.click(function() {
-        message_div.slideToggle(600);
-        add_review.hide();
+        message_div.toggleClass('formhidden');
+        add_review.addClass('formhidden');
     }) 
+    // toggle review on detail page
+
+    review_button.click(function(){
+        add_review.toggleClass('formhidden');
+        message_div.addClass("formhidden"); 
+    });
+
 
     // begin toggle message division
     message_hide_button.click(function(){
@@ -119,10 +129,8 @@ $(document).ready(function () {
         reviewbutton below and addreviewdiv are found on
         the details page of each company
     */
-    var review_button = $('#tm-review-button');
+    
     // average rating for company profile
-    var average_rating = $('#tm-average_rating');
-    var remarks = $('#tm-remarks');
     
     if (average_rating.text() == 0 ){
         remarks.text('Very Poor');
@@ -174,17 +182,13 @@ $(document).ready(function () {
     }
     var search_sticky = $('#tm-search-pane');
     search_sticky.hide();
-    add_review.hide();
+    
     /* login.hide(); */
     /* login_company.hide(); */
     topBtn.hide();
     
     
-    review_button.click(function(){
-        add_review.slideToggle(600);
-        message_div.hide();
-    });
-
+    
     delete_review.click(function(){
         return confirm("Are you sure you want to delete this review ?");
     });
@@ -217,9 +221,6 @@ $(document).ready(function () {
         $('html').animate({scrollTop: 0}, 1000);
       }); 
       
-    
 
-    
-   
   
 });
