@@ -19,6 +19,37 @@ def dynamic_url(request, *args, **kwargs):
     responses = Response.objects.all()
     company = Company.objects.get(company_slug=kwargs.get('company_id'))
 
+    form = ReviewForm()
+    
+    if request.method == "POST":
+        form = ReviewForm(request.POST or None)
+        if form.is_valid:
+            data = form.save(commit=False)
+            data.company = company
+            data.user = request.user
+            data.save()
+             # to implement average rating
+            rating = request.POST.get('rating')
+            companyone = company
+            companyone.rating_array.append(int(rating))
+            new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
+            
+            if 4.5 <= new_rating <= 5:
+                companyone.average_rating = 5
+            elif 4.0 <= new_rating < 4.5:
+                companyone.average_rating = 4
+            elif 3.0 <= new_rating < 4.0:
+                companyone.average_rating = 3
+            elif 2.0 <= new_rating < 3:
+                companyone.average_rating = 2
+            elif 1.0 <= new_rating < 2:
+                companyone.average_rating = 1
+            
+            companyone.save()
+            
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            # comes back to the current page
+
     form_message = MessageForm()
     if request.method == "POST":
         form_message = MessageForm(request.POST or None)
@@ -56,36 +87,7 @@ def dynamic_url(request, *args, **kwargs):
     except EmptyPage:
         page = paginated_companyone_reviews.page(1)
     total_reviews = len(companyone_reviews)
-    form = ReviewForm()
     
-    if request.method == "POST":
-        form = ReviewForm(request.POST or None)
-        if form.is_valid:
-            data = form.save(commit=False)
-            data.company = company
-            data.user = request.user
-            data.save()
-             # to implement average rating
-            rating = request.POST.get('rating')
-            companyone = company
-            companyone.rating_array.append(int(rating))
-            new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
-            
-            if 4.5 <= new_rating <= 5:
-                companyone.average_rating = 5
-            elif 4.0 <= new_rating < 4.5:
-                companyone.average_rating = 4
-            elif 3.0 <= new_rating < 4.0:
-                companyone.average_rating = 3
-            elif 2.0 <= new_rating < 3:
-                companyone.average_rating = 2
-            elif 1.0 <= new_rating < 2:
-                companyone.average_rating = 1
-            
-            companyone.save()
-            
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            # comes back to the current page
     context = {
         'company': company,
         'companyone_reviews': page[::-1],
