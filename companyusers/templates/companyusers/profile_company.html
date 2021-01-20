@@ -241,11 +241,11 @@
                         
                         <div class="row-md mt-2 ">
                                 
-                            <div id="user_message_div" class="scrollable-div-comp box-shadow  mb-3"> 
+                            <div class=" box-shadow  mb-3"> 
                                 <div  class=" text-white text-center bg-info">
                                     <h5 class="card-title">Your Private Messages </h5>
                                 </div>
-                                <div  class="card-body">
+                                <div id="user_message_div" class="scrollable-div-comp card-body">
                                     {% for message in messages %}
                                         
                                         <div class="row-md">
@@ -255,7 +255,7 @@
                                             </p>
                                             {% for reply in replies %}
                                                     {% if reply.message == message %}
-                                                        <p class="row-md text-right receivedmsgpadding "><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                        <p class="row-md text-right receivedmsgpadding "><span class="justify-content-right">{{reply.reply}} <br> <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
                                                             
                                                         </p>
                                                     {% endif %}

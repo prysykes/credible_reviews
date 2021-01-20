@@ -80,24 +80,24 @@
                     <div class="col-md  mb-2">
                         <div class="row pt-2 mb-2 messagebarbg text-center">
                             <div class="col-md-4 ">
-                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages"> <span id="send_message_button_name">Show/Hide Messages</span> </button> - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
+                                <h5 class="card-title"> <span class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages">Show Messages</span> - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
                             </div>
                             
                             <div class="col-md-4 ">
-                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Reviews</button> </h5>
+                                <h5 class="card-title"> <span class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Hide Reviews</span> </h5>
                             </div>
                             <div class="col-md-4 ">
-                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">Show/Hide Companies</button> </h5>
+                                <h5 class="card-title"> <span class="btn btn-info font-weight-bold btn-sm" id="tm-companies">Show Companies</span> </h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md mb-2">
                                 
-                                    <div id="user_message_div"  class="scrollable-div card  box-shadow  mb-3"> 
+                                    <div   class=" card  box-shadow  mb-3"> 
                                         <div  class=" text-white text-center pt-1 bg-info">
                                             <h5 class="card-title">Private Messages </h5>
                                         </div>
-                                        <div  class="row-md">
+                                        <div id="user_message_div" class="scrollable-div row-md">
                                             {% for message in messages %}
                                                 <div class="row-md">
                                                     
@@ -106,7 +106,7 @@
                                                     </p>
                                                     {% for reply in replies %}
                                                             {% if reply.message == message %}
-                                                                <p class="row-md text-right receivedmsgpadding "> {{message.receiver}} <br>  <span class="justify-content-right">{{reply.reply}} <span class="receivedbg"> received <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                                <p class="row-md text-right receivedmsgpadding "> {{message.receiver}} <br>  <span class="justify-content-right">{{reply.reply}} <br> <span class="receivedbg"> received <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
                                                                     
                                                                 </p>
                                                             {% endif %}
@@ -130,10 +130,10 @@
                         </div>
                         
                         
-                        <div class="row " id="tm-display-reviews">
+                        <div class="row scrollable-div " id="tm-display-reviews">
                                 <div class="col-md mb-2">
                                 
-                                    <div  class="card text-center scrollable-div box-shadow mb-3"> 
+                                    <div  class="card text-center box-shadow mb-3"> 
                                         <div class="card-header text-white bg-info">
                                             <h5 class="card-title">Reviews and Responses</h5>
                                         </div>

@@ -4,7 +4,6 @@ $(document).ready(function () {
     
     var display_company = $('#tm-display-companies');
     var send_message_button = $('#tm_send_message_button');
-    var send_message_button_name = $('#send_message_button_name');
     var message_div = $('#tm_send_message_div');
     var add_review = $('#tm-add-review-div');
     var review_button = $('#tm-review-button');
@@ -62,6 +61,12 @@ $(document).ready(function () {
         message_div_display.scrollTop(700)
         review_display.hide();
         display_company.hide();
+        if ($(this).text("Show Messages")){
+            $(this).text("Hide Messages");
+        }else if ($(this).text("Hide Messages")){
+            $(this).text("Show Messages");
+            
+        };
         
     })
 
