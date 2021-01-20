@@ -4,7 +4,7 @@ from .models import UserProfileCompany, Message, ReplyMessage
 
 
 class UserProfileCompanyAdmin(admin.ModelAdmin):
-    list_display = ['user', 'package', 'designation']
+    list_display = ['user', 'phone', 'designation']
     search_fields = ['rep_name']
 
 admin.site.register(UserProfileCompany, UserProfileCompanyAdmin)

@@ -14,7 +14,7 @@ class SignUpFormCompany(UserCreationForm):
 class UserProfileCompanyForm(ModelForm):
     class Meta:
         model = UserProfileCompany
-        fields = ['designation', 'profile_photo', 'package', 'phone', 'location', 'address', 'phone']
+        fields = ['designation', 'profile_photo', 'phone', 'location', 'address', 'phone']
         exclude = ['user']
 
 class MessageForm(ModelForm):

@@ -37,87 +37,61 @@
                                 <div class="card-header text-white bg-info">
                                     <h5 class="card-title">Use the Form Below to Update Your Settings</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body form-group">
 
                                     <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                                        {{form|crispy}}
-                                        {% comment %} <hr>
-                                <div class="row ">
-                                    <div class="col-md-7">
-                                        <h5 class="text-danger"> Personal Information </h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md">
-                                        {{ form.first_name|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md">
-                                        {{ form.last_name|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-md">
-                                        {{ form.email|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md">
-                                        {{ profile_form.phone|as_crispy_field }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    
-      
-                                </div>
-                                <div class="row">
-                                    <div class="col-md">
-                                        {{ profile_form.location|as_crispy_field }}
-                                    </div>
-                                    <div class="col">
-                                        {{ profile_form.profile_picture|as_crispy_field }}
-                                    </div>
-      
-                                </div>
-                                <div class="row">
-                                    
-      
-                                </div>
-								<hr>
-								<div class="row">
-                                    <div class="col-md-7">
-                                        <h5 class="text-danger"> Login Information </h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        {{ form.username|as_crispy_field }}
-                                    </div>
-                                </div>
-								<div class="row">
-                                    <div class="col-md">
-                                        {{ form.password1|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md">
-                                        {{ form.password2|as_crispy_field }}
-                                    </div>
-                                </div>
-								
-								<div class="form-row mb-4">
-									<div class="col-md-7">
-										<div class="form-group form-check">
-											<input type="checkbox" class="form-check-input" id="agreeTerms" required>
-											<label class="form-check-label" for="agreeTerms"><a href="{% url 'privacy-terms' %}" target="_blank">Accept Our Privacy Statement</a></label>
-										</div>
-									</div>
-						
-								</div>
-                                <input class="btn btn-outline-primary" type="submit" value="Submit Registration Form">
-                                <hr> {% endcomment %}
+                                            
                                         
-                                        <input type="submit" class="btn btn-info btn-sm" value="Update Profile">
+                                        <div class="row">
+                                            
+                                            <div class="col-md form-group">
+                                                {{ form.designation|as_crispy_field }}
+                                            </div>
+                                            
+            
+                                        </div>
+                                        <hr>
+                                        
+                                        <div class="row">
+                                            
+                                            <div class="col-md form-group">
+                                                {{ form.profile_photo|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            
+                                            <div class="col-md form-group">
+                                                {{ form.location|as_crispy_field }}
+                                            </div>
+            
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            
+                                            <div class="col-md form-group">
+                                                {{ form.phone|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            
+                                            <div class="col-md form-group">
+                                                {{ form.address|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row form-group text-center">
+                                            <div class="col-md form-group">
+                                                <input type="submit" class="btn btn-info btn-sm font-weight-bold" value="Update Profile">
+                                            </div>
+                                            
+                                        </div>
+                                                
+                                        
                                     </form>
                                 </div>
-                                <hr>
+                                
                                 
                             </div>
 

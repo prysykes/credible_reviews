@@ -69,8 +69,8 @@
                                 <p class="card-text">Phone:&nbsp;{{request.user.userprofilecompany.phone}}</p>
                                 <p class="card-text">Location: &nbsp;{{request.user.userprofilecompany.location}}</p>
                                 <p class="card-text">Claimed: &nbsp;<span id="tm-claimed">{{request.user.userprofilecompany.claimed}}</span>&nbsp;&nbsp;&nbsp;</p>
-                                <p class="card-text">Package: &nbsp;{{request.user.userprofilecompany.package}}&nbsp;&nbsp;&nbsp;
-                                {% if request.user.userprofilecompany.claimed and request.user.userprofilecompany.package == "Premium" %}
+                                <p class="card-text">Package: &nbsp;{{company.package_chosen}}&nbsp;&nbsp;&nbsp;
+                                {% if request.user.userprofilecompany.claimed and company.package_chosen == "Premium" %}
                                 <p class="card-text"><button class="tm-request-review btn btn-outline-primary font-weight-bold btn-sm">Send Review Request to a Customer</button></p>
                                 <p class="tm-request-review-display card-text">
                                    

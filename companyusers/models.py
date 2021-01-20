@@ -81,17 +81,10 @@ class UserProfileCompany(models.Model):
         (Zamfara, 'Zamfara')
     ]
 
-    Free = 'Free'
-    Premium = 'Premium'
-    package = [
-        (Free, 'Free'),
-        (Premium, 'Premium')
-    ]
-
+    
     
     user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)    
     designation = models.CharField(max_length=20)
-    package = models.CharField(max_length=30, choices=package, default=Free, verbose_name="Choose a Package")
     profile_photo = models.ImageField(upload_to='rep_picture', default='pic.jpg', blank=True, null=True)
     location = models.CharField(max_length=30, choices=state, default=Lagos)
     phone = models.CharField(max_length=30, blank=True, null=True)
