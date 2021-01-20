@@ -98,6 +98,28 @@ a{
 	
 }
 
+.scrollable-div{
+	overflow-y: auto;
+	height: 700px;
+	background-color: rgb(243, 243, 205);
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size: medium;
+	
+}
+
+.scrollable-div-comp{
+	overflow-y: auto;
+	height: 550px;
+	background-color: rgb(245, 245, 229);
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size: medium;
+	
+}
+
+.receivedmsgpadding{
+	padding-left: 120px !important;
+}
+
 #tm-search-display{
 	background-color: #ffffff;
     position: absolute;

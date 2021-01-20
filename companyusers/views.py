@@ -314,6 +314,7 @@ def settings_company(request):
         form = UserProfileCompanyForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
+            return redirect("profile_company")
     context = {
         'form': form,
 

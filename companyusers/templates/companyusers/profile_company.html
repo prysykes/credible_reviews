@@ -241,28 +241,29 @@
                         
                         <div class="row-md mt-2 ">
                                 
-                            <div class=" box-shadow  mb-3"> 
+                            <div id="user_message_div" class="scrollable-div-comp box-shadow  mb-3"> 
                                 <div  class=" text-white text-center bg-info">
                                     <h5 class="card-title">Your Private Messages </h5>
                                 </div>
-                                <div id="user_message_div" class="card-body">
+                                <div  class="card-body">
                                     {% for message in messages %}
                                         
                                         <div class="row-md">
                                             
-                                            <p class="card-text"><span class="font-weight-bold">{{message.sender}} &nbsp;-&nbsp; </span><span class="text-left">{{message.subject}} <span class="sentbg"> received <span class="font-weight-small text-danger"> {{message.date_sent}} </span></span></span>  <br> 
+                                            <p class="row-md"><span class="font-weight-bold">{{message.sender}} &nbsp;-&nbsp; </span><span class="text-left">{{message.subject}} <span class="sentbg"> received <span class="font-weight-small text-danger"> {{message.date_sent}} </span></span></span>  <br> 
                                             {{message.message}}
                                             </p>
                                             {% for reply in replies %}
                                                     {% if reply.message == message %}
-                                                        <p class="card-text sentparabg"><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                        <p class="row-md text-right receivedmsgpadding "><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
                                                             
                                                         </p>
                                                     {% endif %}
                                                 {% endfor %}
                                                 <p class="card-text">
-                                                    <a href="{%url 'reply_message_user' message.id %}"><button class="btn btn-sm btn-success">Reply</button> </a> 
+                                                    <a href="{%url 'reply_message' message.id %}">reply </a> 
                                                 </p>
+                                                <hr>
                                             
                                         </div>
                                         {% empty %}
@@ -283,7 +284,7 @@
                             
                         </div>
                     {% if reviews %}
-                    <div class="row-md mt-2" id="tm-display-reviews">
+                    <div class="row-md mt-2 scrollable-div-comp" id="tm-display-reviews">
                         <div class=" box-shadow  mb-3">
                             <div class="text-white text-center bg-info">
                                 <h5 class="card-title">Reviews and Responses</h5>
@@ -302,7 +303,7 @@
                                  to show the button -->
                                 {% for response in review.response_set.all %} 
                                     {% empty %}                                            
-                                <p class="card-text"><a href="{% url 'response' review.id %}"><button id="tm-respond" class="btn btn-outline-primary font-weight-bold btn-sm">respond to this review</button></a></p>
+                                <p class="card-text"><a href="{% url 'response' review.id %}"><span id="tm-respond" class="text-primary">respond to this review</span></a></p>
                                     
                                 {% endfor %}
                                

@@ -92,9 +92,9 @@ def dynamic_url(request, *args, **kwargs):
     companyone_reviews = company.review_set.all()
     filtered_companyone_reviews = ReviewFilter(
         request.GET,
-        queryset=companyone_reviews.order_by('-date_added'),
+        queryset=companyone_reviews,
     )
-    companyone_reviews = filtered_companyone_reviews.qs
+    companyone_reviews = filtered_companyone_reviews.qs[::-1]
     paginated_companyone_reviews = Paginator(companyone_reviews, 6)
     page_num = int(request.GET.get('page', 1))
     try:
@@ -105,7 +105,7 @@ def dynamic_url(request, *args, **kwargs):
     
     context = {
         'company': company,
-        'companyone_reviews': page[::-1],
+        'companyone_reviews': page,
         'page': page,
         'filtered_companyone_reviews': filtered_companyone_reviews,
         'total_reviews': total_reviews,

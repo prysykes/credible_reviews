@@ -4,9 +4,11 @@ $(document).ready(function () {
     
     var display_company = $('#tm-display-companies');
     var send_message_button = $('#tm_send_message_button');
+    var send_message_button_name = $('#send_message_button_name');
     var message_div = $('#tm_send_message_div');
     var add_review = $('#tm-add-review-div');
     var review_button = $('#tm-review-button');
+    var message_div_display = $('#user_message_div');
     var delete_message = $('.tm_delete_message');
     var message_hide_button = $('#tm_show_mesages');
     var average_rating = $('#tm-average_rating');
@@ -34,8 +36,9 @@ $(document).ready(function () {
     var star_five = $('#star_five');
 
     
-    review_display.show()
+    message_div_display.hide()
     list_company_display.hide()
+    display_company.hide()
 
    
     // begin toggle message division
@@ -53,10 +56,21 @@ $(document).ready(function () {
 
     // begin toggle message division
     message_hide_button.click(function(){
-        $('#user_message_div').slideToggle(600);
+        message_div_display.slideToggle(600);
+        message_div_display.scrollTop(700)
         review_display.hide();
-
+        display_company.hide();
+        
     })
+
+    // begin styling of filter inputs on browsereviews page
+    
+    companies.click(function(){
+        display_company.slideToggle(600);
+        review_display.hide(); 
+        message_div_display.hide();
+    })
+
     // begin stylin go of filter inputs on featured page
     avg_rating_input.attr({
         'min': 1,
@@ -90,12 +104,7 @@ $(document).ready(function () {
     $('#id_date_added').attr({
         'placeholder': 'format=2020-10-22'
     })
-    // begin stylin go of filter inputs on browsereviews page
-    display_company.hide();
-    companies.click(function(){
-        display_company.slideToggle(600);
-        review_display.hide(); 
-    })
+    
     /* hides detail for profile company page with no claimed company.
         using booleanfield claimed. */
     
@@ -192,14 +201,12 @@ $(document).ready(function () {
     delete_review.click(function(){
         return confirm("Are you sure you want to delete this review ?");
     });
-    /*delete_review_regular.click(function(){
-        //e.preventDefault();
-        alert("Hello"); //confirm("Are you sure you want to delete review");
-    });
+    
     /* implementing view reviews toggle for company profile */
     view_reviews.click(function(){
         review_display.slideToggle(600);
         display_company.hide();
+        message_div_display.hide();
     });
 
     // begind back to top animation
@@ -214,7 +221,8 @@ $(document).ready(function () {
         }
         
     }); 
-    
+    // implementing allow message div to permanently scroll to buttom
+    message_div_display.scrollTop(700)
 
     // End window effect
     topBtn.click(function(){

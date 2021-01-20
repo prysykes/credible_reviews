@@ -78,13 +78,13 @@
 
                     </div>
                     <div class="col-md  mb-2">
-                        <div class="row pt-2 messagebarbg">
+                        <div class="row pt-2 mb-2 messagebarbg text-center">
                             <div class="col-md-4 ">
-                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages">Show/Hide Your Messages</button> </h5>
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm_show_mesages"> <span id="send_message_button_name">Show/Hide Messages</span> </button> - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
                             </div>
                             
                             <div class="col-md-4 ">
-                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Your Reviews</button> </h5>
+                                <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-reviews">Show/Hide Reviews</button> </h5>
                             </div>
                             <div class="col-md-4 ">
                                 <h5 class="card-title"> <button class="btn btn-info font-weight-bold btn-sm" id="tm-companies">Show/Hide Companies</button> </h5>
@@ -93,27 +93,28 @@
                         <div class="row">
                             <div class="col-md mb-2">
                                 
-                                    <div  class="card  box-shadow  mb-3"> 
-                                        <div  class="card-header text-white text-center bg-info">
-                                            <h5 class="card-title">Messages - <span class="justify-content-right numberbg"> {{total_messages}} </span> </h5>
+                                    <div id="user_message_div"  class="scrollable-div card  box-shadow  mb-3"> 
+                                        <div  class=" text-white text-center pt-1 bg-info">
+                                            <h5 class="card-title">Private Messages </h5>
                                         </div>
-                                        <div id="user_message_div" class="card-body">
+                                        <div  class="row-md">
                                             {% for message in messages %}
                                                 <div class="row-md">
                                                     
-                                                    <p class="card-text"><span class="text-left">{{message.subject}} <span class="sentbg"> sent </span></span> <span class="font-weight-small text-danger"> {{message.date_sent}} </span> <br> 
+                                                    <p class="row-md"><span><b>{{message.subject}}</b> <span class="sentbg"> sent <span class="font-weight-small text-danger"> {{message.date_sent}} </span> </span> <br> 
                                                     {{message.message}}
                                                     </p>
                                                     {% for reply in replies %}
                                                             {% if reply.message == message %}
-                                                                <p class="card-text sentparabg"><span class="justify-content-right">{{reply.reply}} <span class="sentbg"> sent <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
+                                                                <p class="row-md text-right receivedmsgpadding "> {{message.receiver}} <br>  <span class="justify-content-right">{{reply.reply}} <span class="receivedbg"> received <span class=" text-danger"> {{reply.date_sent}} </span> </span></span>  <br> 
                                                                     
                                                                 </p>
                                                             {% endif %}
                                                         {% endfor %}
                                                         <p class="card-text">
-                                                            <a href="{%url 'reply_message_user' message.id %}"><button class="btn btn-sm btn-success">Reply</button> </a> 
+                                                            <a href="{%url 'reply_message_user' message.id %}"><span class="text-success">reply</span> </a> 
                                                         </p>
+                                                        <hr>
                                                     
                                                 </div> 
                                             {% endfor %}
@@ -129,12 +130,12 @@
                         </div>
                         
                         
-                        <div class="row" id="tm-display-reviews">
+                        <div class="row " id="tm-display-reviews">
                                 <div class="col-md mb-2">
                                 
-                                    <div  class="card text-center box-shadow mb-3"> 
+                                    <div  class="card text-center scrollable-div box-shadow mb-3"> 
                                         <div class="card-header text-white bg-info">
-                                            <h5 class="card-title">Details</h5>
+                                            <h5 class="card-title">Reviews and Responses</h5>
                                         </div>
                                         <div class="row ">
                                             {% for review in reviews %}
@@ -192,14 +193,14 @@
                         <div class="row" id="tm-display-companies">
                                 <div class="col-md mb-2">
                                 
-                                    <div class="box-shadow card   mb-3"> 
+                                    <div class="box-shadow card scrollable-div  mb-3"> 
                                         <div class="card-header text-center text-white bg-info">
                                             <h5 class="card-title">Reviewed Companies</h5>
                                         </div>
                                         
                                         <div class="card-body mx-5">
                                         {% for company in companies %}
-                                            <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.id %}">{{company.company_name}}</a>&nbsp; | &nbsp; {% for item in "12345"|make_list %}
+                                            <p class="card-text"><img class="rounded-circle" src="{{company.company_logo.url}}" alt="company_logo" width="50" height="50"> &nbsp; &nbsp; <a class="text-decoration-none" href="{% url 'detail' company.company_slug %}">{{company.company_name}}</a>&nbsp; | &nbsp; {% for item in "12345"|make_list %}
                                                             <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= company.average_rating %}checked{% endif %}"></span>
                                                             {% endfor %} </p>
                                             
