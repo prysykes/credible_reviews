@@ -123,6 +123,11 @@ a{
 	
 }
 
+.abouttextbag{
+	background-color: rgb(10, 5, 48);
+	color: rgb(255, 255, 255);
+}
+
 .receivedmsgpadding{
 	padding-left: 120px !important;
 }

@@ -1,52 +1,11 @@
 {% extends 'base.html' %}
 
-        {% block section %}  
-        <section class="mt-2 bg-white mx-2">
+
             
-            <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span> because we believe that behind every review, there is a heartfelt experience...</span>
-                </div>
-                <div class="row">
-                    
-                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light navbarbg py-2">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class=" nav  flex-column">
-                                
-                                <li class="nav-item">
-                                    <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">Get a CR Seal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        </div>
-                    
-                    
+                    {% block blockslideshow %}
                     <div class="col-md-7 py-2 ">
-                        <h1 class="h4 font-weight-bold navbarbg px-2 py-2 text-center"> Frequently Asked Questions</h1>
-                        
+                        <h1 class="h4 font-weight-bold navbarbg  px-2 py-2 text-center"> Frequently Asked Questions</h1>
+                        <!-- Slideshow container -->
                         <div class="col-md-6 d-flex py-2 ">                   
                             <h4 id="q1" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
                         </div> 
@@ -117,106 +76,6 @@
                                 over 20 years now. I have been doing this for
                                 over 20 years now.
                         </div>
-                </div>
-                <div class="col-md-3 py-2">
-                    <h2 class="h5 px-2 py-2 text-center navbarbg">Advertise here... Get noticed!</h2>
-						<p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. </p>                  </div>
-                </div>
-            </div>
-            
-        </section>
-        {% endblock section %}
-{% block sectionsars %}  
-        <section class="mt-2 bg-white mx-2">
-            
-            <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                  
-                    <div class="col-md-7 py-2 ">
-                        <h1 class="h4 font-weight-bold px-2 py-2"> Frequently Asked Question</h1> 
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q1" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a1" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                          over 20 years now. I have been doing this for
-                          over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q2" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a2" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                              over 20 years now. I have been doing this for
-                              over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q3" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a3" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                              over 20 years now. I have been doing this for
-                              over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q4" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a4" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q5" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a5" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q6" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a6" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                                <h4 id="q7" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a7" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q8" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a8" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                                over 20 years now. I have been doing this for
-                                over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q9" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a9" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                                over 20 years now. I have been doing this for
-                                over 20 years now.
-                        </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q10" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a10" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                                over 20 years now. I have been doing this for
-                                over 20 years now.
-                        </div>
-                                    
-                            
-                        
+                    <!-- Slide show ends-->
                     </div>
-                  
-                    <div class="col-md-5 py-2">
-                        <h2 class="h4 px-2 py-2  text-center">Welcome to Credible Reviews Adverts</h2>
-						    <p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safety</p>                  </div>
-                    </div>
-                </div>
-            </div>
-            
-        </section>
-        {% endblock sectionsars %}
-
-
+                {% endblock blockslideshow %}
