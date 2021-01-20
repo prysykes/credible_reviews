@@ -44,12 +44,14 @@ $(document).ready(function () {
     // begin toggle message division
     send_message_button.click(function() {
         message_div.toggleClass('formhidden');
+        $("#id_subject").focus();
         add_review.addClass('formhidden');
     }) 
     // toggle review on detail page
 
     review_button.click(function(){
         add_review.toggleClass('formhidden');
+        $("#id_rating").focus();
         message_div.addClass("formhidden"); 
     });
 
@@ -71,6 +73,11 @@ $(document).ready(function () {
         message_div_display.hide();
     })
 
+    // setting tabindex to 1 for forms on company detail page
+    // review_button.click(function(){
+    //     $("#id_rating").focus();
+    // })
+    
     // begin stylin go of filter inputs on featured page
     avg_rating_input.attr({
         'min': 1,
@@ -79,6 +86,9 @@ $(document).ready(function () {
     });
 
     $("#id_average_rating, #id_company_name, #id_company_sector, #id_company_state").addClass('form-control');
+
+    // adding bootsrap form-control class to company sign-up page
+    $("#id_username, #id_password1, #id_password2, #id_first_name, #id_last_name, #id_email, #id_phone, #id_designation, #id_profile_photo, #id_location").addClass('form-control');
     
     // implementing delete message
     delete_message.click(function () {

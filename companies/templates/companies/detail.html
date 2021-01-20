@@ -69,11 +69,11 @@
                                 <p><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
                                     &nbsp; &nbsp; <span class="font-weight-bold text-primary">{{request.user|capfirst}}</span>
                                     &nbsp; &nbsp;<button id="tm-review-button" class="btn btn-primary font-weight-bold btn-sm">Add a Review</button>
-                                    {% if company.user.userprofilecompany.claimed %} 
+                                    {% if company.user.userprofilecompany.claimed and company.package_chosen == "Premium"%} 
                                     <button id="tm_send_message_button" class="btn btn-sm btn-success btn-sm" >Send Message</button> 
                                     {% endif %} 
                                 </p>
-                                {% if company.user.userprofilecompany.claimed %}
+                                {% if company.user.userprofilecompany.claimed and company.package_chosen == "Premium"%}
                                     <div id="tm_send_message_div" class="formhidden" name="form_message_form">
                                         <form action="" method="POST">{% csrf_token %}
                                             <div class="row">
