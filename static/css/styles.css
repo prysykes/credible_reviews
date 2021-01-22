@@ -8,9 +8,14 @@ body{
 	background: #fcfcfc;
 		
 }
+
+.borderrounded{
+	border-radius: 15px;
+}
+
 .divbgimg{
-	background: url('/media/bg_image/latest_review_bg.jpg') !important;
-	color: white !important;
+	
+	color: black !important;
 	
 }
 
@@ -218,12 +223,12 @@ a{
 	color: rgb(43, 6, 6) !important;
 }
 .navbarbgtop{
-	background-color: rgb(8, 8, 77) !important;
+	background-color: rgb(3, 3, 49) !important;
 	color: white  !important;
 }
 
 .navbarbg{
-	background-color: rgb(102, 122, 129) !important;
+	background-color: rgb(3, 3, 49) !important;
 	color: white  !important;
 }
 

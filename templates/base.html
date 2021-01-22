@@ -6,6 +6,8 @@
     <style>
         .tm-nav li a:hover{
             background-color: #b7d8f7 !important; 
+            border-radius: 15px;
+            color: black !important;
                             
           }
 
@@ -74,7 +76,7 @@
             
             <div class="row">
                 
-                    <div  class=" navbarbg tm-nav navbar-expand-lg col-md-2  navbar-light py-2">
+                    <div  class=" navbarbg borderrounded tm-nav navbar-expand-lg col-md-2  navbar-light py-2">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                           </button>
@@ -114,7 +116,7 @@
                 {% block featuredcomp %}
                 {% block blockslideshow %}
                 <div class="col-md-7 py-2 ">
-                    <h1 class="h4 font-weight-bold navbarbg  px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
+                    <h1 class="h4 font-weight-bold navbarbg borderrounded  px-2 py-2 text-center"> Welcome to Credible Reviews</h1>
                     <!-- Slideshow container -->
 
                     <div class="galleryContainer">
@@ -152,7 +154,7 @@
             </div>
             {% endblock blockslideshow %}
             <div  class="col-md-3 py-2">
-                <h2 class="h5 px-2 py-2 text-center navbarbg">Advertise here... Get noticed!</h2>
+                <h2 class="h5 px-2 py-2 text-center borderrounded navbarbg">Advertise here... Get noticed!</h2>
                    <p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do</p>                
             </div>
         </div>
@@ -164,7 +166,7 @@
 {% block article %}
     <article  class="mt-2 bg-white mx-2">
         <div class= "row-md  justify-content-center ">
-            <h2 class="text-center navbarbgtop justify-content-center">Latest Reviews - <span class="h4"> <a class="text-decoration-none" href=" {% url 'browse_review' %}"> Browse Reviews </a> to like and view number of likes... </span> </h2>
+            <h2 class="text-center navbarbgtop borderrounded justify-content-center">Latest Reviews - <span class="h4"> <a class="text-decoration-none" href=" {% url 'browse_review' %}"> Browse Reviews </a> to like and view number of likes... </span> </h2>
         </div>
         
         <div class="container-fluid border-0 text-center justify-content-center">
@@ -174,7 +176,7 @@
                 {% for review in reviews%}
                     <div  class=" col-md-3 px-2 py-2 text-center">
                         <div   class="col-md  text-wrap">
-                            <h6 style="background-color: rgb(9, 9, 39); font-size:x-small;" class="font-weight-bold text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle mb-1">  &nbsp; <i style="font-size: large;" class="">
+                            <h6 style="font-size:x-small;" class="font-weight-bold borderrounded navbarbg text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle mb-1">  &nbsp; <i style="font-size: large;" class="">
                                 {% comment %} The code gets a review. and runs the span tag 
                                 as many as there are numbers in the list. Then compares each umber to be less
                                  than or equall to the review value to know how many 

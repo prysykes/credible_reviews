@@ -72,7 +72,7 @@
                             {% for review in page %}
                             <div class="col-md-3 px-2 py-2">
                                             <div  class="col-md text-wrap ">
-                                                <h6 style="font-size:x-small;" class="font-weight-bold bg-primary text-white px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; 
+                                                <h6 style="font-size:x-small;" class="font-weight-bold borderrounded navbarbg px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; 
                                                     {% for item in "12345"|make_list %}
                                                     <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
                                                     {% endfor %}

@@ -220,6 +220,7 @@ class GenericReview(models.Model):
     review_text_g = models.TextField(max_length=500, verbose_name='Your Review:')
     rating_g = Int_max.IntegerRangeField(min_value=1, max_value=5, verbose_name='Your Rating:')
     date_added_g = models.DateField('Review Date', auto_now_add=True)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.review_text_g
@@ -234,7 +235,7 @@ class Review(models.Model):
     review_text = models.TextField(max_length=500, verbose_name='Your Review:')
     rating = Int_max.IntegerRangeField(min_value=1, max_value=5)
     date_added = models.DateField('Review Date', auto_now_add=True)
-
+    verified = models.BooleanField(default=False)
     def __str__(self):
         return self.review_text
 
