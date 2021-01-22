@@ -35,6 +35,7 @@ urlpatterns = [
     #path('edit_response/<int:review_id>/', views.edit_review, name='edit_response'),
     #path('delete_response/<int:review_id>/', views.delete_review, name='delete_response'),
     # overwriting the default template name for reset_password for regular users
+    path('submit_review_generic', views.submit_review_generic, name='submit_review_generic'),
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="users/reset_password.html"), name="reset_password"),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="users/password_reset_sent.html"), name="password_reset_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="users/password_reset_form.html"), name="password_reset_confirm"),

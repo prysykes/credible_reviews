@@ -153,7 +153,7 @@ class Company(models.Model):
     advert = models.BooleanField(default=False)
     premium = models.BooleanField(default=False)
 
-    company_slug = models.SlugField(max_length=255, allow_unicode=True, null=True, default=company_name)# used to get company name in url instead of ID
+    company_slug = models.SlugField(max_length=255, allow_unicode=True)# used to get company name in url instead of ID
 
     def get_absolute_url(self):# used to get company name in url instead of ID
         """Returns the url to access a particular instance of the model."""

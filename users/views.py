@@ -31,7 +31,7 @@ from pages import filters
 
 
 from companies.models import Company
-from users.forms import ReviewForm, ResponseForm
+from users.forms import ReviewForm, ResponseForm, GenericReviewForm
 from .decorators import unauthenticated_user_regular, allowed_users_regular
 
 
@@ -305,50 +305,80 @@ def review_submitted(request):
 
 @login_required(login_url='user_login')
 @allowed_users_regular(allowed_roles=['regular'])
-def submit_review(request):
+def submit_review(request, *args, **kwargs):
     form = ReviewForm()
-    if request.is_ajax():
+    form_generic = GenericReviewForm()
+    if request.is_ajax() and request.method == "GET" and request.GET.get('search_text') != "":
+        term = request.GET.get('search_text')
         
-        term = request.GET.get('term')
-        companies = Company.objects.all().filter(company_name__icontains=term)
-        response_content = list(companies.values())
-        
-        return JsonResponse(response_content, safe=False)
 
+        try:
+            company = get_object_or_404(Company, company_name__icontains=term, approved=True)
+            company_name = company.company_name
+        except:
+            company_name = "Other"
+
+        
+        
+        return JsonResponse(company_name, safe=False)
+
+   
     if request.method == 'POST':
-        form = ReviewForm(request.POST or None)
-        if form.is_valid:
-            data = form.save(commit=False)
-            """
-                to implement the average rating feature, first get the particular company from the company
-                chosen by the reviewer/ Use this company as a primary key to get that particular company from
-                the database. Then use the gotten company to access the company objects like the average rating field.
-            """
-            """
-                The reason for commit=False is allow us assign request.user to the user field in the 
-                submitted form. So we can be able to access it in Template.
-            """
-            data.user = request.user
+        if "normal_review" in request.POST:
+            form = ReviewForm(request.POST or None)
+            if form.is_valid:
+                data = form.save(commit=False)
+                
+                data.user = request.user
+                print(data.user)
+                post_company = request.POST.get('id_company')
+                company = get_object_or_404(Company, company_name=post_company)
+                
+                data.company = company
+                
+                
+                data.save()
+                
+                # to implement average rating
+                
+                posted = request.POST.get('id_company')
+                company = get_object_or_404(Company, company_name=post_company)
+
+                rating = request.POST.get('rating')
+                
+                companyone = Company.objects.get(pk=company.id)
             
-            
-            data.save()
-            
-            # to implement average rating
-            company = request.POST.get('company')
-            
-            rating = request.POST.get('rating')
-            
-            companyone = Company.objects.get(pk=company)
-           
-            companyone.average_rating = round((int(rating) + int(companyone.average_rating))/2)
-            companyone.save()
-            
-            return redirect('profile_regular')
+                companyone.average_rating = round((int(rating) + int(companyone.average_rating))/2)
+                companyone.save()
+                
+                return redirect('profile_regular')
+        elif "generic_review" in request.POST:
+            form_generic = GenericReviewForm(request.POST or None, request.FILES or None)
+            if form_generic.is_valid:
+                data = form_generic.save(commit=False)
+                
+                data.user_g = request.user
+                data.rating_g = int(request.POST.get('rating_g'))
+                print("this is the rating", data.rating_g)  
+                print("data type of rating",type(data.rating_g))             
+                
+                
+                data.save()
+                               
+                return redirect('profile_regular')
     context = {
         'form': form,
+        'form_generic': form_generic,
+        
                 
     }
     return render(request, 'users/submit-review.html', context)
+
+@login_required(login_url='user_login')
+@allowed_users_regular(allowed_roles=['regular'])
+def submit_review_generic(request):
+    pass
+
 
 def edit_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id)

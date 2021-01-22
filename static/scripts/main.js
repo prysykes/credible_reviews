@@ -83,6 +83,18 @@ $(document).ready(function () {
     //     $("#id_rating").focus();
     // })
     
+    // add bootsrap form control for submit review fields
+   $("#id_company, #search_company, #id_subject, #id_review_text").addClass('form-control')
+
+   // add bootsrap form control for  submit generic review fields
+    $("#id_company_name_g, #id_subject_g, #id_company_phone_g, #id_company_email_g, #id_review_text_g, #id_company_address_g, #id_company_state_g, #id_company_sector_g, #id_picture_evidence_g, #id_company_logo_g, #id_company_website_g, #id_rating_g").addClass('form-control')
+    $('#id_rating_g').attr({
+        'class': 'form-control',
+        'placeholder': 'maximum = 5',
+        'min': 1,
+        'max':5,
+    })
+    
     // begin stylin go of filter inputs on featured page
     avg_rating_input.attr({
         'min': 1,

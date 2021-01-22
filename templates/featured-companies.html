@@ -2,11 +2,9 @@
 {% load static %}
 {% static 'images' as baseURL %}
 {% load crispy_forms_tags %}
-    
-        {% block section %}  
-        <section class="mt-2 bg-white mx-2">
-            
-            <div class="container-fluid border-0 text-justify">
+{% block filter %}
+        
+        <div class="container-fluid border-0 text-justify">
                 <div class="row" id="tm-filter-button-div">
                     <span class="font-weight-bold py-1 mx-auto text-info">
                         <button id="tm-form-filter-button" class="btn btn-sm btn-outline-primary font-weight-bold">Click to Filter Featured Companies</button>
@@ -48,45 +46,9 @@
                     </form>
                     </span>
                 </div>
-                <div class="row">
-                    
-                        <div class="tm-nav navbar-expand-lg col-md-2  navbar-light navbarbg py-2">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class=" nav  flex-column">
-                                
-                                <li class="nav-item">
-                                    <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
-                                </li>
-                                
-                                <li class="nav-item ">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">API Coming Soon</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        </div>
-                    
-                    
-                  
-                    <div class="col-md-10 ">
+{% endblock filter %}
+{% block featuredcomp %}
+                <div class="col-md-10 ">
                         <div class="row  container-fluid border-0 ">
                                 <div class="col-md py-2 text-center">
                                     <p class="font-weight-bold">
@@ -155,13 +117,7 @@
                      
                          </div>
                     </div>
-                
-                </div>
-                
-            </div>
-            
-        </section>
-        {% endblock section %}
+{% endblock featuredcomp %}
 
         {% block article %}
         <article class="mt-2 bg-white mx-2">
@@ -171,4 +127,4 @@
         {% endblock article %}
        
 
-
+ 

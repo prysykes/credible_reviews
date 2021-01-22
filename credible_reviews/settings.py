@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'pages',
     'companyusers',
+    'blog',
     'crispy_forms',
     'django_filters', #used to filter featured companies and browse reviews page
     

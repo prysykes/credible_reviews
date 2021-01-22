@@ -19,16 +19,21 @@ class UserProfileForm(ModelForm):
         fields = ['profile_picture', 'phone', 'location']
         exclude = ['user']
 
+class GenericReviewForm(ModelForm):
+    class Meta:
+        model = GenericReview
+        fields = ['company_name_g', 'subject_g', 'review_text_g', 'rating_g', 
+                    'company_logo_g', 'picture_evidence_g', 'company_sector_g', 'company_state_g',
+                    'company_address_g', 'company_website_g', 'company_email_g', 'company_phone_g' 
+                
+                ]
+        
+
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = ['company','subject', 'review_text', 'rating']
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['company'].queryset = Company.objects.none()
-
-        if 'company' in self.data:
-            self.fields['company'].queryset = Company.objects.all()
+        fields = ['subject', 'review_text', 'rating']
+    
     
     
 class ResponseForm(ModelForm):

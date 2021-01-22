@@ -5,38 +5,202 @@
             
                         {% block blockslideshow %}
                         <div class="col-md-7 py-2 ">
-                        <h1 class="h4 font-weight-bold navbarbg  px-2 py-2 text-center"> Contact Us</h1>
+                        <h1 class="h4 font-weight-bold navbarbg  px-2 py-2 text-center"> Submit Review</h1>
                         <!-- Slideshow container -->
                         <p > 
-                            <form class="" action="" method="POST">{% csrf_token %}
+                            <form id="review-form" name="normal_review_form" class="" action="" method="POST">{% csrf_token %}
+                                <h5 class="text-center reviewformheadingbg">Ensure you enter Sincere Information. You will be banned from the site if information provided below is found to be false! </h5>
                                 <hr>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-7">
-                                        {{ form.company|as_crispy_field }}
+                                <div class="row">
+                                    
+                                    
+                                    <div class="col-md text-center">
+                                        <input type="text" name="search_company" id="search_company">
                                     </div>
       
                                 </div>
 
-                                <div class="row justify-content-center">
+                                <div id="company_search_return_row" class="row font-weight-bold ">
+                                    <div class="col-md-4"> Click Here to Select ==> </div>
+                                    <div id="company_search_return" class="col-md text-primary">
+                                        
+                                    </div>
+                                    
+      
+                                </div>
+
+                                <div id="company_name_div" class="row ">
+                                    <div class="col-md-3"> Company Name </div>
+                                    <div class="col-md">
+                                        <input type="text" name="id_company" id="id_company">
+                                    </div>
+      
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-3"> {{form.rating.label}}  </div>
+                                    <div class="col-md">
+                                        {{ form.rating }}
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-md-3"> {{form.subject.label}}  </div>
                                     <div class="col-md-7">
-                                        {{ form.subject|as_crispy_field }}
+                                        {{ form.subject }}
                                     </div>
                                 </div>
                                                                 
-                                <div class="row justify-content-center">
-                                    <div class="col-md-7">
-                                        {{ form.review_text|as_crispy_field }}
+                                <div class="row ">
+                                    <div class="col-md-3"> {{form.review_text.label}}  </div>
+                                    <div class="col-md">
+                                        {{ form.review_text }}
                                     </div>
                                 </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-7">
-                                        {{ form.rating|as_crispy_field }}
-                                    </div>
-                                </div>
+                                
                                 <br>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-7">
-                                        <input class="btn btn-outline-primary" type="submit" value="Send Review">
+                                <div class="row text-center">
+                                    <div class="col-md">
+                                        <input class="btn btn-outline-primary" name="normal_review" type="submit" value="Send Review">
+                                    </div>
+                                </div>
+    
+                                
+                                <hr>
+                            </form>
+                            <!---Generic review form -->
+                            <form id="generic_review_form" name="generic_review_form" class="" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                                <h5 class="text-center reviewformheadingbg">Ensure you enter Sincere Information. You will be banned from the site if information provided below is found to be false! </h5>
+                                <hr>
+								<div class="row text-info text-center font-weight-bold">
+                                    <div class="col-md-2">
+                                        
+                                    </div>
+                                    <div class="col-md h4">
+                                        Company Details
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_name_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_name_g}}
+                                    </div>
+                                </div>
+                               
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_phone_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_phone_g }}
+                                    </div>
+                                </div>
+								<div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_email_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_email_g }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_website_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_website_g }}
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_address_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_address_g }}
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_logo_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_logo_g }}
+                                    </div>
+                                    
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_sector_g.label }} 
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_sector_g }} 
+                                    </div>
+                                    
+                                </div>
+                                    
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.company_state_g.label }} 
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.company_state_g }}
+                                    </div>
+                                </div>
+                                <div class="row text-info text-center font-weight-bold">
+                                    <div class="col-md-2">
+                                        
+                                    </div>
+                                    <div class="col-md h4">
+                                        Review Details
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.rating_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.rating_g }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.subject_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.subject_g }}
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.picture_evidence_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.picture_evidence_g }}
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_generic.review_text_g.label }}
+                                    </div>
+                                    <div class="col-md">
+                                        {{ form_generic.review_text_g }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row text-center">
+                                    <div class="col-md">
+                                        <input class="btn btn-outline-primary" name="generic_review" type="submit" value="Send Review">
                                     </div>
                                 </div>
     

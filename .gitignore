@@ -11,3 +11,6 @@ companyusers/templatetags/__pycache__
 users/__pycache__
 users/migrations
 users/templatetags/__pycache__
+blog/__pycache__
+blog/migrations/__pycache__
+blog/migrations

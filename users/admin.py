@@ -3,11 +3,18 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib import admin
 from .models import *
-from users.forms import ReviewForm
+from users.forms import ReviewForm, GenericReviewForm
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['user']
 admin.site.register(UserProfile, UserProfileAdmin)
+
+class GenericReviewAdmin(admin.ModelAdmin):
+    list_display = ('user_g', 'company_name_g', 'subject_g', 'review_text_g', 'date_added_g')
+    autocomplete_fields = ['user_g']
+    form = GenericReviewForm
+
+admin.site.register(GenericReview, GenericReviewAdmin)
 
 
 class ReviewAdmin(admin.ModelAdmin):
