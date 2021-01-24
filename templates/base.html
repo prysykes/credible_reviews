@@ -211,30 +211,41 @@
         <div class="row">
             <div class="col-md-4">
                 <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
-                    <li> 
-                        <a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} >Privacy Statement</a>
-                    </li>
-                    <li> 
-                        <a class="font-weight-bold text-white" href=" {% url 'careers' %}">Careers</a>
-                    </li>
                     <li> <i class="fas fa-phone-square-alt" style="font-size:20px; padding-right: 4px; color:#2196F3"></i></li>
                     <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:info@crediblereviews.ng">  info@crediblereviews.ng</a></li>
                 </ul>
             </div>
-            <div class="col-md-4 justify-content-end">
-                
-                <em style="font-size: small;"> Enter your email to receive regular updates, advice and tips: 
+            <div class="col-md-4">
+                <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
+                    <li> 
+                        <p class="font-weight-bold">Quick Links</p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} ">Privacy Statement</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'disclaimer' %} ">Disclaimer</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href="#">Blog</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'careers' %}">Careers</a></p>
+                    </li>
+                </ul>
+            </div>
+            <div style="font-size: small; list-style: none; padding: 0 0 0 25px;" class="col-md-4">
+                <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="btn btn-sm btn-primary" id="submit-newsletter" type="Submit" value="SEND">
+                </form><br>
+                <em style="font-size: small;"> Enter your email to receive regular updates, product advice and tips: 
                     <ul style="font-size: small; padding: 0 0 0 25px;">
                         <li> On how to stay safe online.</li>
                         <li> How to identify ilegitimate business</li>
-                        <li> Get Informations on recent security attacks</li>
+                        <li> Get Informations on predator businesses and fake products</li>
                     </ul>
 
                 </em>
-            </div>
-            <div class="col-md-4 justify-content-end">
-                <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="submit-button" id="submit-newsletter" type="Submit" value="SEND">
-                </form>
+
                 
             </div>
           </div>

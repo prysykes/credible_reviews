@@ -9,10 +9,26 @@ body{
 		
 }
 
+a{
+	text-decoration: none !important;
+}
+
 .borderrounded{
 	border-radius: 15px;
 }
 
+.faqansbg{
+	background-color: #d1d1d1;
+	font-size: small;
+	font-weight: 600;
+	padding: 20px;
+	font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.faqqs{
+	font-weight: 600 !important; 
+	font-size:medium !important;
+}
 .hrbig{
 	height:15px;
 	border-width:0;
@@ -25,6 +41,11 @@ body{
 .borderthickness{
 	border: 3px solid rgb(3, 3, 49) ;
 	
+}
+
+.howtouselist{
+	background-color:  rgb(3, 3, 49) !important;
+	color: white !important;
 }
 
 .divbgimg{
@@ -89,13 +110,17 @@ a{
 .plus{
     background: url('../icons/open.png') no-repeat 0 11px;
     padding: 10px 0 0 25px;
-    cursor: pointer;
+	cursor: pointer;
+	font-weight: 600 !important; 
+	font-size:medium !important;
 }
 
 .close {
     background: url('../icons/close.png') no-repeat 0 11px;
 	padding: 10px 0 0 25px;
 	cursor: pointer;
+	font-weight: 600 !important; 
+	font-size:medium !important;
 }
 
 #tm-search-display ul li {

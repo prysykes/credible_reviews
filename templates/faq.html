@@ -6,75 +6,76 @@
                     <div class="col-md-7 py-2 ">
                         <h1 class="h4 borderrounded font-weight-bold navbarbg  px-2 py-2 text-center"> Frequently Asked Questions</h1>
                         <!-- Slideshow container -->
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q1" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
-                        </div> 
-                        <div id="a1" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                          over 20 years now. I have been doing this for
-                          over 20 years now.
+                        <div class="row-md d-flex py-2 ">                   
+                            <p class="font-weight-bold text-center text-primary"> Most Questions have already been answered elaboratively on <a style="text-decoration:none; color: rgb(10, 5, 48);" href="{% url 'how-to-use' %}">How to Use</a>  page. Kindly visit it, you may find answers to your curiosity...</p>
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q2" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q1" class="plus faqqs"> How can I invite my customers to Review me on this site</h5>
                         </div> 
-                        <div id="a2" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                              over 20 years now. I have been doing this for
-                              over 20 years now.
+                        <div id="a1" class="row-md answers faqansbg borderrounded" > Kindly login to your Company User Account, on your profile page, click on 'Send Review Request to a Customer', enter the customers email and click send.
+                            The customer will receive an automated email and a link to our site to review your service.
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q3" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q2"  class=" faqqs plus"> How to I send a private mesage to a business listed here</h5>
                         </div> 
-                        <div id="a3" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                              over 20 years now. I have been doing this for
-                              over 20 years now.
+                        <div id="a2" class="row-md answers faqansbg borderrounded" > 
+                            Please login to your account as a Regular User, search for the company using its name on the search bar above. Once you see the company from the list, click it.
+                            You will be directed to the company page. You can now send your message there. <b><em>You must be logged in as a Regular User to do this</em></b>
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q4" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q3" class="faqqs plus"> Do you influence Reviews</h5>
                         </div> 
-                        <div id="a4" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
+                        <div id="a3" class="row-md answers faqansbg borderrounded " > 
+                            <a href="{% url 'index' %}"> Credible Reviews</a> will never influence customer Reviews for a particular company. This is to ensure equity and transparency which are the core values of our Company.                
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q5" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q4" class="faqqs plus"> How did my company end up here</h5>
                         </div> 
-                        <div id="a5" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
+                        <div id="a4" class=" row-md answers faqansbg borderrounded " > 
+                            <p>Your organization is currently listed on <a href="{% url 'index' %}"> Credible Reviews</a> because someone thought their experience with your company was worth sharing with the general public. We also carry out due diligence and do our best to insure Reviews are accurate and really a heartfelt experience. 
+                            If the information about your company is outdated or you need it improved, kindly <a href="{% url 'contact' %}"> Contact Us</a>.</p>
+                            <p> Having your company listed here is an advantage. You can enjoy the full benefits of <a href="{% url 'index' %}"> Credible Reviews</a> by <a href="{% url 'sign-up-company' %}">signing up</a> as a Company Users and claming the company. 
+                                This enable you to respond to reviews from User, receive and respond to private messages, increase sales, get seen by our millions of daily Users, manage your page and much more. Please visit our <a href="{% url 'how-to-use' %}">How to Use</a> page to find out more.</p>
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q6" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q5"  class="faqqs plus"> What if I disagree with a Review of my Company</h5>
                         </div> 
-                        <div id="a6" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
+                        <div id="a5" class="row-md answers faqansbg borderrounded " > 
+                            If you feel that a Review is false or fabricated by a competitor, kindly email us on: <a href="mailto:abuse@crediblereviews.ng">abuse@crediblereviews.ng</a>  with the username of the reviewer, subject and content of the review. 
+                            We will take appropriate actions once this is received.                        
+
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                                <h4 id="q7" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q6" class="faqqs plus"> Are there any hidden cost</h5>
                         </div> 
-                        <div id="a7" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                            over 20 years now. I have been doing this for
-                            over 20 years now.
+                        <div id="a6" class="row-md answers faqansbg borderrounded " > All the services at <a href="{% url 'index' %}"> Credible Reviews</a> are <b><em>FREE</em></b>. 
+                             
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q8" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                                <h5 id="q7" class="faqqs plus"> How can I list my business for free</h5>
                         </div> 
-                        <div id="a8" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                                over 20 years now. I have been doing this for
-                                over 20 years now.
+                        <div id="a7" class="row-md answers faqansbg borderrounded " > 
+                            Please <a href="{% url 'sign-up-company' %}">Sign Up</a> as a Company User, search the site using the search bar above to find your company. 
+                            If you company is already listted, kindly write us to link the company to your account. Else, use the link in your profile to list your company for free.
+                            Our <a href="{% url 'how-to-use' %}">How to Use </a> page has more details abouts this.
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q9" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q8"  class="faqqs plus"> How much does it cost to advertise here</h5>
                         </div> 
-                        <div id="a9" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                                over 20 years now. I have been doing this for
-                                over 20 years now.
+                        <div id="a8" class="row-md answers faqansbg borderrounded " > 
+                            Kindly send email to <a href="mailto:sales@crediblereviews.ng">sales@crediblereviews.ng</a> for details, offers and promotions on how to advertise on our site.
                         </div>
-                        <div class="col-md-6 d-flex py-2 ">                   
-                            <h4 id="q10" style="font-weight: 600; font-size:large" class="plus"> Tell us about yourself</h4>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q9"  class="faqqs plus"> What is the blog section about</h5>
                         </div> 
-                        <div id="a10" class="answers" style="padding: 20px;"> My name is Emeka Duru I am a software developer. I have been doing this for
-                                over 20 years now. I have been doing this for
-                                over 20 years now.
+                        <div id="a9" class="row-md answers faqansbg borderrounded " > Our Blog is for general discussion on the marketing space. You are also able to discover exotic places, businesses and products by visiting our blog.
+                            We also privide tips on online safety, predator companies and fake or bad products and or businesses.
+                        </div>
+                        <div class="row-md d-flex py-2 ">                   
+                            <h5 id="q10" class="faqqs plus"> Any guideline or rules for posting reviews and listing businesses</h5>
+                        </div> 
+                        <div id="a10" class="row-md answers faqansbg borderrounded" > Firstly, we are in no Way represented by any category of User on our site hence, their reviews and opinions are exclusively theirs and not in any way the opinion or view of <a href="{% url 'index' %}">Credible Reviews</a>.
+                            You are not allowed to post political and illicit contents like (fraudulent or misguiding reviews and pornographic contents). Failure to stick to this rule will get your account banned!
                         </div>
                     <!-- Slide show ends-->
                     </div>

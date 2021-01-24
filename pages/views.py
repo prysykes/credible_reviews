@@ -260,6 +260,28 @@ def online_safety(request):
     }
     return render(request, 'online-safety.html', context)
 
+def disclaimer(request):
+    reviews = Review.objects.all()
+    p = Paginator(reviews, 8)
+    
+    page_num = request.GET.get('page', 1)
+    try:
+        page = p.page(page_num)
+    except EmptyPage:
+        page = p.page(1)
+
+    page_range = p.page_range
+    
+    context = {
+        'reviews': page[::-1],
+        # used to reverse the out of the paginator list
+        'page': page,
+        
+        'page_range': page_range,
+    }
+    return render(request, 'disclaimer.html', context)
+
+
 def privacy_terms(request):
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)

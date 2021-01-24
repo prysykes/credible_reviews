@@ -6,18 +6,91 @@
                         <div class="col-md-7 py-2 ">
                         <h1 class="h4 font-weight-bold navbarbg borderrounded  px-2 py-2 text-center"> How To Use</h1>
                         <!-- Slideshow container -->
-                        <div class="row mx-2 text-wrap ">   <div class="abouttextbag borderrounded row px-3 py-3"> Credible Reviews is a social network for companies, businesses and customers across Nigeria. It does not only provide online presence for businesses and services in Nigeria but also provides an efficient and effective way for customers to evaluate products and services and record their experiences online for a wider audience to see. We believe that real experience whether good or bad is worth telling to guide other customers in their dealings with same company or business. 
+                        <div class="row mx-2 text-wrap ">   
+                                                <div class=" borderrounded row px-3 py-3"> 
+                                                        <h5 class="text-center reviewformheadingbg">Reviews Must be accurate and a personal experience. Anything short of this will get your account disabled. Please, <a href="{% url 'index' %}"> Credible Reviews </a>  cannot influence review. 
+                                                                
+                                                        </h5><br>
+                                                        
+                                                </div>
+                                                <div class="abouttextbag borderrounded row px-3 py-3"> 
+                                                <p>There are two categories of Users with different priviledges on the site. Please choose one that best suits your needs. </p><br>
+                                                <p>
+                                                        <ul class="list-group bg-primary">
+                                                                <li class="list-group-item howtouselist"><i class="fas fa-male text-info mx-2"></i><span class="font-weight-bold"> <a href="{% url 'sign-up' %}"> Regular Users </a> </span>
+                                                                </li>
+                                                                <li class="list-group-item howtouselist"><i class="fas fa-male text-info mx-2"></i>
+                                                                        <span class="font-weight-bold"> <a href="{% url 'sign-up-company' %}"> Company Users </a> </span>
+                                                                </li>
+                                                                <li class="list-group-item howtouselist">
+                                                                        <span class="font-weight-bold">Click either of the links to Sign Up now... </span>
+                                                                </li>
+                                                                
+                                                              </ul>
+                                                </p>
+                                                </div>
+                                               
+                                                 <hr>
+                                                <div class="px-3 row borderthickness borderrounded py-3"> 
+                                                        <p><span class="font-weight-bold">Regular Users </span> - You can review a company, send private messages to a company, edit your review and private messages.
+                                                        </p> 
+                                                        <p><span class="font-weight-bold">Company Users </span> - After creating this account, you can search the site to determine if your company is already listed on our site.
+                                                                 If it is, you can request for it to be linked to your account else, you can list your company from your profile. There is a link for that there. Once you have linked
+                                                                 your account to a company, you are now able to respond to reviews and private messages for that company.
+                                                        </p>
+                                                </div>
+                                               
+                                                <hr>
+                                                <div class=" borderrounded row px-3 py-3"> 
+                                                        <p><b>Private messages</b> are as the name implies, <b><em>Private</em></b>. They can not be seen by any other user or the general public except the company they are meant for. </p>
+                                                        <p><b>Reviews </b> are <b><em>Public </em></b> and can be seen by all categories of users and the general public (whether logged in or not).</p>
+                                                        <p>Please ensure you adopt one that best suits the situation. Thank you.</p>
+                                                        
                                                 </div>
                                                 <hr>
-                                                <div class="px-3 row borderthickness borderrounded py-3"> A typical advantage is the ability of companies to respond to reviews and be able to view the general statistics of their company to enable them to evaluate their overall performance, popularity and rate customer service. With thousands of visitors per day customers and users are rest assured that their reviews are seen by millions hence compelling these businesses to respond to them and ensure their reputation is intact. 
+                                                <div class="abouttextbag borderrounded row px-3 py-3">
+                                                        <p> To send a review, you <span class="font-weight-bold"> <em>must be logged in as a </em> Regular Users </span> to review a company. 
+                                                        You can review a company by searching the site for the company, clicking on it and sending a sincere review on the company's page.
+                                                        </p> 
+                                                        <p> You can also click the submit review button once your signed in, type the company name and send your sincere review.
+                                                                If the company does not appear, kindly select other, provide details of the company, type your review and send.
+                                                        </p>
                                                 </div>
                                                 <hr>
-                                                <div class="abouttextbag borderrounded row px-3 py-3"> Our Site also provides businesses, companies and service providers an online presence. These businesses are able to sign-up for free on our site, design their own page and immediately start recieving reviews and private messages from their cutomers.
-                                                This feature would enable small and medium scale business to have an active online page without the need for an expensive website.
+                                                <div class="px-3 borderthickness borderrounded row py-3">
+                                                        <p> <span class="font-weight-bold">  Company Users <em>are not allowed </em> </span> to review a company. 
+                                                                This is to ensure equity and transparency in the overall review process.
+                                                                </p> 
+                                                                <p> <span class="font-weight-bold">  Company Users </span> are only allowed to view and respond to reviews associated with their company alone. They are also able to respond to private messages from their customers on the site.
+                                                                </p> 
                                                 </div>
                                                 <hr>
-                                                <div class="px-3 borderthickness borderrounded row py-3"> Through our blog, we also provide current information on products and services in Nigeria including start-up and security breaches and tips for online safety with respect to payments and transactions.<br>
-                                                Our forum is free for all registered members. The forum provide a customer service-like platform for businesses and their customers to discuss products and services enabling companies carve a better future for themselves through customer responses and views and improving customer fulfillment. 
+                                                <div class="abouttextbag borderrounded row px-3 py-3"> 
+                                                        <p> To respond to reviews for a particular company, <span class="font-weight-bold">  Company Users </span> <em>MUST </em> have linked that company to their account if the company already exist on our site or list the company from their profile page.                                                                This is to ensure equity and transparency in the overall review process.
+                                                                </p> 
+                                                                <p> Once you list your company, you will get a notification that it is awaiting approval.
+                                                                         This is to enable us review your listing and insure accurate informations are provided.
+                                                                          Your listing will be approved once this validation process is over.
+                                                                </p> 
+                                                                <p> Once approved, <span class="font-weight-bold">  Regular Users </span> can now find the company on our site to review. You are also now able to respond to reviews and private messages for this company.
+                                                               </p> 
+                                                </div>
+                                
+                                                <hr>
+                                                <div class="px-3 borderthickness borderrounded row py-3"> 
+                                                        <p><span class="font-weight-bold">Regular Users </span> - Sending Reviews and Private Messages is totally <b><em>FREE</em></b>.
+                                                        </p> 
+                                                        <p>All <span class="font-weight-bold">Company Users </span> are automatically placed on Premium package once verified. This implies that you can enjoy all the benefits of Credible Reviews <b><em>at no cost</em></b>.
+                                                                You can list a company, ask your customers to review you my sending them an automated email, recieve and respond to private messages, receive and respond to Reviews on your company by our users all <b><em>at no cost</em></b>.
+                                                        </p> 
+                                                        <p><span class="font-weight-bold">Regular Users </span> - Sending Reviews and Private Messages is totally <b><em>FREE</em></b>.
+                                                        </p> 
+                                                        <p>
+                                                                <span class="font-weight-bold">Regular Users </span> - We expect absolute sincerity when writing reviews.    
+                                                        </p>
+                                                        <p>
+                                                                <a href="{% url 'index' %}"> Credible Reviews </a> <b><em>will not and cannot influence </em></b> customers reviews on your page hence, you are advised to respond to these reviews as soon as they come. To enable you biuld your reputation on the site and the business world in general.    
+                                                        </p>
                                                 </div>
  
                         </div>
