@@ -105,7 +105,7 @@ $(document).ready(function () {
     $("#id_average_rating, #id_company_name, #id_company_sector, #id_company_state").addClass('form-control');
 
     // adding bootsrap form-control class to company sign-up page
-    $("#id_username, #id_password1, #id_password2, #id_first_name, #id_last_name, #id_email, #id_phone, #id_designation, #id_profile_photo, #id_location").addClass('form-control');
+    $("#id_username, #id_password1, #id_password2, #id_first_name, #id_last_name, #id_email, #id_phone, #id_designation, #id_profile_photo, #id_location, #id_new_password1, #id_new_password2").addClass('form-control');
     
     // implementing delete message
     delete_message.click(function () {

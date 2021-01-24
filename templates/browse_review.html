@@ -78,7 +78,7 @@
                                                     {% endfor %}
                                                 <br>
                                                 
-                                                    <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas fa-heart"></i> {{review.like_set.all.count}} </span>  <br>
+                                                    <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas  fa-heart"></i> <span class="numberbg"> {{review.like_set.all.count}} </span> </span>  <br>
                                                 
                                                 {{review.user.first_name }} Reviewed: {{review.company}} </h6>
                                                 <p class="text-justify"><span class="font-weight-bold">{{review.subject}}</span> <br>
