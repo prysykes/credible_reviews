@@ -162,6 +162,9 @@
         
     </section>
     {% endblock section %}
+{% block filterdata %}
+
+{% endblock filterdata %} 
     
 {% block article %}
     <article  class="mt-2 bg-white mx-2">
@@ -209,7 +212,7 @@
 <div class="row">
     <div class="container-fluid mt-2 text-white py-2 bg-secondary">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
                     <li> <i class="fas fa-phone-square-alt" style="font-size:20px; padding-right: 4px; color:#2196F3"></i></li>
                     <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:info@crediblereviews.ng">  info@crediblereviews.ng</a></li>
@@ -218,7 +221,7 @@
             <div class="col-md-4">
                 <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
                     <li> 
-                        <p class="font-weight-bold">Quick Links</p>
+                        <p class="font-weight-bold">QUICK LINKS</p>
                     </li>
                     <li> 
                         <p><a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} ">Privacy Statement</a></p>
@@ -234,7 +237,7 @@
                     </li>
                 </ul>
             </div>
-            <div style="font-size: small; list-style: none; padding: 0 0 0 25px;" class="col-md-4">
+            <div style="font-size: small; list-style: none; padding: 0 0 0 25px;" class="col-md-5">
                 <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="btn btn-sm btn-primary" id="submit-newsletter" type="Submit" value="SEND">
                 </form><br>
                 <em style="font-size: small;"> Enter your email to receive regular updates, product advice and tips: 

@@ -3,6 +3,8 @@
 {% static 'images' as baseURL %}
 {% load crispy_forms_tags %}
 {% block filter %}
+{% load auth_extras %} 
+{% comment %} Used param_replace fuction in auth_extras to make paginator not to break with filter {% endcomment %}
         
         <div class="container-fluid border-0 text-justify">
                 <div class="row" id="tm-filter-button-div">
@@ -35,7 +37,7 @@
                                 </div>
                                 <br>
                                 <div class="col-md-1">
-                                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="reset" value="Clear">
+                                    <a href="{{request.META.HTTP_REFERER}}"><input class="btn btn-sm font-weight-bold btn-info mt-4" type="button" value="Back"></a>
                                 </div>
 
   
@@ -95,12 +97,12 @@
                                     </div>
                                     {% endif %}
                                     
-                                    <div  class="col-md-8 font-weight-bold">
+                                    <div  class="col-md-8 text-center font-weight-bold">
                                     <ul style="list-style-type: none;">
                                         
-                                    {% for l in  page.paginator.page_range %}
+                                    {% for l in  page.paginator.page_range %} 
                                     {% if forloop.counter <= 10 %}
-                                    <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                                    <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?{% param_replace page=forloop.counter %}">{{forloop.counter}} </a></li>
                                     {% endif %}
                                     {% endfor %}
                                     </ul>

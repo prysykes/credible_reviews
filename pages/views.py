@@ -320,13 +320,35 @@ def validate_business(request):
     }
     return render(request, 'validate-business.html', context)
 
-def company_list(request):
-    comps = Company.objects.all()
-    context = {
-        'comps': comps,
-    }
+def filter_result_display(request):
+    
+    if request.method == "GET":
+        term = request.GET.get('term') or ""
+    companies_list = Company.objects.all().filter(company_sector__icontains=term)
+    filtered_companies = CompanyFilter(
+        request.GET,
+        queryset=companies_list
+    )
+    company_list_new = filtered_companies.qs
+    paginated_company = Paginator(company_list_new, 9)
+    page_num = int(request.GET.get('page', 1))
 
-    return render(request, 'company_list.html', context)
+    try:
+        page = paginated_company.page(page_num)
+    except EmptyPage:
+        page = paginated_company.page(1)
+    
+    context = {
+        'filtered_companies': filtered_companies,
+        'paginated_company': paginated_company,
+        'page': page,
+        'term': term,
+    }
+    print(term)
+
+    return render(request, 'filter_result_display.html', context)
+    
+    
 
 
 
@@ -347,7 +369,7 @@ def featured_companies(request):
     context = {
         'filtered_companies': filtered_companies, 
         'paginated_company': paginated_company,
-        'page': page
+        'page': page,
 
     } 
     return render(request, 'featured-companies.html', context)

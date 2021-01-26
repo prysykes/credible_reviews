@@ -20,5 +20,5 @@ urlpatterns = [
     
     path('validate-business/', views.validate_business, name='validate-business'),
     path('featured-companies/', views.featured_companies, name='featured-companies'),
-    path('company_list/', views.company_list, name='company-list'),
+    path('filter_result_display/term', views.filter_result_display, name='filter_result_display'),
     ]

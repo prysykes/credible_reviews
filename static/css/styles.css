@@ -17,6 +17,20 @@ a{
 	border-radius: 15px;
 }
 
+.bigicon{
+	font-size: 50px;
+	
+	
+}
+
+.bgchangegray{
+	background-color: #d1d1d1;
+}
+
+.divfilter a {
+	color: rgb(3, 3, 49);
+}
+
 .faqansbg{
 	background-color: #d1d1d1;
 	font-size: small;

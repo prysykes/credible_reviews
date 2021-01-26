@@ -3,292 +3,243 @@
 {% load crispy_forms_tags %}
 
 
-
- {% block section %}  
-        <section class="mt-2 bg-white mx-2">
-            
-            <div class="container-fluid border-0 text-justify">
-                <div class="row">
-                    <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span> because we believe that behind every review, there is a heartfelt experience...</span>
-                </div>
-                <div class="row">
-                    <div class="tm-nav navbar-expand-lg col-md-2  navbar-light navbarbg py-2">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-                            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class=" nav  flex-column">
-                                
-                                <li class="nav-item">
-                                    <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
-                                </li>
-                                
-                                <li class="nav-item ">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">API Coming Soon</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        </div>
-                    
-                    <div class="col-md-7 py-2">
-                      <!-- card section-->
-                        <div class="card  mb-3  bg-light"> 
-                            <h1 class="h4 font-weight-bold navbarbg px-2 py-2 text-center">{{company.company_name}} </h1>
-                                
-                            <div style="background-color: rgb(172, 172, 173);" class="card-header border-top text-center text-white">
-                                <h5 class="card-title"><img src="{{company.company_logo.url}}" alt="Company Logo" width="250" height="300" class="img-thumbnail"></h5>
-                                <p style="font-size: xxx-large;" class="row h3 justify-content-center mb-2">
-                                    <span id="star_one" class="fa fa-star "></span>
-                                    <span id="star_two" class="fa fa-star "></span>
-                                    <span id="star_three" class="fa fa-star "></span>
-                                    <span id="star_four" class="fa fa-star "></span>
-                                    <span id="star_five" class="fa fa-star "></span>
-                                </p>
-                                <p class="h4 card-text text-white font-weight-bold ">Total Views: &nbsp;<span class="justify-content-right numberbg">{{company.company_views}}</span></p>
-                                
-                            </div>
-                            <div class="card-body">
-                                {% if request.user.is_authenticated %}
-                                {% if request.user|has_group:"regular"%}
-                                <p><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
-                                    &nbsp; &nbsp; <span class="font-weight-bold text-primary">{{request.user|capfirst}}</span>
-                                    &nbsp; &nbsp;<button id="tm-review-button" class="btn btn-primary font-weight-bold btn-sm">Add a Review</button>
-                                    {% if company.user.userprofilecompany.claimed and company.package_chosen == "Premium"%} 
-                                    <button id="tm_send_message_button" class="btn btn-sm btn-success btn-sm" >Send Message</button> 
-                                    {% endif %} 
-                                </p>
-                                {% if company.user.userprofilecompany.claimed and company.package_chosen == "Premium"%}
-                                    <div id="tm_send_message_div" class="formhidden" name="form_message_form">
-                                        <form action="" method="POST">{% csrf_token %}
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <p>{{ form_message_form.subject|as_crispy_field }}</p>
-                                                    
-                                                    <p>{{ form_message_form.message|as_crispy_field }}</p> 
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <input class="btn btn-primary btn-sm" type="submit" value="Send Message" name="form_message">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                {% endif %}
-                                <div id="tm-add-review-div" class="formhidden">
-                                    <form action="" method="POST" name="form_review_form">{% csrf_token %}
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <p>{{ form_review_form.rating|as_crispy_field }}</p>
-                                                <p>{{ form_review_form.subject|as_crispy_field }}</p>
-                                                <p>{{ form_review_form.review_text|as_crispy_field }}</p>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md">
-                                                <input class="btn btn-primary btn-sm" type="submit" value="Send Review" name="form_review">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                {% endif %}
-                            {% else %}
-                            <p class="text-danger text-center">
-                                <a   href="{% url 'user_login' %}" target="_blank" class="btn btn-sm btn-danger font-weight-bold"> login to review this company</a>
-                            </p>
-                            {% endif %}
-                                <p><span class="font-weight-bold">Name of Company:</span> {{company.company_name}} </p>                             
-                                <p><span class="font-weight-bold">Phone Number: </span> {{ company.company_phone }}</p>
-                                <p><span class="font-weight-bold"> Email Address: </span> {{ company.company_email }}</p>
-                                <p><span class="font-weight-bold"> Website: </span> <a href="{{ company.company_website }}" target="_blank">{{ company.company_website }} </a></p>                     
-                                <p><span class="font-weight-bold"> Description: </span> {{ company.company_description}}</p>
-                                <p><span class="font-weight-bold"> Address: </span> {{ company.company_address}}</p>
-                                <p><span class="font-weight-bold"> Credibiity Score: <i class="justify-content-right numberbg" id="tm_average">{{company.average_rating}} </i> </span> </p>
-                                <p><span class="font-weight-bold "> Total Reviews: <i class="justify-content-right numberbg"> {{ total_reviews }} </i></p>
-                                
-                                {% if company.premium %}
-                                <p> <span class="font-weight-bold text-danger"> {{company.company_name}}: Has claimed this page. </span> </p>
-                                {% endif %}
-                                <h5 class="text-center font-weight-bold">Latest Reviews</h5>
-                                <div class="row" id="tm-filter-button-div">
-                    <span class="font-weight-bold py-1 mx-auto text-info">
-                        <button id="tm-form-filter-button" class="btn btn-sm btn-outline-primary font-weight-bold">Click to Filter Reviews</button>
-                    </span>
-                </div>
-                <div class="row" id="tm-form-filter">
-                    <span class="font-weight-bold py-1 mx-auto text-info">
-                        <form action="" method="GET" id="tm-filter-form">
-                        
-                            <div class="row ">
-                                                            
-                                
-                                <div class="col-md-3">
-                                    {{ filtered_companyone_reviews.form.rating|as_crispy_field }}
-                                </div>
-                                <div class="col-md-5">
-                                    {{ filtered_companyone_reviews.form.date_added|as_crispy_field }}
-                                </div>
-                                
-                                <div class="col-md-2">
-                                    <div></div>
-                                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="submit" value="Filter">
-                                </div>
-                                <br>
-                                <div class="col-md-2">
-                                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="reset" value="Clear">
-                                </div>
-
-  
-                            </div>
-                            
-                        
-                        
-                    </form>
-                    </span>
-                </div>
-                                {% for review in companyone_reviews %}
-                                <div style="font-size: small;" class="row text-white bg-primary py-1">
-                                        
-                                            <div class="col-md-2 border-dark align-self-center">
-                                                <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
-                                            </div>
-                                            <div  class="col-md align-self-center font-weight-bold">
-                                                By: {{review.user.last_name}}&nbsp;{{review.user.first_name}} &nbsp; | &nbsp;  {% for item in "12345"|make_list %}
-                                                            <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
-                                                         {% endfor %} &nbsp; | &nbsp; <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas fa-heart"></i> {{review.like_set.all.count}} </span> 
-                                            </div>
-                                </div>
-                                                                     
-                                        
-                                            <div class="col  justify-content-start">
-                                                <p>{{ review.review_text }} <br>
-                                                {% for response in review.response_set.all %}
-                                                    {% if response.review == review %}
-                                                    <span style="font-size: small;" class="mx-2 font-italic"> <img src="{{response.review.company.company_logo.url}}" alt="Company Logo" width="35" height="35" class="rounded-circle"> {{response.review.company | capfirst }} responded: {{response}}</span><br>
-                                                    {% endif %}
-                                                    {% empty %}
-                                                    
-                                                    {% if request.user.is_authenticated and request.user|has_group:"company" or not request.user.is_authenticated %}
-                                                    
-                                                        <p style="color: darkred; font-size:x-small; font-weight:bold;"> Only Companies that have claimed thier page can respond to reviews >>> <a href="{% url 'user_login'%}"><button class="btn font-weight-bold btn-sm btn-outline-info"> login to respond to review </button></a></p>
-                                                    {% else %}
-                                                    <p style="color: darkred; font-size:x-small; font-weight:bold;"> Only Companies that have claimed thier page can respond to reviews </p>
-                                                    
-                                                    
-                                                    
-                                                    {% endif %}
-                                                    
-                                                    
-                                                {% endfor %}
-                                                </p>
-                                                                                    
-                                            </div>
-                                        
-                                        
+{% block featuredcomp %}
+                {% block blockslideshow %}
+    <div class="col-md-7 py-2 ">
+        <h1 class="h4 borderrounded font-weight-bold navbarbg  px-2 py-2 text-center"> Details</h1>
+        <!-- Slideshow container -->
+            <div style="background-color: rgb(172, 172, 173);" class="card-header border-top text-center text-white">
+                <h5 class="card-title"><img src="{{company.company_logo.url}}" alt="Company Logo" width="250" height="300" class="img-thumbnail"></h5>
+                <p style="font-size: xxx-large;" class="row h3 justify-content-center mb-2">
+                    <span id="star_one" class="fa fa-star "></span>
+                    <span id="star_two" class="fa fa-star "></span>
+                    <span id="star_three" class="fa fa-star "></span>
+                    <span id="star_four" class="fa fa-star "></span>
+                    <span id="star_five" class="fa fa-star "></span>
+                </p>
+                <p class="h4 card-text text-white font-weight-bold ">Total Views: &nbsp;<span class="justify-content-right numberbg">{{company.company_views}}</span></p>
+                
+            </div>
+            <div class="card-body">
+                {% if request.user.is_authenticated %}
+                {% if request.user|has_group:"regular"%}
+                <p><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
+                    &nbsp; &nbsp; <span class="font-weight-bold text-primary">{{request.user|capfirst}}</span>
+                    &nbsp; &nbsp;<button id="tm-review-button" class="btn btn-primary font-weight-bold btn-sm">Add a Review</button>
+                    {% if company.user.userprofilecompany.claimed and company.package_chosen == "Premium"%} 
+                    <button id="tm_send_message_button" class="btn btn-sm btn-success btn-sm" >Send Message</button> 
+                    {% endif %} 
+                </p>
+                {% if company.user.userprofilecompany.claimed and company.package_chosen == "Premium"%}
+                    <div id="tm_send_message_div" class="formhidden" name="form_message_form">
+                        <form action="" method="POST">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md">
+                                    <p>{{ form_message_form.subject|as_crispy_field }}</p>
                                     
-                                    {% empty %} <!-- checks to see if there are no reviews for the particular company-->
-                                    <div class="d-flex mx-5 border-bottom text-danger h6 "> This Company hasn't been reviewed yet... 
-                                        <hr>
-                                    </div>
-                                    {% endfor %}
-                                
-                            </div>
-                            
-                                <div class="row text-center">
-                                    {% if page.has_previous%}
-                                    <div class="col-md-2">
-                                       <a  href="{% url 'detail' company.company_slug %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
-                                    </div>
-                                    {% endif %}
-                                    
-                                    <div  class="col-md-8 font-weight-bold">
-                                    <ul style="list-style-type: none;">
-                                        
-                                    {% for l in  page.paginator.page_range %}
-                                    {% if forloop.counter <= 10 %}
-                                    <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
-                                    {% endif %}
-                                    {% endfor %}
-                                    </ul>
-                                    </div>
-                                    {% if page.has_next %}
-                                   
-                                    
-                                    <div class="col-md-2">
-                                        <a href="{% url 'detail' company.company_slug %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
-                                    </div>
-                                    {% endif %}
+                                    <p>{{ form_message_form.message|as_crispy_field }}</p> 
                                 </div>
-                            
-                            
-                        
-                                                                    
-                            
-                        </div>
-                      <!-- end card section-->
-                  
-                        
-                    
-                </div>
-                    <div class="col-md-3 py-2">
-                        <h2 class="h5 py-2 text-center navbarbg"> Highlights </h2>
-                        <div class="row mx-2">
-                            {% if company.sample_pics_one %}
-                            <div class="col-md-4">
                                 
-                                <img src="{{company.sample_pics_one.url}}" alt="sample pic one" width="80" height="80" class="img-thumbnail">
                             </div>
-                            {% endif %}
-                            {% if company.sample_pics_two %}
-                            <div class="col-md-4">
-                                <img src="{{company.sample_pics_two.url}}" alt="sample pic two" width="80" height="80" class="img-thumbnail">
+                            <div class="row">
+                                <div class="col-md">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="Send Message" name="form_message">
+                                </div>
                             </div>
-                            {% endif %}
-                            {% if company.sample_pics_three %}
-                            <div class="col-md-4">
-                                <img src="{{company.sample_pics_three.url}}" alt="sample pic three" width="80" height="80" class="img-thumbnail">
-                            </div>
-                            {% endif %}
-                            {% if company.sample_pics_four %}
-                            <div class="col-md-4">
-                                <img src="{{company.sample_pics_four.url}}" alt="sample pic four" width="80" height="80" class="img-thumbnail">
-                            </div>
-                            {% endif %}
-                            
-                        </div>
-                        <div class="row mx-2">
-                            <div class="col-md">
-                                <p>
-                                    Map location through Location given on the site
-                                </p>
-                            </div>
-                            
-                        </div>
+                        </form>
                     </div>
+                {% endif %}
+                <div id="tm-add-review-div" class="formhidden">
+                    <form action="" method="POST" name="form_review_form">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p>{{ form_review_form.rating|as_crispy_field }}</p>
+                                <p>{{ form_review_form.subject|as_crispy_field }}</p>
+                                <p>{{ form_review_form.review_text|as_crispy_field }}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <input class="btn btn-primary btn-sm" type="submit" value="Send Review" name="form_review">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            {% else %}
+            <p class="text-danger text-center">
+                <a   href="{% url 'user_login' %}" target="_blank" class="btn btn-sm btn-danger font-weight-bold"> login to review this company</a>
+            </p>
+            {% endif %}
+                <p><span class="font-weight-bold">Name of Company:</span> {{company.company_name}} </p>                             
+                <p><span class="font-weight-bold">Phone Number: </span> {{ company.company_phone }}</p>
+                <p><span class="font-weight-bold"> Email Address: </span> {{ company.company_email }}</p>
+                <p><span class="font-weight-bold"> Website: </span> <a href="{{ company.company_website }}" target="_blank">{{ company.company_website }} </a></p>                     
+                <p><span class="font-weight-bold"> Description: </span> {{ company.company_description}}</p>
+                <p><span class="font-weight-bold"> Address: </span> {{ company.company_address}}</p>
+                <p><span class="font-weight-bold"> Credibiity Score: <i class="justify-content-right numberbg" id="tm_average">{{company.average_rating}} </i> </span> </p>
+                <p><span class="font-weight-bold "> Total Reviews: <i class="justify-content-right numberbg"> {{ total_reviews }} </i></p>
+                
+                {% if company.premium %}
+                <p> <span class="font-weight-bold text-danger"> {{company.company_name}}: Has claimed this page. </span> </p>
+                {% endif %}
+                <h5 class="text-center font-weight-bold">Latest Reviews</h5>
+                <div class="row" id="tm-filter-button-div">
+    <span class="font-weight-bold py-1 mx-auto text-info">
+        <button id="tm-form-filter-button" class="btn btn-sm btn-outline-primary font-weight-bold">Click to Filter Reviews</button>
+    </span>
+</div>
+<div class="row" id="tm-form-filter">
+    <span class="font-weight-bold py-1 mx-auto text-info">
+        <form action="" method="GET" id="tm-filter-form">
+        
+            <div class="row ">
+                                            
+                
+                <div class="col-md-3">
+                    {{ filtered_companyone_reviews.form.rating|as_crispy_field }}
+                </div>
+                <div class="col-md-5">
+                    {{ filtered_companyone_reviews.form.date_added|as_crispy_field }}
+                </div>
+                
+                <div class="col-md-2">
+                    <div></div>
+                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="submit" value="Filter">
+                </div>
+                <br>
+                <div class="col-md-2">
+                    <input class="btn btn-sm font-weight-bold btn-info mt-4" type="reset" value="Clear">
+                </div>
+
+
             </div>
             
-        </section>
-        {% endblock section %}
-        {% block article %}
-        <article class="mt-2 bg-white mx-2">
         
-        </article>
-        {% endblock article %}
+        
+    </form>
+    </span>
+</div>
+                {% for review in companyone_reviews %}
+                <div style="font-size: small;" class="row text-white bg-primary py-1">
+                        
+                            <div class="col-md-2 border-dark align-self-center">
+                                <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="50" height="50" class="rounded-circle">
+                            </div>
+                            <div  class="col-md align-self-center font-weight-bold">
+                                By: {{review.user.last_name}}&nbsp;{{review.user.first_name}} &nbsp; | &nbsp;  {% for item in "12345"|make_list %}
+                                            <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
+                                            {% endfor %} &nbsp; | &nbsp; <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas fa-heart"></i> {{review.like_set.all.count}} </span> 
+                            </div>
+                </div>
+                                                        
+                        
+                            <div class="col  justify-content-start">
+                                <p>{{ review.review_text }} <br>
+                                {% for response in review.response_set.all %}
+                                    {% if response.review == review %}
+                                    <span style="font-size: small;" class="mx-2 font-italic"> <img src="{{response.review.company.company_logo.url}}" alt="Company Logo" width="35" height="35" class="rounded-circle"> {{response.review.company | capfirst }} responded: {{response}}</span><br>
+                                    {% endif %}
+                                    {% empty %}
+                                    
+                                    {% if request.user.is_authenticated and request.user|has_group:"company" or not request.user.is_authenticated %}
+                                    
+                                        <p style="color: darkred; font-size:x-small; font-weight:bold;"> Only Companies that have claimed thier page can respond to reviews >>> <a href="{% url 'user_login'%}"><button class="btn font-weight-bold btn-sm btn-outline-info"> login to respond to review </button></a></p>
+                                    {% else %}
+                                    <p style="color: darkred; font-size:x-small; font-weight:bold;"> Only Companies that have claimed thier page can respond to reviews </p>
+                                    
+                                    
+                                    
+                                    {% endif %}
+                                    
+                                    
+                                {% endfor %}
+                                </p>
+                                                                    
+                            </div>
+                        
+                        
+                    
+                    {% empty %} <!-- checks to see if there are no reviews for the particular company-->
+                    <div class="d-flex mx-5 border-bottom text-danger h6 "> This Company hasn't been reviewed yet... 
+                        <hr>
+                    </div>
+                    {% endfor %}
+                
+            </div>
+            
+                <div class="row text-center">
+                    {% if page.has_previous%}
+                    <div class="col-md-2">
+                        <a  href="{% url 'detail' company.company_slug %}?page={{page.previous_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-left"></i> </a>
+                    </div>
+                    {% endif %}
+                    
+                    <div  class="col-md-8 font-weight-bold">
+                    <ul style="list-style-type: none;">
+                        
+                    {% for l in  page.paginator.page_range %}
+                    {% if forloop.counter <= 10 %}
+                    <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    </ul>
+                    </div>
+                    {% if page.has_next %}
+                    
+                    
+                    <div class="col-md-2">
+                        <a href="{% url 'detail' company.company_slug %}?page={{page.next_page_number}}"> <i style="font-size: xx-large;" class="fas fa-angle-double-right"></i> </a>
+                    </div>
+                    {% endif %}
+                </div>
+            
+            
+        
+                                                    
+            
+        </div>
+{% endblock blockslideshow %}
+        <div  class="col-md-3 py-2">
+            <h2 class="h5 py-2 text-center borderrounded navbarbg"> Highlights </h2>
+                    <div class="row mx-2">
+                        {% if company.sample_pics_one %}
+                        <div class="col-md-4">
+                            
+                            <img src="{{company.sample_pics_one.url}}" alt="sample pic one" width="80" height="80" class="img-thumbnail">
+                        </div>
+                        {% endif %}
+                        {% if company.sample_pics_two %}
+                        <div class="col-md-4">
+                            <img src="{{company.sample_pics_two.url}}" alt="sample pic two" width="80" height="80" class="img-thumbnail">
+                        </div>
+                        {% endif %}
+                        {% if company.sample_pics_three %}
+                        <div class="col-md-4">
+                            <img src="{{company.sample_pics_three.url}}" alt="sample pic three" width="80" height="80" class="img-thumbnail">
+                        </div>
+                        {% endif %}
+                        {% if company.sample_pics_four %}
+                        <div class="col-md-4">
+                            <img src="{{company.sample_pics_four.url}}" alt="sample pic four" width="80" height="80" class="img-thumbnail">
+                        </div>
+                        {% endif %}
+                        
+                    </div>
+                    <div class="row mx-2">
+                        <div class="col-md">
+                            <p>
+                                Map location through Location given on the site
+                            </p>
+                        </div>
+                        
+                    </div>                
+        </div>
+    </div>
+{% endblock featuredcomp %}
+{% block article %}
+<article class="mt-2 bg-white mx-2">
+
+</article>
+{% endblock article %}
