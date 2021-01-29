@@ -14,3 +14,8 @@ users/templatetags/__pycache__
 blog/__pycache__
 blog/migrations/__pycache__
 blog/migrations
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

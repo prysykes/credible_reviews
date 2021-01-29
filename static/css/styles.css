@@ -20,7 +20,13 @@ a{
 .bigicon{
 	font-size: 50px;
 	
-	
+}
+
+.complogoword{
+	font-size: 120px;
+	font-family: 'Comic Sans MS', 'Trebuchet MS', Garamond, Courier, Verdana;
+	font-weight: 700;
+	color:rgb(10, 5, 48);
 }
 
 .bgchangegray{

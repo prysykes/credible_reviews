@@ -209,6 +209,11 @@ def profile_regular(request):
     reviews = Review.objects.filter(user=request.user)
     
     companies = []
+    for review in reviews:
+        company = review.company
+        if company not in companies:
+            companies.append(company)
+    total_companies = len(companies)
     paginated_reviews = Paginator(reviews, 3)
     page_num = int(request.GET.get('page', 1))
 
@@ -223,11 +228,7 @@ def profile_regular(request):
     then accesses the companies associated with the reviews
     and automatically add it to the companies list above.
     """
-    for review in reviews:
-        company = review.company
-        if company not in companies:
-            companies.append(company)
-    total_companies = len(companies)
+    
     total_reviews = len(reviews)
     
     

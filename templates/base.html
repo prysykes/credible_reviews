@@ -169,7 +169,7 @@
 {% block article %}
     <article  class="mt-2 bg-white mx-2">
         <div class= "row-md  justify-content-center ">
-            <h2 class="text-center navbarbgtop borderrounded justify-content-center">Latest Reviews - <span class="h4"> <a class="text-decoration-none" href=" {% url 'browse_review' %}"> Browse Reviews </a> to like and view number of likes... </span> </h2>
+            <h4 class="text-center navbarbgtop borderrounded justify-content-center">Latest Reviews - <span class="h4"> <a class="text-decoration-none" href=" {% url 'browse_review' %}"> Browse Reviews </a> to like and view number of likes... </span> </h4>
         </div>
         
         <div class="container-fluid border-0 text-center justify-content-center">
@@ -291,51 +291,51 @@
 
     <script>
         $(document).ready(function () {
-    var company_name = $("#id_company")
-    var search_company = $("#search_company")
-    var company_div = $("#company_name_div")
-    var company_search_return = $("#company_search_return")
-    var company_search_return_row = $("#company_search_return_row")
-    var generic_review_form = $('#generic_review_form')
-    company_search_return_row.hide()
-    company_div.hide()
-    generic_review_form.hide()
-    search_company.attr({
-        'autocomplete': 'off',
-        'placeholder': 'Type the company name here, select other if your company is not availble...',
-        'font-size': 'large',
-    })
+        var company_name = $("#id_company")
+        var search_company = $("#search_company")
+        var company_div = $("#company_name_div")
+        var company_search_return = $("#company_search_return")
+        var company_search_return_row = $("#company_search_return_row")
+        var generic_review_form = $('#generic_review_form')
+        company_search_return_row.hide()
+        company_div.hide()
+        generic_review_form.hide()
+        search_company.attr({
+            'autocomplete': 'off',
+            'placeholder': 'Type the company name here, select other if your company is not availble...',
+            'font-size': 'large',
+        })
 
-    search_company.keyup(function () { 
-        company_search_return_row.show(600)
-        
-        $.ajax({
-            type: "GET",
-            url: "{% url 'submit_review' %}",
-            data: {
-                'search_text': search_company.val()
-                    },
-            dataType: "json",
-            success: successdata
+        search_company.keyup(function () { 
+            company_search_return_row.show(600)
+            
+            $.ajax({
+                type: "GET",
+                url: "{% url 'submit_review' %}",
+                data: {
+                    'search_text': search_company.val()
+                        },
+                dataType: "json",
+                success: successdata
+            });
+            
         });
-        
-    });
 
-    function successdata(data, textStatus, jqXHR) {
-    
-    company_search_return.text(data)
-    }
-    company_search_return_row.click(function(){
-        if(company_search_return.text() != "Other"){
-            company_div.show(600)
-            text = company_search_return.text()
-            company_name.val(text)
-        }else{
-            $('#review-form').hide()
-            generic_review_form.show()
-        }
+        function successdata(data, textStatus, jqXHR) {
         
-    })
+            company_search_return.text(data)
+        }
+        company_search_return_row.click(function(){
+            if(company_search_return.text() != "Other"){
+                company_div.show(600)
+                text = company_search_return.text()
+                company_name.val(text)
+            }else{
+                $('#review-form').hide()
+                generic_review_form.show()
+            }
+            
+        })
 });
 
 

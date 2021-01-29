@@ -8,8 +8,12 @@
     <div class="col-md-7 py-2 ">
         <h1 class="h4 borderrounded font-weight-bold navbarbg  px-2 py-2 text-center"> Details</h1>
         <!-- Slideshow container -->
-            <div style="background-color: rgb(172, 172, 173);" class="card-header border-top text-center text-white">
+            <div  class="card-header border-top borderrounded bgchangegray text-center ">
+            {% if company.company_logo %}
                 <h5 class="card-title"><img src="{{company.company_logo.url}}" alt="Company Logo" width="250" height="300" class="img-thumbnail"></h5>
+            {% else %}
+                <h5 class="complogoword card-title">{{company.company_name|slice:2|lower}}</h5>
+            {% endif %}   
                 <p style="font-size: xxx-large;" class="row h3 justify-content-center mb-2">
                     <span id="star_one" class="fa fa-star "></span>
                     <span id="star_two" class="fa fa-star "></span>
@@ -17,7 +21,7 @@
                     <span id="star_four" class="fa fa-star "></span>
                     <span id="star_five" class="fa fa-star "></span>
                 </p>
-                <p class="h4 card-text text-white font-weight-bold ">Total Views: &nbsp;<span class="justify-content-right numberbg">{{company.company_views}}</span></p>
+                <p class="h4 card-text font-weight-bold ">Total Views: &nbsp;<span class="justify-content-right numberbg">{{company.company_views}}</span></p>
                 
             </div>
             <div class="card-body">
@@ -52,7 +56,7 @@
                 <div id="tm-add-review-div" class="formhidden">
                     <form action="" method="POST" name="form_review_form">{% csrf_token %}
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md">
                                 <p>{{ form_review_form.rating|as_crispy_field }}</p>
                                 <p>{{ form_review_form.subject|as_crispy_field }}</p>
                                 <p>{{ form_review_form.review_text|as_crispy_field }}</p>
@@ -204,6 +208,7 @@
         <div  class="col-md-3 py-2">
             <h2 class="h5 py-2 text-center borderrounded navbarbg"> Highlights </h2>
                     <div class="row mx-2">
+                    <p><h6 class="mx-auto font-weight-bold text-center">Gallery - click to expand</h6></p>
                         {% if company.sample_pics_one %}
                         <div class="col-md-4">
                             
@@ -228,7 +233,9 @@
                         
                     </div>
                     <div class="row mx-2">
+                    
                         <div class="col-md">
+                            <p><h6 class="mx-auto font-weight-bold text-center">Google Map Location</h6></p>
                             <p>
                                 Map location through Location given on the site
                             </p>

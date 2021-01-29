@@ -84,7 +84,7 @@ $(document).ready(function () {
     // })
     
     // add bootsrap form control for submit review fields
-   $("#id_company, #search_company, #id_subject, #id_review_text").addClass('form-control')
+   $("#id_company, #search_company, #id_message, #id_subject, #id_review_text").addClass('form-control')
 
    // add bootsrap form control for  submit generic review fields
     $("#id_company_name_g, #id_subject_g, #id_company_phone_g, #id_company_email_g, #id_review_text_g, #id_company_address_g, #id_company_state_g, #id_company_sector_g, #id_picture_evidence_g, #id_company_logo_g, #id_company_website_g, #id_rating_g").addClass('form-control')
