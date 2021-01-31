@@ -1,38 +1,51 @@
 {% load auth_extras %}
     {% block navtop %}
         
-            <nav class=" navbarbgtop row navbar sticky-top navbar-expand-lg ">
-                    <div class="col-md">
+            <nav class=" navbarbgtop row navbar sticky-top navbar-expand-md ">
+                    <div class="col-xs-2">
                         <div class="container-fluid">
-                            <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/logo.png" alt="Credible Reviews Logo" width="90" height="80"></a>
+                            <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/images/logo.png" alt="Credible Reviews Logo" width="60" height="60"></a>
                             
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                            </button>
+                            
                         </div>
                     </div>
-                        <div class="col-md-8">      
-                        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <div class="col-md d-flex">      
+                        <div class=" navbar-collapse justify-content-center" >
                             <ul class="nav nav-pills ">
-                                <li class="nav-item">
-                                <a class="nav-link font-weight-bold" href="{% url 'how-to-use' %}"><i class="fas fa-cog" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>How to Use <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href="{% url 'contact' %}"><i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Contact Us</a>
-                                </li>
+                                
                                 {% if request.user.is_authenticated %}
                                 {% if request.user|has_group:"regular"%}
-                                {% block greetingregular %}                        
+                                {% block greetingregular %} 
                                     <li class="nav-item" >
-                                        <a class="nav-link font-weight-bold" href="{% url 'profile_regular' %}"></i>Back to Profile Page</a>
-                                    </li>
-                                    <li class="nav-item" >
-                                        <a class="nav-link font-weight-bold" href="{% url 'logoutpage_regular' %}"><img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle">&nbsp;Logout</a>
-                                    </li>
+                                    <div class="dropdown ">
+                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{request.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; Profile
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'profile_regular' %}">Back to Profile</a>
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'logoutpage_regular' %}">LogOut</a>
+                                        </div>
+                                    </div>
+                                                                                        
+                                    </li>                       
+                                
                                 {% endblock greetingregular %}
                                 {% elif request.user|has_group:"company"%}
-                                {% block greetingcompany %}                        
+                                {% block greetingcompany %}
                                     <li class="nav-item" >
+                                    <div class="dropdown ">
+                                        <button style="color: #007bff;" class="btn dropdown-toggle font-weight-bold" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{request.user.userprofilecompany.profile_photo.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; Back to Profile
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'profile_company' %}">Back to Profile</a>
+                                            <a class="dropdown-item font-weight-bold text-primary" href="{% url 'logoutpage_company' %}">Logout</a>
+                                        </div>
+                                    </div>
+                                                                                        
+                                    </li>                        
+                                    <li class="nav-item" >
+
                                         <a class="nav-link font-weight-bold" href="{% url 'profile_company' %}"></i>Back to Profile Page</a>
                                     </li>
                                     <li class="nav-item" >
@@ -55,10 +68,10 @@
                                     </div>
                                                                                         
                                 </li>
-                              
+                            
                                 <li class="nav-item" >
                                     <a class="nav-link font-weight-bold" href="{% url 'user_login' %}"><i class="fa fa-sign-in" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Login</a>
-                                  
+                                
                                 </li>
                             {% endif %}
                                 
@@ -67,7 +80,7 @@
                             </ul>
                         </div>
                     </div>  
-                    <div class="col-md-3">  
+                    <div class="col-lg-3">  
                         <div class="justify-content-end">
                             
                             <input autocomplete="off" id="business" name="company_name" class="form-control " type="search" size="28" placeholder="search for a company or business" aria-label="Search">&nbsp;

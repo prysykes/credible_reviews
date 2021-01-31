@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% include "nav_bar.html" %}
+
+{% include "pagination.html" with page=page_obj %}
+
+{% block greeting %}                        
+    <li class="nav-item" >
+        <a class="nav-link font-weight-bold" href="{% url 'contact' %}"><i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i>Contact Us</a>
+    </li>
+{% endblock greeting %}
+
+{% block section %}  
+        <section class="mt-2 bg-white mx-2">
+            
+            <div class="container-fluid border-0 text-justify">
+                <div class="row navbarbg justify-content-center" >
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white" >
+                        <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
+                            <ul class="nav bg-light nav-pills ">
+                                <li class="nav-item ">
+                                <a class="nav-link font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item" >
+                                <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                                
+                                </li>
+                                                        
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
+                                </li>
+                                <li class="nav-item" >
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">API Coming Soon</a>
+                                </li>
+                                
+                                <li class="nav-item" >
+                                    <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
+                                </li>
+                                                        
+                                <li class="nav-item" id="tm-search-pane" >                            
+                                    <form class="form-inline  my-2 my-lg-0" >
+                                        <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
+                                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                                </li>
+                                
+                                            
+                            </ul>
+                        
+                        </div>
+                    </nav>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-8 ">
+                        <div class="row-md mx-auto">
+                        <h2 class="h5 px-2 py-2 text-center borderrounded navbarbg">Blog Posts!</h2>
+                            <div class="row px-2 py-2 mx-auto text-center">
+                                {% for post in posts %}
+                                    <div class="card blogcard py-2 px-2" >
+                                        <img src="\media\blog_images\crowd1.png" class="card-img-top" width="100" height="300" alt="post image">
+                                        <div class="card-body">
+                                        <h6 class=" card-title">{{post.title}}</h6>
+                                        <p class="card-text text-justify">{{post.content|slice:200}}</p>
+                                        <a href="#" class="text-primary">read more>> </a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class=" pagination row px-2 py-2 mx-auto text-center">
+                                
+                                    {% if is_paginated %}
+                                        <ul class="pagination">
+                                            {% if page_obj.has_previous %}
+                                            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                                            {% else %}
+                                            <li class="disabled"><span>&laquo;</span></li>
+                                            {% endif %}
+                                            {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                            {% else %}
+                                                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% if page_obj.has_next %}
+                                            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                            {% else %}
+                                            <li class="disabled"><span>&raquo;</span></li>
+                                            {% endif %}
+                                        </ul>
+                                    {% endif %}
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4  mb-2">
+                        <h2 class="h5 px-2 py-2 text-center borderrounded navbarbg">Advertise here... Get noticed!</h2>
+                            
+                    </div>
+                    
+                </div>
+            
+            </div>
+                    
+            
+            
+        </section>
+        {% endblock section %}
+        {% block article %}
+        
+        {% endblock article %}
+        

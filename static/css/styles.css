@@ -346,7 +346,13 @@ text-decoration: none;
 	a:active { color:#7476b4; text-decoration: underline; }
 }
 
-
+.blogcard{
+	width: 23rem;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border-radius: 15px !important;
+	border: 2px;
+}
 .privacySpan{
 	color: royalblue;
 	cursor: pointer;
@@ -355,3 +361,37 @@ text-decoration: none;
 .list-style{
 	list-style-type: none;
 }
+
+
+
+/* begin Navbar Over-right */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        
+        
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        height: 100%;
+    }
+
+    .navbar-collapse.collapsing {
+        height: 100%;
+        left: -75%;
+        transition: height 0s ease;
+    }
+
+    .navbar-collapse.show {
+        height: 100%;
+        left: 0;
+        transition: left 400ms ease-in-out;
+    }
+
+    .navbar-toggler.collapsed ~ .navbar-collapse {
+        transition: left 400ms ease-in;
+    }
+}
+
+/* end Navbar Over-right */
+

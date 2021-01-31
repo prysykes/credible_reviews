@@ -52,7 +52,7 @@
                 <div class="row  container-fluid border-0 ">
                         <div class="col-md py-2 text-center">
                             <p class="font-weight-bold">
-                            <a class="text-decoration-none" href="{% url 'contact' %}">Contact Us </a> if the information here is erronous or you want your company featured on this page. <br>
+                            <a class="text-decoration-none" href="{% url 'contact' %}">Contact Us </a> if you feel the review is against our ethic and <a href="{% url 'privacy-terms' %}"> terms of use</a>. <br>
                             {% for error in messages %}
                                     <span class="text-danger">{{ error }}</span>
                                 {% endfor %}
@@ -72,46 +72,68 @@
                             {% for review in page %}
                             <div class="col-md-3 px-2 py-2">
                                             <div  class="col-md text-wrap ">
-                                                <h6 style="font-size:x-small;" class="font-weight-bold borderrounded navbarbg px-2 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; 
+                                                <h6 style="font-size:x-small;" class="font-weight-bold borderrounded navbarbg px-1 py-1"> <img src="{{review.user.userprofile.profile_picture.url}}" alt="profile_pic" width="30" height="30" class="rounded-circle"> &nbsp; 
                                                     {% for item in "12345"|make_list %}
                                                     <span style="font-size: large;" class="fa fa-star {% if forloop.counter <= review.rating %}checked{% endif %}"></span>
                                                     {% endfor %}
                                                 <br>
                                                 
-                                                    <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas  fa-heart"></i> <span class="numberbg"> {{review.like_set.all.count}} </span> </span>  <br>
+                                                    
                                                 
-                                                {{review.user.first_name }} Reviewed: {{review.company}} </h6>
-                                                <p class="text-justify"><span class="font-weight-bold">{{review.subject}}</span> <br>
+                                                {{review.user.first_name }} Reviewed: {{review.company}} &nbsp; <span style="font-size: small; font-family: 'Courier New', monospace;" class="justify-content-end"> <i style="color: darkorange;" class="fas  fa-heart"></i> <span class="numberbg"> {{review.like_set.all.count}} </span> </span></h6>
+                                                <p class="text-center mx-1"><span class="font-weight-bold">{{review.subject}}</span> <br>
                                                 
-                                                {{review.review_text|slice:":200"}} <br>
-                                                    {% if request.user.is_authenticated and request.user|has_group:"regular" %} 
-                                                        
-                                                        
-                                                            
-                                                            
-                                                        <a href="{% url 'likes' review.id %}"><i style="font-size: large;" id="tooltip" class="btn btn-sm fas fa-thumbs-up text-primary"></i></a> 
-                                                            
-                                                            
-                                                        
-                                                    {% elif request.user.is_authenticated and request.user|has_group:"company"%} 
-                                                        
-                                                        <span style="font-size: x-small; color:darkred; font-weight:800;">Company users can't like Reviews.</span> 
-                                                            
-                                                    {% else %} 
-                                                        <span style="font-size: x-small; color:darkred; font-weight:800;">Please Login as Regular User to Like Reviews.</span> 
-                                                    {% endif %} <br> 
-                                                    <span id="tooltiptext">Click to Like Review</span> 
+                                                {{review.review_text}}
+                                                    
                                                     
                                                 </p>
+                                            
+                                            <div class="row ">
+                                                {% if request.user.is_authenticated and request.user|has_group:"regular" %}
+                                                    <div class="row  px-1  mx-1">
+
+                                                
+                                                        <div class="col-md-2 ">
+                                                            <a href="{% url 'likes' review.id %}"><i  id="tooltip" class="btn btn-sm fas fa-thumbs-up "></i></a>
+                                                        </div>
+                                                        <div class="col-md-8 ">
+                                                            <i  id="share_button" class="btn btn-sm fas fa-share-alt likefont"></i> 
+                                                        </div>
+                                                        <div class="col-md-2 ">
+                                                            <a href="#"><i  id="" class="btn btn-sm fas fa-exclamation-triangle likefont"></i></a> 
+                                                        </div>
+                                                        <div class="row">
+                                                            <div style="font-size: larger;" id="social_share" class="col-md mt-2 font-weight-bold"><i style="color: #3b5998;" class="fab fa-facebook-f mr-3"></i><i style="color: #e1306c;" class="fab fa-instagram mr-3"></i><i style="color: #1da1f2;" class="fab fa-twitter mr-3"></i><i style="color: #25d366;" class="fab fa-whatsapp"></i></div>
+                                                        </div>
+                                                    </div>
+                                                        
+                                                {% elif request.user.is_authenticated and request.user|has_group:"company"%}
+                                                    <div class="row px-1 mx-2 ">
+                                                        <span style="font-size: x-small; color:darkred; font-weight:800;">Company users can't like Reviews.</span>
+                                                    </div>
+                                                      
+                                                {% else %}
+                                                    <div class="row px-1 mx-2">
+                                                        <span style="font-size: x-small; color:darkred; font-weight:800;">Please Login as Regular User to Like Reviews.</span>
+                                                    </div>
+                                                     
+                                                {% endif %}<br> 
+                                                   
+                                                <div class="col-md">
+                                                   <br> 
+                                                    <span id="tooltiptext">Click to Like Review</span>
+                                                </div>
                                             </div>
                                 
                                         </div>
+                                    </div>
                             {% empty %}
-                            <div class="card border mr-2 text-danger font-weight-bold" style="width: 100%; height: 100%">
-                                
-                                    <p> ooops! No Review with such details, please modify your search...</p>
-                                
-                            </div>
+                                <div class="card border mr-2 text-danger font-weight-bold" style="width: 100%; height: 100%">
+                                    
+                                        <p> ooops! No Review with such details, please modify your search...</p>
+                                    
+                                </div>
+                        </div>
                             {% endfor %} 
                             
                                                     

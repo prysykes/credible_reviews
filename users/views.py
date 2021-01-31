@@ -5,7 +5,7 @@ from .forms import SignUpFormRegular, UserProfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, Review, Response, Like
+from .models import UserProfile, Review, Response, Like, Flag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
@@ -462,6 +462,24 @@ def settings_regular(request):
 @login_required(login_url='user_login')
 @allowed_users_regular(allowed_roles=['regular'])
 def likes(request, review_id):
+    review_to_like = get_object_or_404(Review, id=review_id)
+    
+    try:
+        if get_object_or_404(Like, review=review_to_like, user=request.user):
+            messages.error(request, "You can't like a review more than once!")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            
+    except:
+        user_like = request.user
+        like = Like() #instantiates a like
+        like.review = review_to_like # accesses a like attribute
+        like.user = user_like # accesses a like attribute
+        like.like_count +=1 # adds one to the like count
+        like.save() # saves the like
+
+@login_required(login_url='user_login')
+@allowed_users_regular(allowed_roles=['regular'])
+def flag(request, review_id):
     review_to_like = get_object_or_404(Review, id=review_id)
     
     try:

@@ -40,3 +40,9 @@ class LikeAdmin(admin.ModelAdmin):
 admin.site.register(Like, LikeAdmin)
 
 
+class FlagAdmin(admin.ModelAdmin):
+    list_display = ['user', 'review', 'flag_count']
+
+admin.site.register(Flag, FlagAdmin)
+
+

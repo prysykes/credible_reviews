@@ -208,30 +208,40 @@
         <div  class="col-md-3 py-2">
             <h2 class="h5 py-2 text-center borderrounded navbarbg"> Highlights </h2>
                     <div class="row mx-2">
-                    <p><h6 class="mx-auto font-weight-bold text-center">Gallery - click to expand</h6></p>
+                        <p><h6 class="mx-auto font-weight-bold text-center">Gallery - click to expand</h6></p>
                         {% if company.sample_pics_one %}
                         <div class="col-md-4">
                             
-                            <img src="{{company.sample_pics_one.url}}" alt="sample pic one" width="80" height="80" class="img-thumbnail">
+                            <a data-fancybox="gallery" href="{{company.sample_pics_one.url}}"><img src="{{company.sample_pics_one.url}}" alt="sample pic one" width="80" height="80" class="img-thumbnail"></a>
                         </div>
+                        
                         {% endif %}
                         {% if company.sample_pics_two %}
                         <div class="col-md-4">
-                            <img src="{{company.sample_pics_two.url}}" alt="sample pic two" width="80" height="80" class="img-thumbnail">
+                            <a data-fancybox="gallery" href="{{company.sample_pics_two.url}}"><img src="{{company.sample_pics_two.url}}" alt="sample pic two" width="80" height="80" class="img-thumbnail"></a>
                         </div>
                         {% endif %}
                         {% if company.sample_pics_three %}
                         <div class="col-md-4">
-                            <img src="{{company.sample_pics_three.url}}" alt="sample pic three" width="80" height="80" class="img-thumbnail">
+                            <a data-fancybox="gallery" href="{{company.sample_pics_three.url}}"><img src="{{company.sample_pics_three.url}}" alt="sample pic three" width="80" height="80" class="img-thumbnail"></a>
                         </div>
                         {% endif %}
                         {% if company.sample_pics_four %}
                         <div class="col-md-4">
-                            <img src="{{company.sample_pics_four.url}}" alt="sample pic four" width="80" height="80" class="img-thumbnail">
+                            <a data-fancybox="gallery" href="{{company.sample_pics_four.url}}"><img src="{{company.sample_pics_four.url}}" alt="sample pic four" width="80" height="80" class="img-thumbnail"></a>
                         </div>
                         {% endif %}
                         
                     </div>
+                    {% if not company.sample_pics_one and not company.sample_pics_two and not company.sample_pics_three and not company.sample_pics_four %}
+                        <div class="row mx-2">
+                            <p class="col-md mx-auto">
+                            
+                                No extra images for {{company.company_name}}
+                            </p>
+                        
+                        </div>
+                    {% endif %}
                     <div class="row mx-2">
                     
                         <div class="col-md">
