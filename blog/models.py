@@ -41,7 +41,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=80)
+    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_comments')
     email = models.EmailField()
     content = models.TextField(verbose_name='Your Comment')
     created = models.DateTimeField(auto_now_add=True)

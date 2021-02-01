@@ -82,22 +82,11 @@
                                     <div id="comment_form" class=" hide_form row px-2 py-2 mt-1  mx-4 ">
                                   
                                         <form action="" method="POST">{% csrf_token %}
-                                            
                                             <div class="row-md">
-                                                <div class="col-md-4">
-                                                    {{ form.name.label }}:
-                                                </div>
                                                 <div class="col-md">
-                                                    {{ form.name }}
+                                                    You are commenting as <span class="font-weight-bold">{{ request.user }} </span>:
                                                 </div>
-                                            </div>
-                                            <div class="row-md">
-                                                <div class="col-md-4">
-                                                    {{ form.email.label }}:
-                                                </div>
-                                                <div class="col-md">
-                                                    {{ form.email }}
-                                                </div>
+                                                
                                             </div>
                                             <div class="row-md">
                                                 <div class="col-md-4">
@@ -121,7 +110,7 @@
                                     <div class="row px-2 py-2 mt-1 mx-4 ">
                                         
                                             <div class="col-md">   
-                                                <p>{{ comment.name }}</p>
+                                                <p style="font-size:smaller; color:white;" class="numberbg">{{ comment.name.last_name }},&nbsp;{{ comment.name.first_name }}&nbsp;on:&nbsp;<span >{{ comment.created }}</span></p>
                                                 <p>{{ comment.content }}</p>
                                             </div>
                                         

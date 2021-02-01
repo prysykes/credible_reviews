@@ -25,7 +25,11 @@ def post_detail(request, post_slug):
         if form.is_valid:
             data = form.save(commit=False)
             data.post = post
+            data.name = request.user
+            data.email = request.user.email
             print(data.post)
+            print(data.name)
+            print(data.email)
             data.save()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             
