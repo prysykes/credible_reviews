@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import Post, Comment
 from django.views.generic import ListView, DetailView
 
-from .forms import CommentForm
+from .forms import CommentForm, CommentReplyForm
 
 # Create your views here.
 
@@ -17,13 +17,13 @@ class PostListView(ListView):
 def post_detail(request, post_slug):
     post = get_object_or_404(Post, post_slug=post_slug)
     comments = post.comments.filter(active=True)
-    form = CommentForm()
+    form_comment = CommentForm()
     
 
     if request.method == 'POST':
-        form = CommentForm(request.POST or None)
-        if form.is_valid:
-            data = form.save(commit=False)
+        form_comment = CommentForm(request.POST or None)
+        if form_comment.is_valid:
+            data = form_comment.save(commit=False)
             data.post = post
             data.name = request.user
             data.email = request.user.email
@@ -38,11 +38,14 @@ def post_detail(request, post_slug):
 
     context = {
         'post': post,
-        'form': form,
+        'form_comment': form_comment,
         'comments': comments,
         
     }
 
     return render(request, 'blog/post_detail.html', context)
+
+def reply_comment(request):
+    pass
 
    

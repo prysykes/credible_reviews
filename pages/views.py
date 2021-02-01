@@ -9,7 +9,7 @@ from django.conf import settings
 from .forms import ContactForm
 
 # Create your views here.
-from django.shortcuts import render, redirect, get_list_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from companies.models import Company
 from users.models import Review, Like
 from .forms import NewsletterForm
@@ -83,21 +83,27 @@ def about(request):
     }
     return render(request, 'about.html', context)
 
-""" def submit_review(request):
-    form = ReviewForm()
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('review-submitted')
-    context = {
-        'form': form
-    }
-    return render(request, 'submit-review.html', context) """
-
-def browse_review(request):
+def browse_review(request, *args, **kwargs):
     likes = Like.objects.all()
     review_list = Review.objects.all()
+    if request.is_ajax() and request.method == "GET" and request.GET.get('search_text') != "":
+        term = request.GET.get('search_text')
+        
+
+        try:
+            company = get_object_or_404(Company, company_name__icontains=term, approved=True)
+            company_name = {
+                'name': company.company_name,
+                'id': company.id,
+                'not_found': "Company does not exist, please refine search..."
+            }
+        except:
+            company_name = {
+                'name': "Company does not exist, please refine search..."
+            }
+
+        return JsonResponse(company_name, safe=False)
+
     filtered_reviews = ReviewFilter(
         request.GET,
         queryset=review_list.order_by('-date_added'),

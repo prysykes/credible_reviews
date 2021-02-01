@@ -16,3 +16,11 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'content')
 
 admin.site.register(Comment, CommentAdmin)
+
+
+class ReplyCommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'comment', 'created', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('name', 'email', 'reply')
+
+admin.site.register(ReplyComment, ReplyCommentAdmin)

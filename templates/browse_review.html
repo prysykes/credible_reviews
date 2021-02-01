@@ -5,6 +5,7 @@
 {% load crispy_forms_tags %}
 
 
+
 {% block filter %}
         
         <div class="container-fluid border-0 text-justify">
@@ -35,8 +36,17 @@
                         </div>
                         <br>
                         <div class="col-md-1">
-                            <input class="btn btn-sm font-weight-bold btn-info mt-4" type="reset" value="Clear">
+                            <a href="{{request.META.HTTP_REFERER}}"><input class="btn btn-sm font-weight-bold btn-info mt-4" type="button" value="Back"></a>
                         </div>
+
+
+                    </div>
+                    <div class="row mt-1 ">
+                                                    
+                        <div id="company_div" class="hide_form pointerchange col-md-12">
+                            click here to get ID then filter: <span class="numberbg" id="company_name"></span>
+                        </div>
+                        
 
 
                     </div>
@@ -151,7 +161,7 @@
                                 
                             {% for l in  page.paginator.page_range %}
                             {% if forloop.counter <= 10 %}
-                            <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                            <li style="display: inline-block; padding: 0 3px 0 0;"><a style="text-decoration: none;" href="?{% param_replace page=forloop.counter %}">{{forloop.counter}}</a></li>
                             {% endif %}
                             {% endfor %}
                             </ul>
@@ -171,9 +181,41 @@
             </div>
 {% endblock featuredcomp %}
 
-        {% block article %}
-        <article class="mt-2 bg-white mx-2">
-            
-         
-        </article>
-        {% endblock article %}
+{% block article %}
+<article class="mt-2 bg-white mx-2">
+    
+    
+</article>
+{% endblock article %}
+
+{% block browse_review_script %}
+    <script>
+        $(document).ready(function () {
+            var company_div = $('#company_div');
+            var company_name = $('#company_name');
+            var company = $('#id_company');
+            company.keyup(function(){
+                company_div.removeClass('hide_form', {duration:500});
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'browse_review' %}",
+                    data: {
+                        'search_text': $(this).val()
+                          },
+                    dataType: 'json',
+                    success: gotcompany,
+                    
+                });
+            function gotcompany(data, textStatus, jqXHR){
+                console.log(data);
+                company_name.text(data['name']);
+                company_div.click(function(){
+                    company.val(data['id']);
+                })
+            }
+            });
+        });
+        
+    </script>   
+
+{% endblock browse_review_script %}

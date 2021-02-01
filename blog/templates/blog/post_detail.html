@@ -74,7 +74,7 @@
                                         {% comment %} used to retain paragraphs in the post {% endcomment %}
                                         <p>
                                             {% with comments.count as total_comments %}
-                                                <h6 style="font-size: smaller;"><span class="numberbg">{{ total_comments }} comment{{total_comments|pluralize}}</span> &nbsp;&nbsp; <button class=" add_comment btn btn-sm btn-outline-success"> add comment </button> </h6>
+                                                <h6 style="font-size: smaller;"><span class="numberbg">{{ total_comments }} comment{{total_comments|pluralize}}</span> &nbsp;&nbsp; <span class=" add_comment pointerchange font-weight-bold text-success"> add comment </span> </h6>
                                             {% endwith %}
                                             
                                         </p>
@@ -90,28 +90,34 @@
                                             </div>
                                             <div class="row-md">
                                                 <div class="col-md-4">
-                                                    {{ form.content.label }}:
+                                                    {{ form_comment.content.label }}:
                                                 </div>
                                                 <div class="col-md">
-                                                    {{ form.content }}
+                                                    {{ form_comment.content }}
                                                 </div>
                                             </div>
                                             <div class="row-md">
                                                 
                                                 <div class="col-md">
-                                                    <input class="btn btn-sm btn-info" type="submit" value="Send Comment">
+                                                    <input class="btn btn-sm btn-info" type="submit" value="Send Comment" >
                                                 </div>
                                             </div>
                                             
                                         </form>
                                    
                                     </div>
-                                    {% for comment in comments %}
+                                    {% for comment in comments|slice:"::-1" %}
                                     <div class="row px-2 py-2 mt-1 mx-4 ">
                                         
                                             <div class="col-md">   
-                                                <p style="font-size:smaller; color:white;" class="numberbg">{{ comment.name.last_name }},&nbsp;{{ comment.name.first_name }}&nbsp;on:&nbsp;<span >{{ comment.created }}</span></p>
-                                                <p>{{ comment.content }}</p>
+                                                <p style="font-size:smaller; color:white;" class="commentp">{{ comment.name.last_name }},&nbsp;{{ comment.name.first_name }}&nbsp;on:&nbsp;<span >{{ comment.created }}</span></p>
+                                                <p class="px-3">{{ comment.content }}</p>
+                                                <p class="mx-3">
+                                                    {% with comments.count as total_comments %}
+                                                        <h6 style="font-size: smaller;"><span class="numberbg">{{ total_comments }} comment{{total_comments|pluralize}}</span> &nbsp;&nbsp; <span class="add_comment_reply pointerchange font-weight-bold text-success"> reply </span> </h6>
+                                                    {% endwith %}
+                                                    
+                                                </p>
                                             </div>
                                         
                                     </div>
@@ -119,7 +125,7 @@
                                     <div class="row px-2 py-2 mt-1 mx-4 ">
                                         
                                         <div class="col-md">   
-                                            <p>No comment for this Blog Post here <span class=" add_comment btn btn-sm btn-outline-info"> add comment </span></p>
+                                            <p>No comment for this Blog Post here <span class="add_comment pointerchange font-weight-bold text-success"> add comment </span></p>
                                             
                                         </div>
                                     

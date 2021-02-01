@@ -53,4 +53,20 @@ class Comment(models.Model):
     
     def __str__(self):
         return f"Comment by {self.name} on {self.post}"
+
+class ReplyComment(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='comment')
+    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reply_comments')
+    email = models.EmailField()
+    reply = models.TextField(verbose_name='Reply')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+    
+    def __str__(self):
+        return f"Reply by {self.name} on {self.comment}"
+
     
