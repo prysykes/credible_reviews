@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'blog',
     'crispy_forms',
     'django_filters', #used to filter featured companies and browse reviews page
-    'django_google_maps'
+    'django_google_maps',
+    'taggit',
     
 ]
 

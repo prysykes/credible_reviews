@@ -1,0 +1,8 @@
+.hide_form {
+    display: none !important;
+}
+
+textarea {
+    resize: none;
+    height: 40px;
+}

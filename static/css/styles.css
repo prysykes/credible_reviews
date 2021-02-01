@@ -82,8 +82,6 @@ a{
 	text-decoration-style: none;
 }
 
-
-
 .checked {
 	color: orange;
 	font-size: large;
@@ -100,8 +98,6 @@ a{
 #id_rating{
 	width: 100px;
 }
-
-
 
 #tooltip {
 	position: relative;
@@ -213,6 +209,7 @@ a{
 	height: auto;
 	border-radius: 10px;
 }
+
 #tm-search-result{
 	position: relative;
 	color: black;
@@ -221,12 +218,14 @@ a{
 	height: 200px;
 
 }
+
 .numberbg{
 	background-color: rgb(119, 241, 119) !important;
 	color: grey !important;
 	border-radius: 5px !important;
 	padding: 4px 4px 4px 4px !important;
 }
+
 .messagebarbg{
 	background-color: rgb(8, 8, 77) !important;
 	color: white  !important;
@@ -234,6 +233,7 @@ a{
 	padding-top: 2px !important;
 
 }
+
 .sentbg{
 	background-color: honeydew;
 	color: gray;
