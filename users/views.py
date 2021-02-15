@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile, Review, Response, Like, Flag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
+from django import forms
 
 #imports for interuser messages
 from companyusers.models import Message, ReplyMessage
@@ -46,6 +47,7 @@ class FasterActivateEmail(threading.Thread):
 @unauthenticated_user_regular
 @allowed_users_regular(allowed_roles=['regular'])
 def sign_up(request):
+    
     form = SignUpFormRegular()
     profile_form = UserProfileForm()
     if request.method == "POST":
@@ -55,7 +57,16 @@ def sign_up(request):
         if form.is_valid() and profile_form.is_valid():
             
               # uses this to set the user as inactive to enable send actiation email
-            user = form.save()
+            user = form.save(commit=False)
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            if User.objects.filter(email=email).exists():
+                    raise forms.ValidationError("Email already taken. Please choose another email...")
+                    
+            elif User.objects.filter(username=username).exists():
+                raise forms.ValidationError("Email already taken. Please choose another email...") 
+            else:
+                user.save()
             
             
             
@@ -69,8 +80,7 @@ def sign_up(request):
             group = Group.objects.get(name='regular')
             user.groups.add(group)
             
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
+            
             messages.success(request, 'Account successfully created for ' + username.upper() +' and activation email sent to: ' + email + ",\n" + " Please visit your email to activate your account...")
             current_user = User.objects.get(username=username)
 
@@ -99,6 +109,9 @@ def sign_up(request):
             FasterActivateEmail(email).start()
             
             return redirect('user_login')
+    else:
+        form = SignUpFormRegular()
+        profile_form = UserProfileForm()
 
     context = {
         'form': form,

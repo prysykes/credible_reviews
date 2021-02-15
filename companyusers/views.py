@@ -67,7 +67,17 @@ def sign_up_company(request):
         form = SignUpFormCompany(request.POST)
         profile_form = UserProfileCompanyForm(request.POST, request.FILES)
         if form.is_valid() and profile_form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            if User.objects.filter(email=email).exists():
+                    messages.warning(request, "Email already taken. Please choose another email...")
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
+            elif User.objects.filter(username=username).exists():
+                messages.warning(request, "Username already taken")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
+            else:
+                user.save()
             group = Group.objects.get(name='company')
             user.groups.add(group)
                         

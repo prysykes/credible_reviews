@@ -4,6 +4,9 @@ from users.models import Review
 from django import forms
 
 class CompanyFilter(django_filters.FilterSet):
+    company_name = django_filters.CharFilter(
+        widget=forms.TextInput(attrs={'placeholder': 'Capfirst eg. Credible'})
+    )
     class Meta:
         model = Company
         fields = [

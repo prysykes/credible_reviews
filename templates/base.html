@@ -61,7 +61,7 @@
         
         <div class="container-fluid border-0 text-justify">
             
-            <div class="row">
+            <div class="row text-center">
                 {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
@@ -69,6 +69,10 @@
                         
                         {% endfor %}
                     </ul>
+                {% elif form.errors %}
+                    {% for error in form.errors %}
+                         <span style="color: rgb(179, 33, 11); font-style: oblique; font-size: 20px;" class="font-weight-bold px-2 py-1 mx-auto">{{ error }} &nbsp; already taken!</span>
+                    {% endfor %}
                 {% else %}
                     <span class="font-weight-bold px-2 py-1 mx-auto text-danger">...Created with<span class="h3"> &hearts;</span> because we believe that behind every review, there is a heartfelt experience...</span>
                 {% endif %}
@@ -78,47 +82,38 @@
             
             <div class="row ">
                 
-                    <div class=" navbarbg borderrounded tm-nav  navbar-expand-lg col-md-2  navbar-light py-2">
-                        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                          </button>
-                        <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class=" nav  flex-column">
+                    <div class="navbarbg borderrounded tm-nav  col-md-2 ">
+                    {% block togler %}
+                        <nav class="navbarsec ">
+                            <button class="toggler">
+                                <span class="line"></span>
+                                <span class="line"></span>
+                                <span class="line"></span>
+                            </button>
+                            <div class=" nav-list-container">
+                                <ul class="nav-list flex-column">
+                                
+                                    <li><a class="font-weight-bold" href=" {% url 'index' %} ">Home </a></li>
+                                    <li><a class="font-weight-bold" href=" {% url 'about' %} ">About Us</a></li>
+                                    {% if request.user.is_authenticated or not request.user.is_authenticated %}
+                                    {% if request.user|has_group:"regular" or not request.user|has_group:"company"%}
+                                    <li>
+                                        <a class="font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
+                                    </li>
+                                    
+                                    {% endif %}
+                                    {% endif %}
+                                    <li><a class="font-weight-bold" href=" {% url 'browse_review' %} ">Browse Reviews</a></li>
+                                    <li><a class="font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a></li>
+                                    <li><a class="font-weight-bold" href=" {% url 'how-to-use' %}">How to Use</a></li>
+                                    <li><a class="font-weight-bold" href=" {% url 'contact' %}">Contact Us</a></li>
+                                    <li><a class="font-weight-bold" href=" {% url 'faq' %}">FAQ</a></li>
+                                    
+                                </ul>
                             
-                            <li class="nav-item">
-                                <a   class="nav-link active font-weight-bold" href=" {% url 'index' %} ">Home </a>
-                            </li>
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                            </li>
-                            {% if request.user.is_authenticated or not request.user.is_authenticated %}
-                            {% if request.user|has_group:"regular" or not request.user|has_group:"company"%}
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a>
-                            </li>
-                            
-                            {% endif %}
-                            {% endif %}
-                            <li class="nav-item">
-                                <a   class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
-                            </li>
-                        
-                            <li class="nav-item">
-                                <a    class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">Featured Comp.</a>
-                            </li>
-                            <li class="nav-item">
-                                <a   class="nav-link font-weight-bold" href=" {% url 'how-to-use' %}">How to Use</a>
-                            </li>
-                            <li class="nav-item">
-                                <a   class="nav-link font-weight-bold" href=" {% url 'contact' %}">Contact Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a   class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                            </li>
-                            
-                            
-                        </ul>
-                    </div>
+                            </div>
+                        </nav>
+                    {% block togler %}
                     </div>
                 
                 {% block featuredcomp %}

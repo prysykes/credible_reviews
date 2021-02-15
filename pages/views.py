@@ -24,17 +24,20 @@ from .filters import CompanyFilter, ReviewFilter
 from django.core.mail import EmailMessage
 from users.views import FasterActivateEmail
 
+from django.contrib.postgres.search import SearchVector
 
 
 
 def search_business(request):
     if request.method == "GET" and request.GET.get('search_text') != "":
         term = request.GET.get('search_text')
-        company = Company.objects.all().filter(company_name__icontains=term, approved=True)
-        sector = Company.objects.all().filter(company_sector__icontains=term, approved=True)
+        company = Company.objects.annotate(
+            search=SearchVector('company_name', 'company_sector'),
+        ).filter(company_name__icontains=term, approved=True)
+        
         context = {
             'company': company,
-            'sector': sector,
+           
         }
         
     return render(request, 'ajax_search.html', context)

@@ -135,9 +135,17 @@
                                     
                                     
                                 </div>
+                                
                                     
                             </div>
-                            
+                            <h6>Similar posts</h6>
+                            {% for post in similar_posts %}
+                            <p>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </p>
+                            {% empty %}
+                            There are no similar posts yet.
+                            {% endfor %}
                             
                         </div>
                         

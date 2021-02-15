@@ -34,7 +34,7 @@ class Post(models.Model):
         ordering = ('-created_on',)
     
     def get_absolute_url(self):
-        return reverse('blog:post_detail', args=[self.post_slug])
+        return reverse('post_detail', args=[self.post_slug])
     
     def __str__(self):
         return self.title
@@ -56,7 +56,7 @@ class Comment(models.Model):
 
 class ReplyComment(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='comment')
-    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reply_comments')
+    name = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_replycomment')
     email = models.EmailField()
     reply = models.TextField(verbose_name='Reply')
     created = models.DateTimeField(auto_now_add=True)
