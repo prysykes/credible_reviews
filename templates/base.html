@@ -113,7 +113,7 @@
                             
                             </div>
                         </nav>
-                    {% block togler %}
+                    {% endblock togler %}
                     </div>
                 
                 {% block featuredcomp %}
@@ -230,6 +230,15 @@
                         <p><a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} ">Privacy Statement</a></p>
                     </li>
                     <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'how-to-use' %}">How to Use</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'contact' %}">Contact Us</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href="font-weight-bold" href=" {% url 'faq' %}">FAQ</a></p>
+                    </li>
+                    <li> 
                         <p><a class="font-weight-bold text-white" href=" {% url 'disclaimer' %} ">Disclaimer</a></p>
                     </li>
                     <li> 
@@ -287,7 +296,8 @@
     <script type="text/javascript" src="/static/scripts/ajax.js"></script> 
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     {% comment %} <script type="text/javascript" src="/static/scripts/ajaxcompanyname.js"></script>  {% endcomment %}
-    <script type="text/javascript" src="/static/scripts/main.js"></script> 
+    <script type="text/javascript" src="/static/scripts/main.js"></script>
+    <script type="text/javascript" src="/static/scripts/navbar.js"></script> 
     <script type="text/javascript" src="/static/scripts/blog.js"></script> 
     <script type="text/javascript" src="/static/scripts/slideshow.js"></script>
     <script type="text/javascript" src="/static/scripts/slideshowadvert.js"></script>  

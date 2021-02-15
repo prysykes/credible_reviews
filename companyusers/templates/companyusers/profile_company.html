@@ -13,48 +13,27 @@
         <section class="mt-2 bg-white mx-2">
             
             <div class="container-fluid border-0 text-justify">
-                <div class="row navbarbg justify-content-center" >
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white" >
-                        <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#tmnavbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                <div class="row justify-content-center" >
+                    <nav class="navbarsec borderrounded ">
+                        <button class="toggler">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
                         </button>
-                        <div class="collapse navbar-collapse justify-content-start" id="tmnavbarNav">
-                            <ul class="nav bg-light nav-pills ">
-                                <li class="nav-item ">
-                                <a class="nav-link font-weight-bold" href=" {% url 'index' %} ">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item" >
-                                <a class="nav-link font-weight-bold" href=" {% url 'about' %} ">About Us</a>
-                                </li>
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a>
+                        <div class=" mx-auto nav-list-container">
+                            <ul class="nav-list flex-row">
+                            
+                                <li><a class="font-weight-bold" href=" {% url 'index' %} ">Home </a></li>
+                                <li><a class="font-weight-bold" href=" {% url 'about' %} ">About Us</a></li>
+                                <li><a class="font-weight-bold" href="{% url 'submit_review' %}">Submit Review</a></li>
+                                <li><a class="font-weight-bold" href=" {% url 'browse_review' %} ">Browse Review</a></li>
+                                <li><a class="font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a></li>
                                 
-                                </li>
-                                                        
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href=" {% url 'faq' %}">FAQ</a>
-                                </li>
-                                <li class="nav-item" >
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href=" {% url 'cr-seal' %}">API Coming Soon</a>
-                                </li>
                                 
-                                <li class="nav-item" >
-                                    <a class="nav-link font-weight-bold" href=" {% url 'featured-companies' %}">View Featured Companies</a>
-                                </li>
-                                                        
-                                <li class="nav-item" id="tm-search-pane" >                            
-                                    <form class="form-inline  my-2 my-lg-0" >
-                                        <input class="form-control mr-sm-2" type="search" placeholder="search for a business..." aria-label="Search">
-                                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                                    </form>
-                                </li>
-                                
-                                            
                             </ul>
                         
                         </div>
-                </nav>
+                    </nav>
                 </div>
                 <div class="row mx-2 mt-2">
                     <div class="col-md-5  mb-2">

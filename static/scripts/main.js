@@ -1,26 +1,5 @@
 $(document).ready(function () {
     
-    //beging Nav Bar togler
-
-    const toggler = document.querySelector('.navbarsec > .toggler'),
-    navListContainer = document.querySelector('.navbarsec > .nav-list-container');
-
-    /*when toggler button is clicked*/
-    toggler.addEventListener(
-    "click",
-    () => {
-        //convert hamburger to close
-        toggler.classList.toggle('cross');
-        //make nav visible
-        navListContainer.classList.toggle('nav-active');
-    },
-    true
-    );
-
-
-    // End Navbar toglar
-    
-    
     var display_company = $('#tm-display-companies');
     var send_message_button = $('#tm_send_message_button');
     var message_div = $('#tm_send_message_div');
