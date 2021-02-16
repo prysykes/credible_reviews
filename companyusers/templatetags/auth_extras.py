@@ -1,5 +1,6 @@
 from django import template
 from django.contrib.auth.models import Group
+from companies.models import Company
 
 register = template.Library()
 
@@ -7,6 +8,10 @@ register = template.Library()
 def has_group(user, group_name):
     group = Group.objects.get(name=group_name)
     return True if group in user.groups.all() else False
+
+@register.filter(name='has_sector')
+def has_sector(companies, sector):
+    return Company.objects.all().filter(company_sector=sector)
 
 
 @register.simple_tag(takes_context=True)

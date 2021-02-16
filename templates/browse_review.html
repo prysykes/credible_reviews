@@ -77,7 +77,7 @@
                     <div class="card border-0 bg-light py-2 text-center">
 
                         <div class="row ">
-                            <!-- without .qs extension, the returned value won't be an iterable hence a for loop can't be used on it-->
+                            {% comment %} without .qs extension, the returned value won't be an iterable hence a for loop can't be used on it {% endcomment %}
                             
                             {% for review in page %}
                             <div class="col-md-3 px-2 py-2">

@@ -1,6 +1,8 @@
 $(document).ready(function () {
     
     var display_company = $('#tm-display-companies');
+    var hide_category_button = $('#hide_category_button');
+    var tm_company_category = $('#tm_company_category');
     var send_message_button = $('#tm_send_message_button');
     var message_div = $('#tm_send_message_div');
     var add_review = $('#tm-add-review-div');
@@ -119,7 +121,16 @@ $(document).ready(function () {
     // implementing share button toggle
     share_button.click(function(){
         social_share.slideToggle(600)
-    })
+    });
+
+    // begin show/hide company category
+    hide_category_button.click(function(){
+        tm_company_category.toggle(600);
+        
+    });
+    
+
+    // end show/hide company category
     
     /* $('#tm-filter-form').focusout(function(){
         

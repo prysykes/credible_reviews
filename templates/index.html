@@ -1,67 +1,71 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
 
 {% block filterdata %}
-<div class= "row-md mt-2 mx-2  justify-content-center ">
-    <h4 class="text-center py-1 navbarbgtop borderrounded justify-content-center"> Browse Companies by Sector </h4>
-    <div class="row-md bgchangegray borderrounded mx-3 py-3 px-3">
-        <div class="row-md divfilter text-center d-flex">
-            <div class="col-md  ">
-                <a href="{% url 'filter_result_display' %}?term=merchant"> <i class="bigicon fas fa-shopping-cart"></i> <br> 
-                <span class="font-weight-bold"> Online Merchant </span> </a>
+<div class="row-md mt-2 mx-2  justify-content-center ">
+    <div class="col-md">
+        <h4 class="text-center py-1 navbarbgtop borderrounded justify-content-center"> Browse Companies by Sector &nbsp;&nbsp;<button id="hide_category_button" class=" font-weight-bold btn btn-sm text-white btn-outline-primary">HIDE</button></h4>
+    </div>
+    
+</div>
+<div id="tm_company_category" class="row divfilter mt-2 mx-5 py-3 bgchangegray borderrounded">
+    
+        
+            <div class="col-md-2 ">
+                <a href="{% url 'filter_result_display' %}?term=merchant"> <i class="bigicon fas fa-shopping-cart"></i><div  class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"online merchant"|length }}</div> <br> 
+                    <span class="font-weight-bold"> Online Merchant </span> </a>
             </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=forex"><i class=" bigicon fas fa-dollar-sign"></i><br> 
-                <span class="font-weight-bold"> Forex Company </span></a>
+            <div class="col-md-2">
+                <a href="{% url 'filter_result_display' %}?term=forex"><i class=" bigicon fas fa-dollar-sign"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"forex"|length }}</div><br> 
+                    <span class="font-weight-bold"> Forex Company </span></a>
             </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=betting"><i class="bigicon fas fa-futbol"></i><br> 
-                <span class="font-weight-bold"> Sports Betting </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=fooddrug"><i class="bigicon fas fa-utensils"></i><br> 
-                <span class="font-weight-bold"> Food and Drug </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=education"><i class=" bigicon fas fa-graduation-cap"></i><br> 
+            <div class="col-md-2">
+                <a href="{% url 'filter_result_display' %}?term=betting"><i class="bigicon fas fa-futbol"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"betting"|length }}</div><br> 
+                    <span class="font-weight-bold"> Sports Betting </span></a>
+             </div>
+             <div class="col-md-2">
+                <a href="{% url 'filter_result_display' %}?term=fooddrug"><i class="bigicon fas fa-utensils"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"food and drug"|length }}</div><br> 
+                    <span class="font-weight-bold"> Food and Drug </span></a>
+             </div>
+             <div class="col-md-2">
+                <a href="{% url 'filter_result_display' %}?term=education"><i class=" bigicon fas fa-graduation-cap"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"education"|length }}</div><br> 
                 <span class="font-weight-bold"> Education </span></a>
             </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=transportation"><i class="bigicon fas fa-bus"></i><br> 
-                <span class="font-weight-bold"> Transportation </span></a>
+            <div class="col-md-2">
+                <a href="{% url 'filter_result_display' %}?term=transportation"><i class="bigicon fas fa-bus"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"transportation"|length }}</div><br> 
+                    <span class="font-weight-bold"> Transportation </span></a>
+             </div>
+             <hr>
+             <div class="col-md-2 mt-3">
+                <a href="{% url 'filter_result_display' %}?term=logistics"><i class=" bigicon fas fa-truck"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"logistics"|length }}</div><br> 
+                    <span class="font-weight-bold"> Logistics </span></a>
+             </div>
+             <div class="col-md-2 mt-3">
+                <a href="{% url 'filter_result_display' %}?term=hospitality"><i class="bigicon fas fa-hotel"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"hospitality"|length }}</div><br> 
+                    <span class="font-weight-bold"> Hotels and Bars </span></a>
             </div>
-            
-        </div>
-        <hr>
-        <div class="row-md divfilter text-center mt-3 d-flex">
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=logistics"><i class=" bigicon fas fa-truck"></i><br> 
-                <span class="font-weight-bold"> Logistics </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=hospitality"><i class="bigicon fas fa-hotel"></i><br> 
-                <span class="font-weight-bold"> Hotels and Bars </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=healthcare"><i class=" bigicon far fa-hospital"></i><br> 
-                <span class="font-weight-bold"> Healthcare </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=construction"><i class=" bigicon fas fa-tools"></i><br> 
-                <span class="font-weight-bold"> Construction </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=media"><i class="bigicon fas fa-tv"></i><br> 
-                <span class="font-weight-bold"> Media </span></a>
-            </div>
-            <div class="col-md">
-                <a href="{% url 'filter_result_display' %}?term=finance"><i class="bigicon fas fa-coins"></i><br> 
-                <span class="font-weight-bold"> Finance </span></a>
-            </div>
+            <div class="col-md-2 mt-3">
+                <a href="{% url 'filter_result_display' %}?term=healthcare"><i class=" bigicon far fa-hospital"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"healthcare"|length }}</div><br> 
+                    <span class="font-weight-bold"> Healthcare </span></a>
+             </div>
+             <div class="col-md-2 mt-3">
+                <a href="{% url 'filter_result_display' %}?term=construction"><i class=" bigicon fas fa-tools"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"construction"|length }}</div><br> 
+                    <span class="font-weight-bold"> Construction </span></a>
+             </div>
+             <div class="col-md-2 mt-3">
+                <a href="{% url 'filter_result_display' %}?term=media"><i class="bigicon fas fa-tv"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"media"|length }}</div><br> 
+                    <span class="font-weight-bold"> Media </span></a>
+             </div>
+             <div class="col-md-2 mt-3">
+                <a href="{% url 'filter_result_display' %}?term=finance"><i class="bigicon fas fa-coins"></i><div class="navbarbg borderrounded companyfilternum"> {{ companies|has_sector:"finance"|length }}</div><br> 
+                    <span class="font-weight-bold"> Finance </span></a>
+             </div>
             
             
-        </div>
+            
+       
     
-    </div>
+    
     
 
 </div>
