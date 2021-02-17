@@ -139,8 +139,8 @@ class Company(models.Model):
     
     company_state = models.CharField(max_length=30, choices=state, default=Lagos, verbose_name='State')
     company_address = models.TextField(max_length=2000)
-    rating_array = ArrayField(models.IntegerField(), size=50, default=list)
-    average_rating = Int_max.IntegerRangeField(default=1, verbose_name='Avg', min_value=1, max_value=5)
+    rating_array = ArrayField(models.IntegerField(), size=50, default=[0])
+    average_rating = Int_max.IntegerRangeField(default=0, verbose_name='Avg', min_value=1, max_value=5)
     total_views = models.IntegerField(default=0)
     company_website = models.CharField(max_length=500, blank=True, null=True)
     company_email = models.EmailField(max_length=500, blank=True, null=True)

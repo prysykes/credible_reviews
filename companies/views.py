@@ -35,17 +35,7 @@ def dynamic_url(request, *args, **kwargs):
                 companyone = company
                 companyone.rating_array.append(int(rating))
                 new_rating = (sum(companyone.rating_array)/len(companyone.rating_array))
-                
-                if 4.5 <= new_rating <= 5:
-                    companyone.average_rating = 5
-                elif 4.0 <= new_rating < 4.5:
-                    companyone.average_rating = 4
-                elif 3.0 <= new_rating < 4.0:
-                    companyone.average_rating = 3
-                elif 2.0 <= new_rating < 3:
-                    companyone.average_rating = 2
-                elif 1.0 <= new_rating < 2:
-                    companyone.average_rating = 1
+                companyone.average_rating = round(new_rating)
                 
                 companyone.save()
                 

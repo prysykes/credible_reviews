@@ -344,7 +344,7 @@ def submit_review(request, *args, **kwargs):
                 data = form.save(commit=False)
                 
                 data.user = request.user
-                print(data.user)
+                
                 post_company = request.POST.get('id_company')
                 company = get_object_or_404(Company, company_name=post_company)
                 
@@ -373,9 +373,6 @@ def submit_review(request, *args, **kwargs):
                 
                 data.user_g = request.user
                 data.rating_g = int(request.POST.get('rating_g'))
-                print("this is the rating", data.rating_g)  
-                print("data type of rating",type(data.rating_g))             
-                
                 
                 data.save()
                                

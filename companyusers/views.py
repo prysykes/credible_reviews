@@ -67,17 +67,7 @@ def sign_up_company(request):
         form = SignUpFormCompany(request.POST)
         profile_form = UserProfileCompanyForm(request.POST, request.FILES)
         if form.is_valid() and profile_form.is_valid():
-            user = form.save(commit=False)
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            if User.objects.filter(email=email).exists():
-                    messages.warning(request, "Email already taken. Please choose another email...")
-                    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
-            elif User.objects.filter(username=username).exists():
-                messages.warning(request, "Username already taken")
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
-            else:
-                user.save()
+            user = form.save()
             group = Group.objects.get(name='company')
             user.groups.add(group)
                         
@@ -202,7 +192,20 @@ def profile_company(request):
         if form.is_valid:
             data = form.save(commit=False)
             data.user = request.user
-            data.company_slug = slugify(request.POST.get('company_name'))
+            company_name = request.POST.get('company_name')
+            username = data.user
+            data.company_slug = slugify(company_name)
+            email_subject = "New Company Listed"
+            email_body = f"A new Company have been listed by {username} name is: {company_name}. \n Kindly crosscheck the entry then tick approved or the company delete. "
+            email = EmailMessage(
+                    email_subject,
+                    email_body,
+                    'noreply@crediblereviews.com',
+                    ['princealexe2000@gmail.com'],
+                    
+                )
+            
+            FasterActivateEmailCompany(email).start()
             
             data.save()
             return redirect('profile_company')
