@@ -486,6 +486,7 @@ def likes(request, review_id):
         like.user = user_like # accesses a like attribute
         like.like_count +=1 # adds one to the like count
         like.save() # saves the like
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) 
 
 @login_required(login_url='user_login')
 @allowed_users_regular(allowed_roles=['regular'])
