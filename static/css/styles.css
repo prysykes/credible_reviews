@@ -102,7 +102,7 @@ body{
     position: fixed;
     width: fit-content;
     height:fit-content;
-    top: 50;
+    top: 25%;
 	left: 0;
 	padding: 10px;
 	border-radius: 20px;
@@ -163,6 +163,8 @@ a{
 	position: absolute; 
 	top:0; 
 	right:30%;
+	background-color: rgb(188, 188, 197) !important;
+	color: rgb(10, 5, 48) !important;
 	font-size: smaller;
 	padding: 3px 3px 3px 3px;
 }
@@ -442,18 +444,18 @@ a{
 }
 
 .navbarbg{
-	background-color: rgb(3, 3, 49) !important;
-	color: white  !important;
+	background-color: rgb(3, 3, 49);
+	color: white;
 }
 
 #topBtn {
 	position: fixed;
 	bottom: 40px;
 	right: 1px;
-	font-size: 25px;
-	width: 50px;
-	height: 50px;
-	background-color: cornflowerblue;
+	font-size: 15px;
+	width: 35px;
+	height: 35px;
+	background-color: rgb(3, 3, 49);
 	color: white;
 	border: none;
 	border-radius: 20px;
@@ -462,7 +464,7 @@ a{
 
 #topBtn:hover {
 	background-color: lightblue;
-	color: lightslategray;
+	color: rgb(68, 72, 75);
 }
 
 a {

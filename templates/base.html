@@ -104,7 +104,8 @@
                                     {% endif %}
                                     {% endif %}
                                     <li><a class="font-weight-bold" href=" {% url 'browse_review' %} ">Browse Reviews</a></li>
-                                    <li><a class="font-weight-bold" href=" {% url 'featured-companies' %}">Featured Companies</a></li>
+                                    <li><a class="font-weight-bold" href=" {% url 'featured-companies' %}">Featured Comp</a></li>
+                                    
                                     <li><a class="font-weight-bold" href=" {% url 'how-to-use' %}">How to Use</a></li>
                                     <li><a class="font-weight-bold" href=" {% url 'contact' %}">Contact Us</a></li>
                                     <li><a class="font-weight-bold" href=" {% url 'faq' %}">FAQ</a></li>
@@ -215,19 +216,18 @@
 <div class="row">
     <div class="container-fluid mt-2 text-white py-2 bg-secondary">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 border-right">
                 <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
                     <li> <i class="fas fa-phone-square-alt" style="font-size:20px; padding-right: 4px; color:#2196F3"></i></li>
                     <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:info@crediblereviews.ng">  info@crediblereviews.ng</a></li>
+                    <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:sales@crediblereviews.ng">  sales@crediblereviews.ng</a></li>
+                    <li> <i class="fas fa-envelope" style="font-size:20px; padding-right: 4px; color:#2196F3"></i><a class="font-weight-bold text-white" href="mailto:abuse@crediblereviews.ng">  abuse@crediblereviews.ng</a></li>
                 </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 border-right">
                 <ul style="font-size: small; list-style: none; padding: 0 0 0 25px;">
                     <li> 
                         <p class="font-weight-bold">QUICK LINKS</p>
-                    </li>
-                    <li> 
-                        <p><a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} ">Privacy Statement</a></p>
                     </li>
                     <li> 
                         <p><a class="font-weight-bold text-white" href=" {% url 'how-to-use' %}">How to Use</a></p>
@@ -236,21 +236,29 @@
                         <p><a class="font-weight-bold text-white" href=" {% url 'contact' %}">Contact Us</a></p>
                     </li>
                     <li> 
-                        <p><a class="font-weight-bold text-white" href="font-weight-bold" href=" {% url 'faq' %}">FAQ</a></p>
-                    </li>
-                    <li> 
-                        <p><a class="font-weight-bold text-white" href=" {% url 'disclaimer' %} ">Disclaimer</a></p>
-                    </li>
-                    <li> 
-                        <p><a class="font-weight-bold text-white" href="{% url 'blog' %}">Blog</a></p>
+                        <p><a class="font-weight-bold text-white" href=" {% url 'faq' %}">FAQ</a></p>
                     </li>
                     <li> 
                         <p><a class="font-weight-bold text-white" href=" {% url 'careers' %}">Careers</a></p>
                     </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href="#">API Request</a></p>
+                    </li>
+                    
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'disclaimer' %} ">Disclaimer</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href=" {% url 'privacy-terms' %} ">Privacy Statement</a></p>
+                    </li>
+                    <li> 
+                        <p><a class="font-weight-bold text-white" href="{% url 'blog' %}">Blog</a></p>
+                    </li>
+                    
                 </ul>
             </div>
-            <div style="font-size: small; list-style: none; padding: 0 0 0 25px;" class="col-md-5">
-                <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="btn btn-sm btn-primary" id="submit-newsletter" type="Submit" value="SEND">
+            <div class="col-md-5 h6">
+                <form  action=""><label for="email" > Regular Security Tips: &nbsp;</label><input class="form-control-sm" style="display: inline; text-align: center;"  name="email" type="email" placeholder="---enter your email here---" size="30">&nbsp;<input class="btn btn-sm btn-primary" id="submit-newsletter" type="Submit" value="SEND">
                 </form><br>
                 <em style="font-size: small;"> Enter your email to receive regular updates, product advice and tips: 
                     <ul style="font-size: small; padding: 0 0 0 25px;">
@@ -288,6 +296,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/static/scripts/formauth.js"></script> 
     <script type="text/javascript" src="/static/scripts/faq.js"></script> 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="sweetalert2.min.js"></script>
     <script src="https://kit.fontawesome.com/47f849ecd1.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -300,7 +310,7 @@
     <script type="text/javascript" src="/static/scripts/navbar.js"></script> 
     <script type="text/javascript" src="/static/scripts/blog.js"></script> 
     <script type="text/javascript" src="/static/scripts/slideshow.js"></script>
-    <script type="text/javascript" src="/static/scripts/slideshowadvert.js"></script>  
+      
  {% endblock script %}
 
     <script>

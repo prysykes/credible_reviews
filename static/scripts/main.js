@@ -60,26 +60,37 @@ $(document).ready(function () {
 
 
     // begin toggle message division
+    var clicker_m = 1
     message_hide_button.click(function(){
         message_div_display.slideToggle(600);
         message_div_display.scrollTop(700)
         review_display.hide();
         display_company.hide();
-        if ($(this).text("Show Messages")){
-            $(this).text("Hide Messages");
-        }else if ($(this).text("Hide Messages")){
-            $(this).text("Show Messages");
-            
-        };
+        
+        if (clicker_m == 1) {
+            $(this).text("Hide Messages")
+            clicker_m = 0
+        }else if (clicker_m == 0){
+            $(this).text("Show Messages")
+            clicker_m = 1;
+        }
+        
         
     })
 
     // begin styling of filter inputs on browsereviews page
-    
+    var clicker_c = 1
     companies.click(function(){
         display_company.slideToggle(600);
         review_display.hide(); 
         message_div_display.hide();
+        if (clicker_c == 1) {
+            $(this).text("Hide Companies")
+            clicker_c = 0
+        }else if (clicker_c == 0){
+            $(this).text("Show Companies")
+            clicker_c = 1;
+        }
     })
 
     // setting tabindex to 1 for forms on company detail page
@@ -124,8 +135,18 @@ $(document).ready(function () {
     });
 
     // begin show/hide company category
+    var clicker = 0
     hide_category_button.click(function(){
         tm_company_category.toggle(600);
+        if (clicker==0){
+            hide_category_button.text("Show Sectors")
+            clicker = 1
+        }else if (clicker == 1){
+            hide_category_button.text("Hide Sectors")
+            clicker = 0
+        }
+        
+        
         
     });
     
@@ -249,10 +270,18 @@ $(document).ready(function () {
     });
     
     /* implementing view reviews toggle for company profile */
+    var clicker_r = 1
     view_reviews.click(function(){
         review_display.slideToggle(600);
         display_company.hide();
         message_div_display.hide();
+        if (clicker_r == 1) {
+            $(this).text("Show Reviews")
+            clicker_r = 0
+        }else if (clicker_r == 0){
+            $(this).text("Hide Reviews")
+            clicker_r = 1;
+        }
     });
 
     // begind back to top animation
