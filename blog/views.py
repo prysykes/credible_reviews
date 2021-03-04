@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from .models import Post, Comment
+from .models import Post, Comment, ReplyComment
 from django.views.generic import ListView, DetailView
 
 from .forms import CommentForm, CommentReplyForm
@@ -53,12 +53,14 @@ class PostListView(ListView):
     template_name='blog/blog.html'
     paginate_by = 3
 
-def post_detail(request, post_slug):
-    post = get_object_or_404(Post, post_slug=post_slug)
+def post_detail(request, *args, **kwargs):
+    post = get_object_or_404(Post, post_slug=kwargs.get('post_slug'))
     comments = post.comments.filter(active=True)
+    replies = ReplyComment.objects.all()
     post_tag_ids = post.tags.values_list('id', flat=True)
     similar_posts = Post.published.filter(tags__in=post_tag_ids).exclude(id=post.id)
     similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
+    form_reply = CommentReplyForm()
     form_comment = CommentForm()
     
 
@@ -69,11 +71,10 @@ def post_detail(request, post_slug):
             data.post = post
             data.name = request.user
             data.email = request.user.email
-            print(data.post)
-            print(data.name)
-            print(data.email)
             data.save()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
+    
             
 
     
@@ -83,12 +84,25 @@ def post_detail(request, post_slug):
         'form_comment': form_comment,
         'comments': comments,
         'similar_posts': similar_posts,
+        'form_reply': form_reply,
+        'replies': replies,
         
     }
 
     return render(request, 'blog/post_detail.html', context)
 
-def reply_comment(request):
-    pass
+def reply_comment(request, post_slug, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    form_reply = CommentReplyForm()
+    if request.method == 'POST':
+        form_reply = CommentReplyForm(request.POST or None)
+        if form_reply.is_valid:
+            data = form_reply.save(commit=False)
+            data.comment = comment
+            data.name = request.user
+            data.email = request.user.email
+            data.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
 
    

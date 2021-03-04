@@ -114,9 +114,37 @@
                                                 <p class="px-3">{{ comment.content }}</p>
                                                 <p class="mx-3">
                                                     {% with comments.count as total_comments %}
-                                                        <h6 style="font-size: smaller;"><span class="numberbg">{{ total_comments }} comment{{total_comments|pluralize}}</span> &nbsp;&nbsp; <span class="add_comment_reply pointerchange font-weight-bold text-success"> reply </span> </h6>
+                                                        <h6 style="font-size: smaller;"> &nbsp;&nbsp; <span class="add_comment_reply pointerchange font-weight-bold text-success"> reply </span> </h6>
                                                     {% endwith %}
                                                     
+                                                </p>
+                                                <p> {% for reply in replies %}
+                                                        {% if reply.comment == comment %} {{reply}}
+                                                        
+                                                        {% endif %}
+
+                                                    {% endfor %}
+                                                </p>
+                                                
+                                                <p>
+                                                    <form action="{% url 'reply_comment' post.post_slug comment.id %}" method="POST">{% csrf_token %}
+                                                        
+                                                        <div class="row-md">
+                                                            <div class="col-md-4">
+                                                                {{ form_reply.reply.label }}:
+                                                            </div>
+                                                            <div class="col-md">
+                                                                {{ form_reply.reply}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row-md">
+                                                            
+                                                            <div class="col-md">
+                                                                <input class="btn btn-sm btn-info" type="submit" value="Reply" >
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </form>
                                                 </p>
                                             </div>
                                         

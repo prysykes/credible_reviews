@@ -13,3 +13,4 @@ class CommentReplyForm(ModelForm):
     class Meta:
         model = ReplyComment
         fields = ('reply',)
+        

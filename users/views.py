@@ -126,8 +126,6 @@ class VerificationView(View):
         try:
             id = force_text(urlsafe_base64_decode(uidb64))  #get the user Id sent with the request
             user = User.objects.get(pk=id)
-            print("this is ", user)
-
             # if not account_activation_token.check_token(user, token):
             #     return redirect('user_login')
 

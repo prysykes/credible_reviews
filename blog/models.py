@@ -67,6 +67,6 @@ class ReplyComment(models.Model):
         ordering = ('created',)
     
     def __str__(self):
-        return f"Reply by {self.name} on {self.comment}"
+        return self.reply
 
     
