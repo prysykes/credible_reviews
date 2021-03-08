@@ -293,7 +293,6 @@ def reply_message_user(request, message_id):
 
 def edit_message(request, message_id):
     message = get_object_or_404(Message, pk=message_id)
-    print(message.sender)
     if request.method == "POST":
         form = MessageForm(request.POST or None, instance=message)
         if form.is_valid:

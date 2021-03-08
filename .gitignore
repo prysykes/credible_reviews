@@ -20,3 +20,4 @@ blog/migrations
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 credible-reviews.pem
+.idea

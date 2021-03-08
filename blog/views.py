@@ -10,6 +10,10 @@ from .forms import CommentForm, CommentReplyForm
 from taggit.models import Tag
 from django.db.models import Count
 
+from django.contrib.auth.decorators import login_required
+
+from users.decorators import allowed_users_regular, unauthenticated_user_regular
+
 # Create your views here.
 
 def post_list(request, tag_slug=None):
@@ -62,7 +66,6 @@ def post_detail(request, *args, **kwargs):
     similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
     form_reply = CommentReplyForm()
     form_comment = CommentForm()
-    
 
     if request.method == 'POST':
         form_comment = CommentForm(request.POST or None)
@@ -74,11 +77,6 @@ def post_detail(request, *args, **kwargs):
             data.save()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
-    
-            
-
-    
-
     context = {
         'post': post,
         'form_comment': form_comment,
@@ -91,6 +89,7 @@ def post_detail(request, *args, **kwargs):
 
     return render(request, 'blog/post_detail.html', context)
 
+@login_required(login_url='user_login')
 def reply_comment(request, post_slug, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     form_reply = CommentReplyForm()
@@ -103,6 +102,9 @@ def reply_comment(request, post_slug, comment_id):
             data.email = request.user.email
             data.save()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    
 
-   
+@login_required(login_url='user_login')
+def delete_reply(request, reply_id):
+    reply = get_object_or_404(ReplyComment, pk=reply_id)
+    reply.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

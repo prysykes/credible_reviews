@@ -118,16 +118,18 @@
                                                     {% endwith %}
                                                     
                                                 </p>
-                                                <p> {% for reply in replies %}
-                                                        {% if reply.comment == comment %} {{reply}}
-                                                        
+                                                <p class="px-4"> {% for reply in replies %}
+                                                        {% if reply.comment == comment %} {{reply}}<br>
+                                                        <a class="tm_delete_message text-danger" href="{% url 'delete_reply' reply.id %}">delete </a> &nbsp;&nbsp; 
                                                         {% endif %}
+
+                                                       
 
                                                     {% endfor %}
                                                 </p>
                                                 
                                                 <p>
-                                                    <form action="{% url 'reply_comment' post.post_slug comment.id %}" method="POST">{% csrf_token %}
+                                                    <form class="reply_form hide_form" action="{% url 'reply_comment' post.post_slug comment.id %}" method="POST">{% csrf_token %}
                                                         
                                                         <div class="row-md">
                                                             <div class="col-md-4">
@@ -140,7 +142,7 @@
                                                         <div class="row-md">
                                                             
                                                             <div class="col-md">
-                                                                <input class="btn btn-sm btn-info" type="submit" value="Reply" >
+                                                                <input class="btn btn-sm btn-info mt-1" type="submit" value="Reply" >
                                                             </div>
                                                         </div>
                                                         

@@ -14,6 +14,7 @@ from companyusers.models import Message
 from companyusers.forms import MessageForm
 
 
+
 def dynamic_url(request, *args, **kwargs):
     likes = Like.objects.all()
     responses = Response.objects.all()
