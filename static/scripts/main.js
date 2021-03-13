@@ -17,8 +17,8 @@ $(document).ready(function () {
     var list_company_display = $('#list_company_display');
     var claimed_detail = $('#tm-claimed-detail');
     var claimed = $('#tm-claimed');
-    var share_button = $('#share_button');
-    var social_share = $('#social_share');
+    var share_button = $('.share_button');
+    var social_share = $('.social_share');
     var review_display = $('#tm-display-reviews');
     var view_reviews = $('#tm-reviews');
     var delete_review = $('.tm-delete-review');
@@ -35,8 +35,6 @@ $(document).ready(function () {
     var star_three = $('#star_three');
     var star_four = $('#star_four');
     var star_five = $('#star_five');
-
-    social_share.hide()
 
     
     message_div_display.hide()
@@ -125,13 +123,21 @@ $(document).ready(function () {
     // implementing delete message
     delete_message.click(function () {
         
-        return confirm("Are you sure you want to delete message? ")
+        return confirm("This action can't be undone, delete? ")
 
       })
 
     // implementing share button toggle
     share_button.click(function(){
-        social_share.slideToggle(600)
+        
+        var current_index = share_button.index($(this))
+        
+        social_share.eq(current_index).toggleClass('formhidden')
+        
+        
+        
+       
+        
     });
 
     // begin show/hide company category

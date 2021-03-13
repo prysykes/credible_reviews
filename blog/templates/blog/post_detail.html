@@ -110,17 +110,19 @@
                                     <div class="row px-2 py-2 mt-1 mx-4 ">
                                         
                                             <div class="col-md">   
-                                                <p style="font-size:smaller; color:white;" class="commentp">{{ comment.name.last_name }},&nbsp;{{ comment.name.first_name }}&nbsp;on:&nbsp;<span >{{ comment.created }}</span></p>
-                                                <p class="px-3">{{ comment.content }}</p>
+                                                <p style="font-size:smaller; color:white;" class="commentp">{{ comment.name.last_name }},&nbsp;{{ comment.name.first_name }}&nbsp;commented on:&nbsp;<span >{{ comment.created }}</span></p>
+                                                <p class="px-3">{{ comment.content }} <br>
+                                                    {% if comment.name == request.user %} <a class="tm_delete_message text-danger" href="{% url 'delete_comment' comment.id %}"> delete </a> {% endif %} &nbsp;&nbsp;<span class="add_comment_reply pointerchange text-success"> reply </span>
+                                                </p>
                                                 <p class="mx-3">
                                                     {% with comments.count as total_comments %}
-                                                        <h6 style="font-size: smaller;"> &nbsp;&nbsp; <span class="add_comment_reply pointerchange font-weight-bold text-success"> reply </span> </h6>
+                                                        <h6 style="font-size: smaller;"> &nbsp;&nbsp;  </h6>
                                                     {% endwith %}
                                                     
                                                 </p>
                                                 <p class="px-4"> {% for reply in replies %}
                                                         {% if reply.comment == comment %} {{reply}}<br>
-                                                        <a class="tm_delete_message text-danger" href="{% url 'delete_reply' reply.id %}">delete </a> &nbsp;&nbsp; 
+                                                        {% if reply.name == request.user %} <a class="tm_delete_message text-danger" href="{% url 'delete_reply' reply.id %}">delete </a> &nbsp;&nbsp; {% endif %} 
                                                         {% endif %}
 
                                                        
@@ -155,7 +157,7 @@
                                     <div class="row px-2 py-2 mt-1 mx-4 ">
                                         
                                         <div class="col-md">   
-                                            <p>No comment for this Blog Post here <span class="add_comment pointerchange font-weight-bold text-success"> add comment </span></p>
+                                            <p>No comment for this Blog Post yet! <span class="add_comment pointerchange font-weight-bold text-success"> add comment </span></p>
                                             
                                         </div>
                                     

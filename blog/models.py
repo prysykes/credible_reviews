@@ -20,6 +20,8 @@ class Post(models.Model):
     post_slug = models.SlugField(max_length=255, allow_unicode=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     post_image = models.ImageField(upload_to="blog_images", null=True, blank=True)
+    post_body_image_one = models.ImageField(upload_to="blog_images", null=True, blank=True)
+    post_body_image_two = models.ImageField(upload_to="blog_images", null=True, blank=True)
     content = models.TextField()
     updated_on = models.DateField(auto_now_add=True)
     created_on = models.DateField(auto_now_add=True)

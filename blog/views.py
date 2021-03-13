@@ -108,3 +108,10 @@ def delete_reply(request, reply_id):
     reply = get_object_or_404(ReplyComment, pk=reply_id)
     reply.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@login_required(login_url='user_login')
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
