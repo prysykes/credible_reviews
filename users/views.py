@@ -9,6 +9,7 @@ from .models import UserProfile, Review, Response, Like, Flag
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django import forms
+from pages.models import Ads
 
 #imports for interuser messages
 from companyusers.models import Message, ReplyMessage
@@ -47,6 +48,7 @@ class FasterActivateEmail(threading.Thread):
 @unauthenticated_user_regular
 @allowed_users_regular(allowed_roles=['regular'])
 def sign_up(request):
+    ads = get_list_or_404(Ads, active=True)
     
     form = SignUpFormRegular()
     profile_form = UserProfileForm()
@@ -93,7 +95,7 @@ def sign_up(request):
             domain = get_current_site(request).domain
             #second, get link the user would click for activation which takes a view name and kwargs
             link = reverse('activate_account', kwargs={'uidb64':uidb64, 'token':token})
-            #activate_account above has already been created in the app urls.py path
+            # activate_account above has already been created in the app urls.py path
             activate_url = 'http://'+domain+link
             current_user.is_active = False
             current_user.save()
@@ -115,6 +117,7 @@ def sign_up(request):
 
     context = {
         'form': form,
+        'ads': ads,
         'profile_form': profile_form
     }
     return render(request, 'users/sign-up.html', context)
@@ -146,6 +149,7 @@ class VerificationView(View):
 @unauthenticated_user_regular
 @allowed_users_regular(allowed_roles=['regular', 'company'])
 def user_login(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -177,7 +181,7 @@ def user_login(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
-        
+        'ads': ads,
         'page_range': page_range,
     }
     return render(request, 'users/user_login.html', context)
@@ -327,7 +331,7 @@ def submit_review(request, *args, **kwargs):
             company = get_object_or_404(Company, company_name__icontains=term, approved=True)
             company_name = company.company_name
         except:
-            company_name = "Other"
+            company_name = "Add New"
 
         
         
@@ -432,6 +436,7 @@ def done(request):
     return render(request, 'done.html')
 
 def done_contact(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -447,6 +452,7 @@ def done_contact(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }

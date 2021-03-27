@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from .models import UserProfileCompany
+from pages.models import Ads
 
 from users.models import Review, Response
 from users.forms import ResponseForm
@@ -61,6 +62,7 @@ class FasterActivateEmailCompany(threading.Thread):
 @unauthenticated_user_company
 @allowed_users_company(allowed_roles=['company'])
 def sign_up_company(request):
+    ads = get_list_or_404(Ads, active=True)
     form = SignUpFormCompany()
     profile_form = UserProfileCompanyForm()
     if request.method == 'POST':
@@ -109,6 +111,7 @@ def sign_up_company(request):
             
     context = {
         'form': form,
+        'ads': ads,
         'profile_form': profile_form
     }
     return render(request, 'companyusers/sign-up-company.html', context)
@@ -136,6 +139,7 @@ class CompanyVerificationView(View):
 @unauthenticated_user_company
 @allowed_users_company(allowed_roles=['company'])
 def loginpage_company(request):
+    
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')

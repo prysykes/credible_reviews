@@ -26,6 +26,8 @@ from users.views import FasterActivateEmail
 
 from django.contrib.postgres.search import SearchVector
 
+from .models import Ads
+
 
 
 def search_business(request):
@@ -44,6 +46,8 @@ def search_business(request):
 
 
 def index(request):
+    ads = get_list_or_404(Ads, active=True)
+
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -59,6 +63,7 @@ def index(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
@@ -66,6 +71,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 def about(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -81,6 +87,7 @@ def about(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
@@ -130,6 +137,7 @@ def browse_review(request, *args, **kwargs):
     return render(request, 'browse_review.html', context)
 
 def careers(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -145,12 +153,14 @@ def careers(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
     return render(request, 'careers.html', context)
 
 def contact(request):
+    ads = get_list_or_404(Ads, active=True)
     if request.method == "POST":
         fullname = request.POST['full_name']
         message = request.POST['message']
@@ -185,20 +195,24 @@ def contact(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
     return render(request, 'contact.html', context)
 
 def cr_seal(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     last_twenty = Review.objects.all().order_by('-date_added')[:20]
     context = {
         'reviews': last_twenty,
+        'ads': ads,
     }
     return render(request, 'cr-seal.html', context)
 
 def faq(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -214,12 +228,13 @@ def faq(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
-        
+        'ads': ads,
         'page_range': page_range,
     }
     return render(request, 'faq.html', context)
 
 def how_to_use(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -235,16 +250,18 @@ def how_to_use(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
-        
+        'ads': ads,
         'page_range': page_range,
     }
     return render(request, 'how-to-use.html', context)
 
 def login(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     last_twenty = Review.objects.all().order_by('-date_added')[:20]
     context = {
         'reviews': last_twenty,
+        'ads': ads,
     }
     return render(request, 'login.html', context)
 
@@ -270,6 +287,7 @@ def online_safety(request):
     return render(request, 'online-safety.html', context)
 
 def disclaimer(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -283,6 +301,7 @@ def disclaimer(request):
     
     context = {
         'reviews': page[::-1],
+        'ads': ads,
         # used to reverse the out of the paginator list
         'page': page,
         
@@ -292,6 +311,7 @@ def disclaimer(request):
 
 
 def privacy_terms(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -307,6 +327,7 @@ def privacy_terms(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
@@ -322,14 +343,17 @@ def display_reviews(request):
 
 
 def validate_business(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     last_twenty = Review.objects.all().order_by('-id')[:20]
     context = {
         'reviews': last_twenty,
+        'ads': ads,
     }
     return render(request, 'validate-business.html', context)
 
 def filter_result_display(request):
+    ads = get_list_or_404(Ads, active=True)
     
     if request.method == "GET":
         term = request.GET.get('term') or ""
@@ -351,16 +375,14 @@ def filter_result_display(request):
         'filtered_companies': filtered_companies,
         'paginated_company': paginated_company,
         'page': page,
+        'ads': ads,
         'term': term,
     }
-    print(term)
+   
 
     return render(request, 'filter_result_display.html', context)
     
     
-
-
-
 
 def featured_companies(request):
     company_list = Company.objects.all().filter(approved=True)
@@ -385,6 +407,7 @@ def featured_companies(request):
 
 
 def review_submitted(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -400,12 +423,14 @@ def review_submitted(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
     return render(request, 'review-submitted.html', context)
 
 def done_newsletter(request):
+    ads = get_list_or_404(Ads, active=True)
     reviews = Review.objects.all()
     p = Paginator(reviews, 8)
     
@@ -421,8 +446,12 @@ def done_newsletter(request):
         'reviews': page[::-1],
         # used to reverse the out of the paginator list
         'page': page,
+        'ads': ads,
         
         'page_range': page_range,
     }
     return render(request, 'done_newsletter.html', context)
+
+
+    
 

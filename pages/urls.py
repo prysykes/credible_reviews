@@ -16,6 +16,7 @@ urlpatterns = [
     path('disclaimer/', views.disclaimer, name='disclaimer'),
     path('search_business', views.search_business, name='search_business'),
     path('online-safety/', views.online_safety, name='online-safety'),
+    
     #path('submit-review/', views.submit_review, name='submit-review'),
     
     path('validate-business/', views.validate_business, name='validate-business'),

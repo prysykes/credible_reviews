@@ -158,8 +158,21 @@
             </div>
             {% endblock blockslideshow %}
             <div  class="col-md-3 py-2">
-                <h2 class="h5 px-2 py-2 text-center borderrounded navbarbg">Advertise here... Get noticed!</h2>
-                   <p class="text-wrap">Welcome to Credible Reviews Adverts You are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do not match the description of the provider. You are free to write a review on such marchant and the our community of visitors know about them to avoid having the same experience. At TrustReviews, we do not only review customer experiences but would help you inot digging deeper on propectie business ventures or commitments validating their claims and the credibility of their purpose. We do all these at no charge because we care about your safetyYou are here either becasue you have had an unruly experience with a marchant online, a governement agency or have recieved poor service that do</p>                
+                <h2 class="h5 px-2 py-2 text-center borderrounded navbarbg">Promoted Ads</h2>
+                   <p class="text-wrap">
+                   {% for ad in ads%}
+                   <a href="{{ad.ad_url}}" target="_blank" class="justtify-content-center">
+                       <div class="card mx-auto" style="border: 0; font-size: small; width: 16rem;">
+                            <h5 class="card-title text-center">{{ad.ad_name}}</h5>
+                            <img src="{{ad.ad_image.url}}" class="card-img-top" alt="{{ad_name}} logo">
+                            
+                        </div>
+                    </a>
+                        <hr>
+                        
+                   {%endfor%}
+                   
+                   </p>                
             </div>
         </div>
         {% endblock featuredcomp %}

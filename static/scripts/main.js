@@ -91,6 +91,22 @@ $(document).ready(function () {
         }
     })
 
+    /* implementing view reviews toggle for company profile */
+    var clicker_r = 1
+    view_reviews.click(function(){
+        review_display.slideToggle(600);
+        display_company.hide();
+        message_div_display.hide();
+        if (clicker_r == 1) {
+            $(this).text("Show Reviews")
+            clicker_r = 0
+        }else if (clicker_r == 0){
+            $(this).text("Hide Reviews")
+            clicker_r = 1;
+        }
+    });
+    // end view review toggle
+
     // setting tabindex to 1 for forms on company detail page
     // review_button.click(function(){
     //     $("#id_rating").focus();
@@ -275,20 +291,7 @@ $(document).ready(function () {
         return confirm("Are you sure you want to delete this review ?");
     });
     
-    /* implementing view reviews toggle for company profile */
-    var clicker_r = 1
-    view_reviews.click(function(){
-        review_display.slideToggle(600);
-        display_company.hide();
-        message_div_display.hide();
-        if (clicker_r == 1) {
-            $(this).text("Show Reviews")
-            clicker_r = 0
-        }else if (clicker_r == 0){
-            $(this).text("Hide Reviews")
-            clicker_r = 1;
-        }
-    });
+    
 
     // begind back to top animation
     $(window).scroll(function () { 
