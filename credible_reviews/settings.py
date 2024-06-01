@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'credible_reviews',
         'USER': 'postgres',
-        'PASSWORD': 'emekamu123',
+        'PASSWORD': '',
         'HOST': 'localhost',
     }
 }
